@@ -34,7 +34,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST") {
 			$session['member_id']
 		]);
 	} else {
-		$update_video = $conn->prepare("UPDATE members SET name = ?, birthday = ?, gender = ?, relationship_status = ?, about_me = ?, personal_website = ?, hometown = ?, current_city = ?, current_country = ?, occupations = ?, companies = ?, schools = ?, interests_and_hobbies = ?, favorite_movies_and_shows = ?, favorite_music = ?, favorite_books = ? WHERE member_id = ?");
+		$update_video = $conn->prepare("UPDATE members SET name = ?, birthday = ?, gender = ?, relationship_status = ?, about_me = ?, personal_website = ?, hometown = ?, current_city = ?, current_country = ?, occupations = ?, companies = ?, schools = ?, interests_and_hobbies = ?, favorite_movies_and_shows = ?, favorite_music = ?, favorite_books = ?, channelicon = ? WHERE member_id = ?");
 		$update_video->execute([
 			trim($_POST['name']),
 			trim($_POST['birthday']),
