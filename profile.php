@@ -56,6 +56,10 @@ $favorites = $conn->prepare(
 );
 $favorites->execute([$profile['member_id']]);
 }
+
+if(empty($profile['channelicon'])) {
+	$profile['channelicon'] = $profile_latest_video['video_id'];
+}
 ?>
 
 	<link rel="stylesheet" href="/styles.css" type="text/css">
@@ -389,7 +393,7 @@ $favorites->execute([$profile['member_id']]);
 					
 				
 					<td width="142" align="left">
-						<img src="/get_still.php?video_id=<?php echo htmlspecialchars($profile_latest_video['video_id']); ?>" class="aboutImg">
+						<img src="/get_still.php?video_id=<?php echo htmlspecialchars($profile['channelicon']); ?>" class="aboutImg">
 					</td>
 					
 					<td width="144" align="left">
