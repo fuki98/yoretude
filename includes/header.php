@@ -24,8 +24,8 @@ if(isset($_SESSION['member_id'])) {
 		<meta name="description" content="Share your videos with friends and family">
 	<meta name="keywords" content="video,sharing,camera phone,video phone,revival, recreation, YoreTude, 2005, yoretude ">
 	
-		<link rel="stylesheet" href="https://web.archive.org/web/20060303064630cs_/http://www.youtube.com/styles.css" type="text/css">
-	<link rel="stylesheet" href="https://web.archive.org/web/20060303064630cs_/http://www.youtube.com/base.css" type="text/css">
+		<link rel="stylesheet" href="styles.css" type="text/css">
+	<link rel="stylesheet" href="base.css" type="text/css">
 
 <div id="baseDiv">
 		
@@ -55,7 +55,7 @@ if(isset($_SESSION['member_id'])) {
 			<option value="search_groups">Groups</option>
 			<option value="search_playlists">Playlists</option>
 			</select>
-			<input type="submit" name="search" value="Search">
+			<input type="submit" value="Search Videos">
 		</form>
 	</div>
 
@@ -175,7 +175,11 @@ if(isset($_SESSION['member_id'])) {
 				<td style="  "><a href="my_messages.php" >My Messages</a></td>
 				<td style="padding: 0px 10px 0px 10px;">|</td>
 				<td style="  "><a href="my_profile.php">My Profile</a></td>
+                <?php if($session['administrator'] == 1) {?>
+                <td style="padding: 0px 10px 0px 10px;">|</td>
+				<td style="  "><strong><a href="admin.php">Admin Panel</a></strong></td>
 				<?php } ?>
+                <?php } ?>
                 <?php if($current_page === "browse") { ?>				
 				<td style="font-size: 10px;">&nbsp;</td>
 				<td><a href="/browse.php?s=mr">Most Recent</a></td>
