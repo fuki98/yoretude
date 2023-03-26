@@ -9,6 +9,7 @@ if(!isset($_GET['vanity'])) {
 }else{
 	$profile = $conn->prepare("SELECT * FROM members WHERE members.username = ?");
 	$profile->execute([$_GET['vanity']]);
+	$_GET['user'] = $profile['username'];
 }
 
 
