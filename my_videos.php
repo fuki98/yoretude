@@ -12,6 +12,18 @@ $videos = $conn->prepare(
 	ORDER BY videos.uploaded_at DESC"
 );
 $videos->execute([$session['member_id']]);
+
+
+if($_SERVER['REQUEST_METHOD'] == "POST") {
+	$update_video = $conn->prepare("UPDATE members SET channelicon = ? WHERE member_id = ?");
+	$update_video->execute([
+		trim($_POST['channelicon']),
+		$session['member_id']
+	]);
+	$_SESSION['alert'] = "Channel picture updated!";
+	header("Location: my_videos.php");
+}
+
 ?>
 <div style="padding: 0px 5px 0px 5px;">
 
@@ -72,6 +84,10 @@ $videos->execute([$session['member_id']]);
 										<form method="get" action="remove_video.php" onsubmit="return confirm('Are you sure you want to remove this video? Theres no undo!');">
 											<input type="hidden" value="<?php echo $video['video_id']; ?>" name="video_id">
 											<input type="submit" value="Remove Video">
+										</form>
+										<form method="get" action="my_videos.php">
+											<input type="hidden" value="<?php echo $video['video_id']; ?>" name="vid">
+											<input type="submit" value="Make channel picture">
 										</form>
 									</td>
 								</tr>
