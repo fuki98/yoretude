@@ -199,14 +199,12 @@ if(isset($_GET['uid'])) {
                     </tr>
                     <tr valign="top">
                         <?php
-                        $videos_count = $conn->prepare(
-                            "SELECT * FROM videos WHERE videos.converted = 1"
-                        );
-                        $videos_count->execute();
-                        $user_count = $conn->prepare(
-                            "SELECT * FROM users WHERE users.banned = 0"
-                        );
-                        $user_count->execute();
+                            $videos_count = $conn->query(
+                                "SELECT * FROM videos WHERE videos.converted = 1"
+                            );
+                            $user_count = $conn->query(
+                                "SELECT * FROM users WHERE users.banned = 0"
+                            );
                         ?>
                         <td align="right"><span class="label">Users: <?= $user_count->rowCount() ?></span></td>
                         <td align="right"><span class="label">Videos: <?= $videos_count->rowCount() ?></span></td>
