@@ -1,10 +1,12 @@
 RewriteEngine on
-RewriteRule ^([^.]+)$ $1.php
-RewriteRule ^(.*).php$ /$1.php [NC,END]
 Options -Indexes
 
 # Redirect root URL to index.php
 RewriteRule ^$ /index.php [END]
+
+# Rewrites things without .php and with .php
+RewriteRule ^([^.]+)$ $1.php
+RewriteRule ^(.*).php$ /$1.php [NC,END]
 
 # Redirect requests for /user/profilename to /profile.php?user=profilename
 RewriteRule ^user/([^/]*)$ /profile.php?user=$1 [NC,END]
@@ -12,13 +14,12 @@ RewriteRule ^user/([^/]*)$ /profile.php?user=$1 [NC,END]
 # Redirect requests for /user/profilename/menu to /profile_menu.php?user=profilename
 RewriteRule ^user/([^/]+)/(videos|favorites)$ profile_$2.php?user=$1 [NC,END]
 
-ErrorDocument 403 /errors/error.html
-ErrorDocument 404 /errors/404.php
-
 # Redirect to vanity page for non-existent URLs
 RewriteRule ^([^/]*)$ profile.php?vanity=$1 [NC,END]
 RewriteRule ^(.*)/(videos|favorites)?$ profile_$2.php?vanity=$1 [NC,END]
 
+ErrorDocument 403 /errors/error.html
+ErrorDocument 404 /errors/404.php
 
 RewriteRule ^(includes|scripts|videos|stills) - [F,L]
 
