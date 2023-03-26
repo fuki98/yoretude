@@ -5,13 +5,11 @@ Options -Indexes
 RewriteRule ^$ /index.php [END]
 
 # Rewrites things without .php and with .php
-RewriteRule ^([^.]+)$ $1.php
+RewriteRule ^([^.]+)$ $1.php [NC,END]
 RewriteRule ^(.*).php$ /$1.php [NC,END]
 
 # Redirect requests for /user/profilename to /profile.php?user=profilename
 RewriteRule ^user/([^/]*)$ /profile.php?user=$1 [NC,END]
-
-# Redirect requests for /user/profilename/menu to /profile_menu.php?user=profilename
 RewriteRule ^user/([^/]+)/(videos|favorites)$ profile_$2.php?user=$1 [NC,END]
 
 # Redirect to vanity page for non-existent URLs
