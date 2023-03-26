@@ -33,7 +33,8 @@ if(isset($_SESSION['member_id'])) {
 <div id="taglineDiv"><img src="/img/tagline-20pt.gif"></div>
 <div id="utilDiv">
 	<?php if(isset($session)) { ?>	
-						<td><b>Hello, <a href="profile.php?user=<?php echo htmlspecialchars($session['username']); ?>"><?php echo htmlspecialchars($session['username']); ?></a></b>        <img src="/img/mail.gif" border="0"> (<a href="./my_messages.php">0</a>)</td>
+						<td><b>Hello, <a href="profile.php?user=<?php echo htmlspecialchars($session['username']); ?>"><?php echo htmlspecialchars($session['username']); ?></a></b>        
+						| <img src="/img/mail.gif" border="0"> (<a href="./my_messages.php">0</a>)</td>
 						<td style="padding: 0px 5px 0px 5px;">|</td>
 						<td><a href="logout.php?next=<?php echo $_SERVER['REQUEST_URI'] ?>">Log Out</a></td>
 						<td style="padding: 0px 5px 0px 5px;">|</td>
