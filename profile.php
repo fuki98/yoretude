@@ -613,7 +613,7 @@ if(empty($profile['channelicon'])) {
 <?php } ?>
 <?php if(!empty($profile['interests_and_hobbies'])) { ?>
 							<div class="spaceMaker">
-		<span class="profileTitles">Hobbies &amp; Interests: </span> <?php echo htmlspecialchars($profile['favorite_movies_and_shows']); ?>
+		<span class="profileTitles">Hobbies &amp; Interests: </span> <?php echo htmlspecialchars($profile['interests_and_hobbies']); ?>
 		<br>
 		</div>
         <?php } ?>
