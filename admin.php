@@ -22,6 +22,26 @@ if(isset($_GET['uid'])) {
     $member = $member->fetch(PDO::FETCH_ASSOC);
 
     if($_SERVER['REQUEST_METHOD'] == "POST") {
+        // Validate username
+        if(empty(trim($_POST["username"]))){
+            $username_err = "Please enter a username.";
+        } else if(!preg_match('/^[a-zA-Z0-9_]+$/', trim($_POST["username"]))){
+            $username_err = "Username can only contain letters, numbers, and underscores.";
+        } else {
+            // Prepare a select statement and bind variables to the prepared statement as parameters
+            $param_username = trim($_POST["username"]);
+            $stmt = $conn->prepare("SELECT member_id FROM members WHERE username = :username");
+            $stmt->execute([
+                ':username' => $param_username,
+            ]);
+            if($stmt->rowCount() > 0){
+                $username_err = "This username is already taken.";
+            }
+        }
+        if(!empty($username_err)) {
+            $_POST["username"] = $member['username'];
+            $_SESSION['alert'] = $username_err;
+        }
         $_POST['birthday'] = date("Y-m-d", strtotime($_POST['birthday']));
         
         if($_POST['birthday'] == "1970-01-01") {
@@ -72,6 +92,9 @@ if(isset($_GET['uid'])) {
         header("Location: /admin?uid=".$_GET['uid']);
     }
 
+    if(isset($_GET['vid'])) {
+        die('jr can add this.. i dont feel like it right now');
+    }
     ?>
     <div class="formTable">
         <?php echo (isset($_SESSION['alert'])) ? '<div class="success">'.$_SESSION['alert'].'</div>' : ''; ?>
@@ -194,31 +217,38 @@ if(isset($_GET['uid'])) {
         <?php echo (isset($_SESSION['alert'])) ? '<div class="success">'.$_SESSION['alert'].'</div>' : ''; ?>
         <form method="post" action="/admin">
             <table cellpadding="5" width="700" cellspacing="0" border="0" align="center">
-                    <tr valign="top">
+                    <!--<tr valign="top">
                         <td colspan="2"><div class="tableSubTitle">Site info</div></td>
                     </tr>
                     <tr valign="top">
                         <?php
-                            $videos_count = $conn->query(
-                                "SELECT * FROM videos WHERE videos.converted = 1"
-                            );
-                            $user_count = $conn->query(
-                                "SELECT * FROM users WHERE users.banned = 0"
-                            );
+                            //$videos_count = $conn->query(
+                            //    "SELECT * FROM videos WHERE videos.converted = 1"
+                            //);
+                            //$user_count = $conn->query(
+                            //    "SELECT * FROM users WHERE users.banned = 0"
+                            //);
                         ?>
-                        <td align="right"><span class="label">Users: <?= $user_count->rowCount() ?></span></td>
-                        <td align="right"><span class="label">Videos: <?= $videos_count->rowCount() ?></span></td>
-                    </tr>
-                    <tr valign="top">
-                        <td></td>
-                        <td><input type="submit" id="save" name="save" value="Submit"></td>
-                    </tr>
+                        <td align="right"><span class="label">Users: <?php //echo $user_count->rowCount() ?></span></td>
+                        <td align="right"><span class="label">Videos: <?php //echo $videos_count->rowCount() ?></span></td>
+                    </tr>-->
                     <tr valign="top">
                         <td colspan="2"><div class="tableSubTitle">Edit user</div></td>
                     </tr>
                     <tr valign="top">
                         <td align="right"><span class="label">Username:</span></td>
                         <td><input type="text" size="20" maxlength="50" name="username"></td>
+                    </tr>
+                    <tr valign="top">
+                        <td></td>
+                        <td><input type="submit" id="save" name="save" value="Submit"></td>
+                    </tr>
+                    <tr valign="top">
+                        <td colspan="2"><div class="tableSubTitle">Feature video</div></td>
+                    </tr>
+                    <tr valign="top">
+                        <td align="right"><span class="label">Video ID:</span></td>
+                        <td><input type="text" size="10" maxlength="10" name="vid"></td>
                     </tr>
                     <tr valign="top">
                         <td></td>
