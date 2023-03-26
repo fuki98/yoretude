@@ -440,7 +440,7 @@ if(empty($profile['channelicon'])) {
 						<br>
 						<span class="profileTitles">Signed Up: </span><?php echo str_replace("ago", "ago", timeAgo($profile['created_at'])); ?>
 						<br>
-						<span class="profileTitles">URL: </span> <a href="/<?= $profile['url']  ?>">http://www.yoretude.com/user/<?= $profile['url']  ?></a>
+						<span class="profileTitles">URL: </span> <a href="/<?= $profile['url']  ?>">http://www.yoretude.com/<?= $profile['url']  ?></a>
 					</td>
 				</tr>
 			</tbody></table>
