@@ -11,7 +11,7 @@ if(!isset($_SESSION['member_id']) || $session['administrator'] !== 1) {
 
 if(isset($_GET['username'])) {
     $member = $conn->prepare("SELECT * FROM members WHERE username = ?");
-    $member->execute([$_GET['uid']]);
+    $member->execute([$_GET['username']]);
     $member = $member->fetch(PDO::FETCH_ASSOC);
     die(header("Location: /admin?uid=".$_GET['uid']));
 }
@@ -195,7 +195,28 @@ if(isset($_GET['uid'])) {
         <form method="post" action="/admin">
             <table cellpadding="5" width="700" cellspacing="0" border="0" align="center">
                     <tr valign="top">
-                        <td colspan="2"><div class="tableSubTitle">Admin panel</div></td>
+                        <td colspan="2"><div class="tableSubTitle">Site info</div></td>
+                    </tr>
+                    <tr valign="top">
+                        <?php
+                        $videos_count = $conn->prepare(
+                            "SELECT * FROM videos WHERE videos.converted = 1"
+                        );
+                        $videos_count->execute();
+                        $user_count = $conn->prepare(
+                            "SELECT * FROM users WHERE users.banned = 0"
+                        );
+                        $user_count->execute();
+                        ?>
+                        <td align="right"><span class="label">Users: <?= $user_count->rowCount() ?></span></td>
+                        <td align="right"><span class="label">Videos: <?= $videos_count->rowCount() ?></span></td>
+                    </tr>
+                    <tr valign="top">
+                        <td></td>
+                        <td><input type="submit" id="save" name="save" value="Submit"></td>
+                    </tr>
+                    <tr valign="top">
+                        <td colspan="2"><div class="tableSubTitle">Edit user</div></td>
                     </tr>
                     <tr valign="top">
                         <td align="right"><span class="label">Username:</span></td>
