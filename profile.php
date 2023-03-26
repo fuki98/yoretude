@@ -9,12 +9,10 @@ if(!isset($_GET['vanity'])) {
 }else{
 	$profile = $conn->prepare("SELECT * FROM members WHERE members.username = ?");
 	$profile->execute([$_GET['vanity']]);
-	$_GET['user'] = $profile['username'];
 }
 
-
 if($profile->rowCount() == 0) {
-	header("Location: index_down.php");
+	header("Location: /");
 } else {
 	$profile = $profile->fetch(PDO::FETCH_ASSOC);
 }
@@ -25,6 +23,7 @@ $profile['videos'] = $profile['videos']->rowCount();
 $profile['favorites'] = $conn->prepare("SELECT favorite_id FROM favorites WHERE member_id = ?");
 $profile['favorites']->execute([$profile["member_id"]]);
 $profile['favorites'] = $profile['favorites']->rowCount();
+$profile['url'] = ucfirst(strtolower($profile['username']));
 
 $profile_latest_video = $conn->prepare(
 	"SELECT * FROM videos
@@ -400,7 +399,7 @@ if(empty($profile['channelicon'])) {
 					
 				
 					<td width="142" align="left">
-						<img src="/get_still.php?video_id=<?php echo htmlspecialchars($profile['channelicon']); ?>" class="aboutImg">
+						<a href="/<?= $profile['url']  ?>"><img src="/get_still.php?video_id=<?php echo htmlspecialchars($profile['channelicon']); ?>" class="aboutImg"></a>
 					</td>
 					
 					<td width="144" align="left">
@@ -441,7 +440,7 @@ if(empty($profile['channelicon'])) {
 						<br>
 						<span class="profileTitles">Signed Up: </span><?php echo str_replace("ago", "ago", timeAgo($profile['created_at'])); ?>
 						<br>
-						<span class="profileTitles">URL: </span> <a href="/user/<?php echo htmlspecialchars($profile["username"]); ?>">http://www.yoretude.com/user/<?php echo htmlspecialchars($profile["username"]); ?></a>
+						<span class="profileTitles">URL: </span> <a href="/<?= $profile['url']  ?>">http://www.yoretude.com/user/<?= $profile['url']  ?></a>
 					</td>
 				</tr>
 			</tbody></table>
