@@ -13,7 +13,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST") {
 	$_POST['birthday'] = date("Y-m-d", strtotime($_POST['birthday']));
 	
 	if($_POST['birthday'] == "1970-01-01") {
-		$update_video = $conn->prepare("UPDATE members SET name = ?, birthday = NULL, gender = ?, relationship_status = ?, about_me = ?, personal_website = ?, hometown = ?, current_city = ?, current_country = ?, occupations = ?, companies = ?, schools = ?, interests_and_hobbies = ?, favorite_movies_and_shows = ?, favorite_music = ?, favorite_books = ? WHERE member_id = ?");
+		$update_video = $conn->prepare("UPDATE members SET name = ?, birthday = NULL, gender = ?, relationship_status = ?, about_me = ?, personal_website = ?, hometown = ?, current_city = ?, current_country = ?, occupations = ?, companies = ?, schools = ?, interests_and_hobbies = ?, favorite_movies_and_shows = ?, favorite_music = ?, favorite_books = ?, channelicon = ? WHERE member_id = ?");
 		$update_video->execute([
 			trim($_POST['name']),
 			trim($_POST['gender']),
@@ -30,6 +30,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST") {
 			trim($_POST['favorite_movies_and_shows']),
 			trim($_POST['favorite_music']),
 			trim($_POST['favorite_books']),
+			trim($_POST['channelicon']),
 			$session['member_id']
 		]);
 	} else {
@@ -51,6 +52,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST") {
 			trim($_POST['favorite_movies_and_shows']),
 			trim($_POST['favorite_music']),
 			trim($_POST['favorite_books']),
+			trim($_POST['channelicon']),
 			$session['member_id']
 		]);
 	}
@@ -69,6 +71,10 @@ if($_SERVER['REQUEST_METHOD'] == "POST") {
 				<tr valign="top">
 					<td align="right"><span class="label">Name:</span></td>
 					<td><input type="text" size="20" maxlength="500" name="name" value="<?php echo (!empty($member['name'])) ? htmlspecialchars($member['name']) : ""; ?>"></td>
+                </tr>
+				<tr valign="top">
+					<td align="right"><span class="label">Channel icon:</span></td>
+					<td><input type="text" size="20" maxlength="500" name="name" value="<?php echo htmlspecialchars($member['channelicon']); ?>"></td>
                 </tr>
 				<tr valign="top">
 					<td align="right"><span class="label">Birthday:</span></td>
