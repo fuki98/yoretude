@@ -119,7 +119,7 @@ function CommentHandler()
 				<td style="padding-bottom: 15px;"> 
 								
 										<div style="float:left; margin-left:5em; padding-right: 18px;">
-							<span>Average (230 votes)</span><br/>
+							<span>Average (0 votes)</span><br/>
 								
 	<nobr>
 									<img style="border:0px; padding:0px; margin:0px; vertical-align:middle;" src="/img/star.gif">
