@@ -5,6 +5,13 @@ if(!isset($_SESSION['member_id']) || $session['administrator'] !== 1) {
     die(header("Location: /"));
 }
 
+if(isset($_GET['username'])) {
+    $member = $conn->prepare("SELECT * FROM members WHERE username = ?");
+    $member->execute([$_GET['uid']]);
+    $member = $member->fetch(PDO::FETCH_ASSOC);
+    die(header("Location: /admin?uid=".$_GET['uid']));
+}
+
 if(isset($_GET['uid'])) {
     $member = $conn->prepare("SELECT * FROM members WHERE member_id = ?");
     $member->execute([$_GET['uid']]);
@@ -32,7 +39,7 @@ if(isset($_GET['uid'])) {
                 trim($_POST['favorite_music']),
                 trim($_POST['favorite_books']),
                 trim($_POST['banned']),
-                $session['member_id']
+                $_GET['uid']
             ]);
         } else {
             $update_video = $conn->prepare("UPDATE members SET name = ?, birthday = ?, gender = ?, relationship_status = ?, about_me = ?, personal_website = ?, hometown = ?, current_city = ?, current_country = ?, occupations = ?, companies = ?, schools = ?, interests_and_hobbies = ?, favorite_movies_and_shows = ?, favorite_music = ?, favorite_books = ?, banned = ? WHERE member_id = ?");
@@ -54,17 +61,17 @@ if(isset($_GET['uid'])) {
                 trim($_POST['favorite_music']),
                 trim($_POST['favorite_books']),
                 trim($_POST['banned']),
-                $session['member_id']
+                $_GET['uid']
             ]);
         }
         $_SESSION['alert'] = "Changes successfully saved!";
-        header("Location: /admin");
+        header("Location: /admin?uid=".$_GET['uid']);
     }
 
     ?>
     <div class="formTable">
         <?php echo (isset($_SESSION['alert'])) ? '<div class="success">'.$_SESSION['alert'].'</div>' : ''; ?>
-        <form method="post" action="my_profile.php">
+        <form method="post" action="/admin">
             <table cellpadding="5" width="700" cellspacing="0" border="0" align="center">
                     <tr valign="top">
                         <td colspan="2"><div class="tableSubTitle"><?= $member['username'] ?>'s Personal Information</div></td>
@@ -178,7 +185,34 @@ if(isset($_GET['uid'])) {
     <?php
     unset($_SESSION['alert']);
     }else{
-        THE SHIT
+?>
+    <div class="formTable">
+        <?php echo (isset($_SESSION['alert'])) ? '<div class="success">'.$_SESSION['alert'].'</div>' : ''; ?>
+        <form method="post" action="/admin">
+            <table cellpadding="5" width="700" cellspacing="0" border="0" align="center">
+                    <tr valign="top">
+                        <td colspan="2"><div class="tableSubTitle">Admin panel</div></td>
+                    </tr>
+                    <tr valign="top">
+                        <td align="right"><span class="label">Username:</span></td>
+                        <td><input type="text" size="20" maxlength="50" name="username"></td>
+                    </tr>
+                    <tr valign="top">
+                        <td></td>
+                        <td><input type="submit" id="save" name="save" value="Submit"></td>
+                    </tr>
+                    <?php if(isset($_SESSION['error'])) { ?>
+                        <tr valign="top">
+                            <td>
+                                <p style="color: #ff0000;"><?php echo htmlspecialchars($_SESSION['error']) ?></p>
+                            </td>
+                        </tr>
+                    <?php unset($_SESSION['error']); } ?>
+            </table>
+        </form>
+    </div>
+
+<?php
     }
 require __DIR__ . "/includes/footer.php";
 ?>
