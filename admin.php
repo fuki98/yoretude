@@ -13,7 +13,7 @@ if(isset($_POST['username'])) {
     $member = $conn->prepare("SELECT * FROM members WHERE username = ?");
     $member->execute([$_GET['username']]);
     $member = $member->fetch(PDO::FETCH_ASSOC);
-    die(header("Location: /admin?uid=".$_GET['uid']));
+    die(header("Location: /admin?uid=".$member['uid']));
 }
 
 if(isset($_GET['uid'])) {
