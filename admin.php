@@ -98,7 +98,7 @@ if(isset($_GET['uid'])) {
     ?>
     <div class="formTable">
         <?php echo (isset($_SESSION['alert'])) ? '<div class="success">'.$_SESSION['alert'].'</div>' : ''; ?>
-        <form method="post" action="/admin">
+        <form method="post" action="/admin?uid=<?= $member['member_id'] ?>">
             <table cellpadding="5" width="700" cellspacing="0" border="0" align="center">
                     <tr valign="top">
                         <td colspan="2"><div class="tableSubTitle"><?= $member['username'] ?>'s Personal Information</div></td>
