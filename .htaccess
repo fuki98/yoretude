@@ -3,6 +3,9 @@ RewriteRule ^([^.]+)$ $1.php
 RewriteRule ^(.*).php$ /$1.php [NC,END]
 Options -Indexes
 
+# Redirect root URL to index.php
+RewriteRule ^$ /index.php [END]
+
 # Redirect requests for /user/profilename to /profile.php?user=profilename
 RewriteRule ^user/([^/]*)$ /profile.php?user=$1 [NC,END]
 
