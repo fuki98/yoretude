@@ -9,7 +9,7 @@ if(!isset($_SESSION['member_id']) || $session['administrator'] !== 1) {
     die(header("Location: /"));
 }
 
-if(isset($_GET['username'])) {
+if(isset($_POST['username'])) {
     $member = $conn->prepare("SELECT * FROM members WHERE username = ?");
     $member->execute([$_GET['username']]);
     $member = $member->fetch(PDO::FETCH_ASSOC);
