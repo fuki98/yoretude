@@ -415,9 +415,6 @@ if(empty($profile['channelicon'])) {
 							<div class="moduleEntryTags">Tags // <?php
 							foreach($tags as $tag) {
 								echo '<a href="results.php?search='.htmlspecialchars($tag).'">'.htmlspecialchars($tag).'</a> : ';
-								if(!in_array(strtolower($tag), array_map('strtolower', $related_tags))) { // To prevent repeated tags.
-									array_push($related_tags, $tag);
-								}
 							}
 							?></div>
 							<div class="moduleEntryDetails">Added: <?php echo date("F j, Y", strtotime($video['uploaded_at'])); ?> by <a href="profile.php?user=<?php echo htmlspecialchars($video['username']); ?>"><?php echo htmlspecialchars($video['username']); ?></a></div>
