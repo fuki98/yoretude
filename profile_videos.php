@@ -362,9 +362,9 @@ if(empty($profile['channelicon'])) {
 <div>
 <table align="center" cellpadding="0" cellspacing="0" border="0">
 	<tr>
-		<td><strong>Profile</strong></td>
+		<td><a href="profile.php?user=<?php echo htmlspecialchars($profile["username"]); ?>">Profile</a></td>
 		<td style="padding: 0px 5px 0px 5px;">|</td>
-		<td><a href="profile_videos.php?user=<?php echo htmlspecialchars($profile["username"]); ?>">Public Videos</a> (<?php echo $profile['videos']; ?>)</td>
+		<td><strong>Public Videos</strong> (<?php echo $profile['videos']; ?>)</td>
 		<td style="padding: 0px 5px 0px 5px;">|</td>
 		<td><a href="profile_videos_private.php?user=<?php echo htmlspecialchars($profile["username"]); ?>">Private Videos</a> (0)</td>
 		<td style="padding: 0px 5px 0px 5px;">|</td>
