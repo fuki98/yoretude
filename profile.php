@@ -3,8 +3,14 @@ require __DIR__ . "/includes/header.php";
 
 if(!isset($_GET['user'])) require __DIR__ . "/index_down.php";
 
-$profile = $conn->prepare("SELECT * FROM members WHERE members.username = ?");
-$profile->execute([$_GET['user']]);
+if(!isset($_GET['vanity'])) {
+	$profile = $conn->prepare("SELECT * FROM members WHERE members.username = ?");
+	$profile->execute([$_GET['user']]);
+}else{
+	$profile = $conn->prepare("SELECT * FROM members WHERE members.username = ?");
+	$profile->execute([$_GET['vanity']]);
+}
+
 
 if($profile->rowCount() == 0) {
 	header("Location: index_down.php");
