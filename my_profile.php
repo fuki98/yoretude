@@ -74,7 +74,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST") {
                 </tr>
 				<tr valign="top">
 					<td align="right"><span class="label">Channel icon:</span></td>
-					<td><input type="text" size="20" maxlength="500" name="name" value="<?php echo htmlspecialchars($member['channelicon']); ?>"></td>
+					<td><input type="text" size="20" maxlength="500" name="channelicon" value="<?php echo htmlspecialchars($member['channelicon']); ?>"></td>
                 </tr>
 				<tr valign="top">
 					<td align="right"><span class="label">Birthday:</span></td>

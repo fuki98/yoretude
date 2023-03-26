@@ -574,13 +574,7 @@ if(empty($profile['channelicon'])) {
                 <?php } ?>
 		<br>
 		</div>
-<?php } ?>	
-<?php if(!empty($profile['about_me'])) { ?>
-							<div class="spaceMaker">
-		<span class="profileTitles">About Me: </span> <?php echo htmlspecialchars($profile['about_me']); ?>	
-		<br>
-		</div>
-<?php } ?>	
+<?php } ?>		
 <?php if(!empty($profile['schools'])) { ?>
 							<div class="spaceMaker">
 		<span class="profileTitles">Schools: </span> <?php echo htmlspecialchars($profile['schools']); ?>
