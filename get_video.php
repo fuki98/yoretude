@@ -1,6 +1,6 @@
 <?php
 if(isset($_GET['format']) && $_GET['format'] == "webm") {
-	$video_file = __DIR__ . "https://yoretude.com/videos/" . $_GET['video_id'] . ".webm";
+	$video_file = __DIR__ . "/videos/" . $_GET['video_id'] . ".webm";
 } else {
 	$video_file = __DIR__ . "/videos/" . $_GET['video_id'] . ".flv";
 }

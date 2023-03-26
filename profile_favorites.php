@@ -6,8 +6,8 @@ if(!isset($_GET['user'])) require __DIR__ . "/errors/404.php";
 $profile = $conn->prepare("SELECT * FROM members WHERE members.username = ?");
 $profile->execute([$_GET['user']]);
 
-if($profile->rowCount() == 0) {
-	require __DIR__ . "/errors/404.php";
+if($profile->rowCount() == 0 || $profile['banned'] == 1) {
+	header("Location: index_down.php");
 } else {
 	$profile = $profile->fetch(PDO::FETCH_ASSOC);
 }

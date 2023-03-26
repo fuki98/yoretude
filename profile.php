@@ -6,7 +6,7 @@ if(!isset($_GET['user'])) require __DIR__ . "/index_down.php";
 $profile = $conn->prepare("SELECT * FROM members WHERE members.username = ?");
 $profile->execute([$_GET['user']]);
 
-if($profile->rowCount() == 0) {
+if($profile->rowCount() == 0 || $profile['banned'] == 1) {
 	header("Location: index_down.php");
 } else {
 	$profile = $profile->fetch(PDO::FETCH_ASSOC);
@@ -389,7 +389,7 @@ $favorites->execute([$profile['member_id']]);
 					
 				
 					<td width="142" align="left">
-						<img src="https://yoretude.com/get_still.php?video_id=<?php echo htmlspecialchars($profile_latest_video['video_id']); ?>" class="aboutImg">
+						<img src="/get_still.php?video_id=<?php echo htmlspecialchars($profile_latest_video['video_id']); ?>" class="aboutImg">
 					</td>
 					
 					<td width="144" align="left">
@@ -672,7 +672,7 @@ $favorites->execute([$profile['member_id']]);
                             <?php foreach($videos as $video) { ?>
 							<div class="videobarthumbnail_block" id="div_profile_videos_0">
 								<center>
-									<div><a id="href_profile_videos_0" href="/watch?v=<?php echo htmlspecialchars($video['video_id']); ?>"><img class="videobarthumbnail_white" id="img_profile_videos_0" src="https://yoretude.com/get_still.php?video_id=<?php echo htmlspecialchars($video['video_id']); ?>" width="80" height="60"></a></div>
+									<div><a id="href_profile_videos_0" href="/watch?v=<?php echo htmlspecialchars($video['video_id']); ?>"><img class="videobarthumbnail_white" id="img_profile_videos_0" src="/get_still.php?video_id=<?php echo htmlspecialchars($video['video_id']); ?>" width="80" height="60"></a></div>
 									<div id="title1_profile_videos_0" style="font-family: Arial, Helvetica, sans-serif; font-size: 10px; font-color: #666666; padding-bottom: 3px;"><a href="/watch?v=<?php echo htmlspecialchars($video['video_id']); ?>" title="<?php echo htmlspecialchars($video['title']); ?>"><?php echo htmlspecialchars($video['title']); ?></a></div>
 									<div id="title2_profile_videos_0" style="font-family: Arial, Helvetica, sans-serif; font-size: 10px; font-color: #666666; padding-bottom: 3px;">1 month ago</div>
 								</center>
@@ -719,7 +719,7 @@ $favorites->execute([$profile['member_id']]);
 							<td style="border-bottom:none;">
 							<div class="videobarthumbnail_block" id="div_recent_friends_0">
 								<center>
-									<div><a id="href_recent_friends_0" href="/profile?user=Devro"><img class="videobarthumbnail_white" id="img_recent_friends_0" src="https://yoretude.com/get_still.php=?video_id=" width="80" height="60"></a></div>
+									<div><a id="href_recent_friends_0" href="/profile?user=Devro"><img class="videobarthumbnail_white" id="img_recent_friends_0" src="/get_still.php=?video_id=" width="80" height="60"></a></div>
 									<div id="title1_recent_friends_0" style="font-family: Arial, Helvetica, sans-serif; font-size: 10px; font-color: #666666; padding-bottom: 3px;"><a href="/profile?user=Devro" title="Devro">Devro</a></div>
 									<div id="title2_recent_friends_0" style="font-family: Arial, Helvetica, sans-serif; font-size: 10px; font-color: #666666; padding-bottom: 3px;"></div>
 								</center>

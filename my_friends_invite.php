@@ -11,7 +11,7 @@ At YoreTude we want our community to grow. This is why we added invites! Simply 
 <span class="highlight">Copy and Paste This To A Friend</span>
 <br>
 <br>
-<textarea cols="65" rows="6" id="snippet_iframe" wrap="soft">https://yoretude.com/invite.php?user=<?php echo htmlspecialchars($session['username']); ?></textarea>
+<textarea cols="65" rows="6" id="snippet_iframe" wrap="soft">/invite.php?user=<?php echo htmlspecialchars($session['username']); ?></textarea>
 </center>
 <?php
 require __DIR__ . "/includes/footer.php";
