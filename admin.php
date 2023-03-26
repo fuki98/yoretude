@@ -1,4 +1,8 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 require __DIR__ . "/includes/header.php";
 
 if(!isset($_SESSION['member_id']) || $session['administrator'] !== 1) {
@@ -84,8 +88,8 @@ if(isset($_GET['uid'])) {
                         <td align="right"><span class="label">Banned:</span></td>
                         <td>
                             <select name="banned">
-                                <option value="0" <?php echo ($member['relationship_status'] == 0) ? "selected" : ""; ?>>No</option>
-                                <option value="1" <?php echo ($member['relationship_status'] == 1) ? "selected" : ""; ?>>Yes</option>
+                                <option value="0" <?php echo ($member['banned'] == 0) ? "selected" : ""; ?>>No</option>
+                                <option value="1" <?php echo ($member['banned'] == 1) ? "selected" : ""; ?>>Yes</option>
                             </select>
                         </td>
                     </tr>
