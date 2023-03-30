@@ -16,6 +16,10 @@ if(isset($_SESSION['member_id'])) {
 		$session = $session->fetch(PDO::FETCH_ASSOC);
 	}
 }
+// Banning in general
+ if($session['banned'] == 1) {
+    die("You are banned!");
+}
 ?>
 <html>
 <head>
