@@ -4,7 +4,9 @@ require_once './includes/functions.php';
 function randstr($len, $charset = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_-"){
     return substr(str_shuffle($charset),0,$len);
 }
-
+ if($session['banned'] == 1) {
+    die("You are banned!");
+}
 if(!isset($_SESSION['member_id'])) {
     die(header("Location: /login.php"));
 }
@@ -32,9 +34,6 @@ $cooldown->bindParam(":member_id", $_SESSION['member_id']);
 $cooldown->execute();
 
 switch(true) {
-    case $cooldown->rowCount() === 1:
-        $request->error->msg = "You must wait 30 minutes before uploading"; $request->error->status = "";
-        break;
     case $request->vfile["error"] == 4:
         $request->error->msg = "You must select a file"; $request->error->status = "";
         break;
