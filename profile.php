@@ -25,6 +25,7 @@ $profile['favorites']->execute([$profile["member_id"]]);
 $profile['favorites'] = $profile['favorites']->rowCount();
 $profile['url'] = ucfirst(strtolower($profile['username']));
 
+
 $profile_latest_video = $conn->prepare(
 	"SELECT * FROM videos
 	LEFT JOIN members ON members.member_id = videos.member_id
@@ -384,8 +385,8 @@ if(empty($profile['channelicon'])) {
 <table width="875" cellpadding="0" cellspacing="0">	
 	<tbody><tr>
 		<td width="300" valign="top">
-			<table class="userTable" cellpadding="0" cellspacing="0">
-				<tbody><tr class="profileHeaders">
+			<table class="userTable" cellpadding="0" cellspacing="0" style="border-color:<?php echo htmlspecialchars($profile["aboutTable"]); ?>">
+				<tbody><tr class="profileHeaders" style="background-color:<?php echo htmlspecialchars($profile["profileHeaders"]); ?>";>
 					
 					<td colspan="2">
 						<div style="float: left; padding-top: 2px; padding-bottom: 2px; padding-left: 5px; padding-right: 5px">Hello. I'm <?php echo htmlspecialchars($profile["username"]); ?></div>
@@ -399,7 +400,12 @@ if(empty($profile['channelicon'])) {
 					
 				
 					<td width="142" align="left">
+                    <?php if($profile['channelicon']  != "none") { ?>
 						<a href="/<?= $profile['url']  ?>"><img src="/get_still.php?video_id=<?php echo htmlspecialchars($profile['channelicon']); ?>" class="aboutImg"></a>
+                        <?php } ?>
+                        <?php if($profile['channelicon']  == "none") { ?>
+						<a href="/<?= $profile['url']  ?>"><img src="/img/no_videos_140.jpg" class="aboutImg"></a>
+                        <?php } ?>
 					</td>
 					
 					<td width="144" align="left">
@@ -440,7 +446,7 @@ if(empty($profile['channelicon'])) {
 						<br>
 						<span class="profileTitles">Signed Up: </span><?php echo str_replace("ago", "ago", timeAgo($profile['created_at'])); ?>
 						<br>
-						<span class="profileTitles">URL: </span> <a href="/<?= $profile['url']  ?>">http://www.yoretude.com/<?= $profile['url']  ?></a>
+						<span class="profileTitles">URL: </span> <a href="/<?= $profile['url']  ?>">http://www.yoretude.com/user/<?= $profile['url']  ?></a>
 					</td>
 				</tr>
 			</tbody></table>
@@ -450,7 +456,7 @@ if(empty($profile['channelicon'])) {
 						
 			
 			<table class="connectTable" cellpadding="0" cellspacing="0">
-				<tbody><tr class="profileHeaders">
+				<tbody><tr class="profileHeaders"style="background-color:<?php echo htmlspecialchars($profile["profileHeaders"]); ?>">
 					<td colspan="5">&nbsp;&nbsp;Connect with <?php echo htmlspecialchars($profile["username"]); ?></td>
 				</tr>
 				<tr class="connectRowsTop">
@@ -479,8 +485,8 @@ if(empty($profile['channelicon'])) {
 			
 			<div>&nbsp;</div>
 			
-			<table class="bulletinTable" cellpadding="0" cellspacing="0">
-				<tbody><tr class="profileHeaders">
+			<table class="bulletinTable" cellpadding="0" cellspacing="0" style="border-color:<?php echo htmlspecialchars($profile["aboutTable"]); ?>">
+				<tbody><tr class="profileHeaders" style="background-color:<?php echo htmlspecialchars($profile["profileHeaders"]); ?>">
 					<td colspan="3">	<div style="float: left; padding-top: 2px; padding-bottom: 2px; padding-left: 5px; padding-right: 5px">My Bulletin Board</div>
 	<div style="float: right; padding-right: 5px">
 
@@ -504,8 +510,8 @@ if(empty($profile['channelicon'])) {
 		
 	  <td width="15" valign="top"></td>
 	  <td width="560" valign="top">
-			<table class="aboutTable" cellpadding="0" cellspacing="0">
-				<tbody><tr class="profileHeaders">
+			<table class="aboutTable" style="border-color:<?php echo htmlspecialchars($profile["aboutTable"]); ?>" cellpadding="0" cellspacing="0">
+				<tbody><tr class="profileHeaders" style="background-color:<?php echo htmlspecialchars($profile["profileHeaders"]); ?>">
 					<td>	<div style="float: left; padding-top: 2px; padding-bottom: 2px; padding-left: 5px; padding-right: 5px">More About Me</div>
 	<div style="float: right; padding-right: 5px">
 
@@ -653,8 +659,8 @@ if(empty($profile['channelicon'])) {
 			
 			<!--Begin Insert My Recent Videos Video Bar Here-->
 
-				<table class="aboutTable" cellpadding="0" cellspacing="0">
-					<tbody><tr class="profileHeaders">
+				<table class="aboutTable" style="border-color:<?php echo htmlspecialchars($profile["aboutTable"]); ?>" cellpadding="0" cellspacing="0">
+					<tbody><tr class="profileHeaders" style="background-color:<?php echo htmlspecialchars($profile["profileHeaders"]); ?>">
 					<td>
 							<div style="float: left; padding-top: 2px; padding-bottom: 2px; padding-left: 5px; padding-right: 5px">My Recent Videos</div>
 	<div style="float: right; padding-right: 5px"><a href="/profile_videos?user=<?php echo htmlspecialchars($profile["username"]); ?>" class="edit">See All Videos</a>
@@ -678,7 +684,7 @@ if(empty($profile['channelicon'])) {
 								<center>
 									<div><a id="href_profile_videos_0" href="/watch?v=<?php echo htmlspecialchars($video['video_id']); ?>"><img class="videobarthumbnail_white" id="img_profile_videos_0" src="/get_still.php?video_id=<?php echo htmlspecialchars($video['video_id']); ?>" width="80" height="60"></a></div>
 									<div id="title1_profile_videos_0" style="font-family: Arial, Helvetica, sans-serif; font-size: 10px; font-color: #666666; padding-bottom: 3px;"><a href="/watch?v=<?php echo htmlspecialchars($video['video_id']); ?>" title="<?php echo htmlspecialchars($video['title']); ?>"><?php echo htmlspecialchars($video['title']); ?></a></div>
-									<div id="title2_profile_videos_0" style="font-family: Arial, Helvetica, sans-serif; font-size: 10px; font-color: #666666; padding-bottom: 3px;">1 month ago</div>
+									<div id="title2_profile_videos_0" style="font-family: Arial, Helvetica, sans-serif; font-size: 10px; font-color: #666666; padding-bottom: 3px;"><?php echo date("F j, Y", strtotime($video['uploaded_at']))?></div>
 								</center>
 							</div>
                             <?php } ?>
@@ -702,8 +708,8 @@ if(empty($profile['channelicon'])) {
 			<div>&nbsp;</div>
 			
 			<!--Begin Insert My Friends Video Bar Here-->
-			<table class="aboutTable" cellpadding="0" cellspacing="0">
-				<tbody><tr class="profileHeaders">
+			<table class="aboutTable" style="border-color:<?php echo htmlspecialchars($profile["aboutTable"]); ?>" cellpadding="0" cellspacing="0">
+				<tbody><tr class="profileHeaders" style="background-color:<?php echo htmlspecialchars($profile["profileHeaders"]); ?>">
 				<td>
 						<div style="float: left; padding-top: 2px; padding-bottom: 2px; padding-left: 5px; padding-right: 5px">My Friends</div>
 	<div style="float: right; padding-right: 5px"><a href="/profile_friends?user=<?php echo htmlspecialchars($profile["username"]); ?>" class="edit">See All Friends</a>
@@ -752,8 +758,8 @@ if(empty($profile['channelicon'])) {
 			<!--End Insert My Friends Video Bar Here-->
 			<div>&nbsp;</div>
     
-			<table class="commentPostTable" cellpadding="0" cellspacing="0">
-				<tbody><tr class="profileHeaders">
+			<table class="commentPostTable" style="border-color:<?php echo htmlspecialchars($profile["aboutTable"]); ?>" cellpadding="0" cellspacing="0">
+				<tbody><tr class="profileHeaders" style="background-color:<?php echo htmlspecialchars($profile["profileHeaders"]); ?>">
 					<td colspan="3">	<div style="float: left; padding-top: 2px; padding-bottom: 2px; padding-left: 5px; padding-right: 5px">My Comments</div>
 	<div style="float: right; padding-right: 5px">
 
@@ -773,4 +779,4 @@ if(empty($profile['channelicon'])) {
 </tbody></table>
 </div><?php
 require __DIR__ . "/includes/footer.php";
-?> 
+?>
