@@ -12,8 +12,9 @@ $member = $member->fetch(PDO::FETCH_ASSOC);
 if($_SERVER['REQUEST_METHOD'] == "POST") {
 	$_POST['birthday'] = date("Y-m-d", strtotime($_POST['birthday']));
 	
-	if($_POST['birthday'] == "1970-01-01") {
-		$update_video = $conn->prepare("UPDATE members SET name = ?, birthday = NULL, gender = ?, relationship_status = ?, about_me = ?, personal_website = ?, hometown = ?, current_city = ?, current_country = ?, occupations = ?, companies = ?, schools = ?, interests_and_hobbies = ?, favorite_movies_and_shows = ?, favorite_music = ?, favorite_books = ?, channelicon = ? WHERE member_id = ?");
+        
+    if($_POST['birthday'] == "1970-01-01") {
+		$update_video = $conn->prepare("UPDATE members SET name = ?, birthday = NULL, gender = ?, relationship_status = ?, about_me = ?, personal_website = ?, hometown = ?, current_city = ?, current_country = ?, occupations = ?, companies = ?, schools = ?, interests_and_hobbies = ?, favorite_movies_and_shows = ?, favorite_music = ?, favorite_books = ?, channelicon = ?, aboutTable = ?, profileHeaders = ? WHERE member_id = ?");
 		$update_video->execute([
 			trim($_POST['name']),
 			trim($_POST['gender']),
@@ -31,10 +32,12 @@ if($_SERVER['REQUEST_METHOD'] == "POST") {
 			trim($_POST['favorite_music']),
 			trim($_POST['favorite_books']),
 			trim($_POST['channelicon']),
+            trim($_POST['aboutTable']),
+            trim($_POST['profileHeaders']),
 			$session['member_id']
 		]);
 	} else {
-		$update_video = $conn->prepare("UPDATE members SET name = ?, birthday = ?, gender = ?, relationship_status = ?, about_me = ?, personal_website = ?, hometown = ?, current_city = ?, current_country = ?, occupations = ?, companies = ?, schools = ?, interests_and_hobbies = ?, favorite_movies_and_shows = ?, favorite_music = ?, favorite_books = ?, channelicon = ? WHERE member_id = ?");
+		$update_video = $conn->prepare("UPDATE members SET name = ?, birthday = ?, gender = ?, relationship_status = ?, about_me = ?, personal_website = ?, hometown = ?, current_city = ?, current_country = ?, occupations = ?, companies = ?, schools = ?, interests_and_hobbies = ?, favorite_movies_and_shows = ?, favorite_music = ?, favorite_books = ?, channelicon = ?, aboutTable = ?, profileHeaders = ? WHERE member_id = ?");
 		$update_video->execute([
 			trim($_POST['name']),
 			trim($_POST['birthday']),
@@ -53,6 +56,8 @@ if($_SERVER['REQUEST_METHOD'] == "POST") {
 			trim($_POST['favorite_music']),
 			trim($_POST['favorite_books']),
 			trim($_POST['channelicon']),
+            trim($_POST['aboutTable']),
+            trim($_POST['profileHeaders']),
 			$session['member_id']
 		]);
 	}
@@ -153,6 +158,17 @@ if($_SERVER['REQUEST_METHOD'] == "POST") {
 				<tr valign="top">
 					<td align="right"><span class="label">Favorite Books:</span></td>
 					<td><textarea maxlength="500" name="favorite_books" cols="55" rows="3"><?php echo (!empty($member['favorite_books'])) ? htmlspecialchars($member['favorite_books']) : ""; ?></textarea></td>
+                </tr>
+                				<tr valign="top">
+					<td colspan="2"><br><div class="tableSubTitle">Profile Appearance</div></td>
+				</tr>
+				<tr valign="top">
+					<td align="right"><span class="label">Borders:&nbsp;</span></td>
+					<td><input type="color" size="50" maxlength="500" name="aboutTable" value="<?php echo (!empty($member['aboutTable'])) ? htmlspecialchars($member['aboutTable']) : ""; ?>"></td>
+                </tr>
+				<tr valign="top">
+					<td align="right"><span class="label">Headers:&nbsp;</span></td>
+					<td><input type="color" size="50" maxlength="500" name="profileHeaders" value="<?php echo (!empty($member['profileHeaders'])) ? htmlspecialchars($member['profileHeaders']) : ""; ?>"></td>
                 </tr>
 				<tr valign="top">
                     <td></td>
