@@ -12,7 +12,8 @@ if(!isset($_GET['vanity'])) {
 }
 
 if($profile->rowCount() == 0) {
-	header("Location: /");
+	$error = "This page could not be found.";
+	require './includes/home.php';
 } else {
 	$profile = $profile->fetch(PDO::FETCH_ASSOC);
 }
