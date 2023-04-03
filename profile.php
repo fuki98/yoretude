@@ -65,8 +65,10 @@ $favorites = $conn->prepare(
 $favorites->execute([$profile['member_id']]);
 }
 
-if(empty($profile['channelicon'])) {
+if(empty($profile['channelicon']) || $profile['channelicon']  == "none" && !empty($profile_latest_video['video_id'])) {
 	$profile['channelicon'] = $profile_latest_video['video_id'];
+}else{
+	$profile['channelicon'] = "none";
 }
 if(!empty($profile['channelicon']) && strpos($profile['channelicon'], 'watch?v=') !== false) {
 	// Use parse_url() to get the query string from the URL

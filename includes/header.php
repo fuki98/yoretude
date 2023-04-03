@@ -1,6 +1,9 @@
 <?php
 require __DIR__ . "/functions.php";
 
+if(!isset($_SESSION)) {
+	session_start();
+}
 preg_match('/^\/(\w+)/', $_SERVER['REQUEST_URI'], $matches, PREG_OFFSET_CAPTURE, 0);
 if(empty($matches[0])) $matches[1][0] = "index"; // If the request URI is just "/", then we can just say it's "index"
 $current_page = $matches[1][0]; // If the current page is "/index.php", $current_page will be "index".
