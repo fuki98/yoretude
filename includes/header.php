@@ -3,6 +3,9 @@ require __DIR__ . "/functions.php";
 
 if(!isset($_SESSION)) {
 	session_start();
+	echo '<!-- fucking your mother -->';
+}else{
+	echo '<!-- doing your mother 2 -->';
 }
 
 $header_loaded = true;
