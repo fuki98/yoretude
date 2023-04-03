@@ -288,7 +288,7 @@ $featured_videos = $conn->query("SELECT * FROM featured LEFT JOIN videos ON vide
 		</div>
 	<!--
 	<?php
-		require __DIR__ . "/includes/whos_on_now.php";
+		require "includes/whos_on_now.php";
 	?>-->
 
 		</div>
@@ -297,5 +297,5 @@ $featured_videos = $conn->query("SELECT * FROM featured LEFT JOIN videos ON vide
 </table>
 
 <?php
-require __DIR__ . "/includes/footer.php";
+require "includes/footer.php";
 ?>
