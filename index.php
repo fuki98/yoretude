@@ -5,6 +5,5 @@ if(isset($_GET['v'])) {
 	header("Location: watch.php?v=".$_GET['v'], true, 303);
 	die();
 }
-
-require './includes/home.php';
 ?>
+<?php require 'module/home.php'; ?>
