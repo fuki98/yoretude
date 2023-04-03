@@ -15,6 +15,13 @@ If you have recently uploaded this video, you may need to wait a few minutes for
 		</tr>
 	</tbody></table><br>
 <?php } ?>
+<?php if(isset($error)) { ?>
+	 <table width="100%" align="center" bgcolor="#FF0000" cellpadding="6" cellspacing="3" border="0">
+		<tbody><tr>
+			<td align="center" bgcolor="#FFFFFF"><span class="error"><?= $error ?><br>
+		</tr>
+	</tbody></table><br>
+<?php } ?>
 <div id="searchbox">
   <!-- ... -->
 </div>
