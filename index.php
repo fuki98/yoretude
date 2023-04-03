@@ -1,8 +1,5 @@
 <?php
-session_start();
-if(!isset($header_loaded)) {
-	require __DIR__ . "/includes/header.php";
-}
+require __DIR__ . "/includes/header.php";
 
 if(isset($_GET['v'])) {
 	header("Location: watch.php?v=".$_GET['v'], true, 303);
@@ -53,7 +50,7 @@ $tag_list = array_slice(array_count_values($tag_list), 0, 50);
 					<tr valign="top">
 					<td width="33%" style="border-right: 1px dashed #369; padding: 0px 10px 10px 10px; color: #444;">
 					<div style="font-size: 16px; font-weight: bold; margin-bottom: 5px;"><a href="browse.php">Watch</a></div>
-					Instantly find and watch lots fast streaming videos.
+					Instantly find and watch 1000's of fast streaming videos.
 					</td>
 					<td width="33%" style="border-right: 1px dashed #369; padding: 0px 10px 10px 10px; color: #444;">
 					<div style="font-size: 16px; font-weight: bold; margin-bottom: 5px;"><a href="my_videos_upload.php">Upload</a></div>
@@ -206,7 +203,7 @@ $featured_videos = $conn->query("SELECT * FROM featured LEFT JOIN videos ON vide
 		</td>
 		
 		<td width="180">
-		<!--
+		
 		<table class="roundedTable" width="180" align="center" cellpadding="0" cellspacing="0" border="0" bgcolor="#ffeebb">
 			<tbody><tr>
 				<td><img src="/img/box_login_tl.gif" width="5" height="5"></td>
@@ -217,6 +214,7 @@ $featured_videos = $conn->query("SELECT * FROM featured LEFT JOIN videos ON vide
 				<td><img src="/img/pixel.gif" width="5" height="1"></td>
 				<td width="170">
 									<div style="font-size: 16px; font-weight: bold; text-align: center; padding: 5px 5px 10px 5px;">
+	<!--Begin if not logged in Section-->
 					<?php if(isset($session)) { ?>
 								
 				<div style="font-size: 16px; font-weight: bold; text-align: center; padding: 5px 5px 10px 5px;"><a href="my_friends_invite.php">Invite your friends to join YoreTude!</a></div>
@@ -254,7 +252,7 @@ $featured_videos = $conn->query("SELECT * FROM featured LEFT JOIN videos ON vide
 				<td><img src="/img/pixel.gif" width="1" height="5"></td>
 				<td valign="bottom"><img src="/img/box_login_br.gif" width="5" height="5"></td>
 			</tr>
-		</tbody></table>-->
+		</tbody></table>
 		<table class="roundedTable" width="180" align="center" cellpadding="0" cellspacing="0" border="0" bgcolor="#cccccc">
 			<tbody><tr>
 				<td><img src="/img/box_login_tl.gif" width="5" height="5"></td>
@@ -298,19 +296,19 @@ $featured_videos = $conn->query("SELECT * FROM featured LEFT JOIN videos ON vide
 			<tr>
 				<td><img src="/img/pixel.gif" width="5" height="1"></td>
 				<td width="170" style="padding: 5px; text-align: center;">
-				<div style="font-weight: bold; font-size: 13px;">April Video Contest!</div>
+				<div style="font-weight: bold; font-size: 13px;">September Video Contest!</div>
 				
 				<a href="/watch.php?v=mEysvUf4LXK&search=backtoschool"><img src="/get_still.php?video_id=mEysvUf4LXK" width="90" height="60" style="border: 5px solid #FFFFFF; margin-top: 10px;"></a>
-			<div style="font-size: 16px; font-weight: bold; padding-top: 5px;"><a href="monthly_contest.php">Pranks!</a></div>
+			<div style="font-size: 16px; font-weight: bold; padding-top: 5px;"><a href="monthly_contest.php">Back to school!</a></div>
 				<br>
 
 				<?php if(isset($session)) { ?>
 		                <div style="font-size: 12px; font-weight: bold; margin-bottom: 7px;"><a href="my_videos_upload.php">Learn more</a></div>
 				<?php } else { ?>				
-				<div style="font-size: 12px; font-weight: bold; margin-bottom: 7px;"><a href="/my_videos_upload">Join the contest now!</a></div>
+				<div style="font-size: 12px; font-weight: bold; margin-bottom: 7px;"><a href="login.php">Join the contest now!</a></div>
 				<?php } ?>
-				<!--<div style="font-size: 10px; font-weight: normal; margin-bottom: 3px;"><a href="monthly_contest_august_2005.php">August winners!</a></div>				
-				</td>-->
+				<div style="font-size: 10px; font-weight: normal; margin-bottom: 3px;"><a href="monthly_contest_august_2005.php">August winners!</a></div>				
+				</td>
 				<td><img src="/img/pixel.gif" width="5" height="1"></td>
 			</tr>
 			<tr>
@@ -332,10 +330,10 @@ $featured_videos = $conn->query("SELECT * FROM featured LEFT JOIN videos ON vide
 		<div style="font-size: 14px; font-weight: bold; margin-top: 10px;"><a href="tags.php">See More Tags</a></div>
 		
 		</div>
-	<!--
+
 	<?php
-		require __DIR__ . "/includes/whos_on_now.php";
-	?>-->
+require __DIR__ . "/includes/whos_on_now.php";
+?>
 
 		</div>
 		</td>

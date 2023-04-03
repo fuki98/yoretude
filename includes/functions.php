@@ -1,8 +1,6 @@
 <?php
 ob_start(); // Makes redirects easier.
-if(!isset($_SESSION)) {
-	session_start();
-}
+session_start(); // This allows sessions to work. If this is removed, you cannot log in.
 
 $config = parse_ini_file(__DIR__ . "/../config.ini");
 
@@ -19,17 +17,10 @@ date_default_timezone_set("UTC");
 $conn->exec("SET time_zone = '+0:00'");
 
 // Error reporting
-if($_COOKIE['debug'] == "hi") {
-	ini_set('display_errors', 1);
-	ini_set('display_startup_errors', 1);
-	error_reporting(E_ALL);
-} else {
-	ini_set('display_errors', 0);
-	ini_set('display_startup_errors', 0);
-	error_reporting(0);
-}
-
-
+ini_set('display_errors', 0);
+ini_set('display_startup_errors', 0);
+ini_set('error_reporting', 0);
+error_reporting(-1);
 
 // ip banning
 $stmt = $conn->prepare("SELECT ip FROM ip_bans WHERE ip = :ip");

@@ -1,27 +1,25 @@
 <?php
 require __DIR__ . "/functions.php";
 
-$header_loaded = true;
-
 preg_match('/^\/(\w+)/', $_SERVER['REQUEST_URI'], $matches, PREG_OFFSET_CAPTURE, 0);
-$current_page = !empty($matches[0]) ? $matches[1][0] : "index"; // Use "index" if no match was found
+if(empty($matches[0])) $matches[1][0] = "index"; // If the request URI is just "/", then we can just say it's "index"
+$current_page = $matches[1][0]; // If the current page is "/index.php", $current_page will be "index".
 
+// If a user is logged in, information about that user will be available in $session.
 if(isset($_SESSION['member_id'])) {
 	$session = $conn->prepare("SELECT * FROM members WHERE member_id = ?");
 	$session->execute([$_SESSION['member_id']]);
 	if($session->rowCount() == 0) {
-		unset($session);
-		unset($_SESSION['member_id']);
+		header("Location: logout.php");
+		die();
 	} else {
 		$session = $session->fetch(PDO::FETCH_ASSOC);
 	}
 }
-
-if(isset($session) && $session['banned'] == 1) {
-	unset($session);
-	unset($_SESSION['member_id']);
+// Banning in general
+ if($session['banned'] == 1) {
+    die("You are banned!");
 }
-
 ?>
 <html>
 <head>
@@ -45,13 +43,13 @@ if(isset($session) && $session['banned'] == 1) {
 						<td><a href="logout.php?next=<?php echo $_SERVER['REQUEST_URI'] ?>">Log Out</a></td>
 						<td style="padding: 0px 5px 0px 5px;">|</td>
 						<td style="padding-right: 5px;"><a href="help.php">Help</a></td>
-	<?php } else { ?>
+						<?php } else { ?>
 						<td><a href="signup.php"><strong>Sign Up</strong></a></td>
 						<td style="padding: 0px 5px 0px 5px;">|</td>
 						<td><a href="login.php">Log In</a></td>
 						<td style="padding: 0px 5px 0px 5px;">|</td>
 						<td style="padding-right: 5px;"><a href="help.php">Help</a></td>
-	<?php } ?>
+		                                <?php } ?>
 </div>
 	<div id="searchDiv">
 		<form name="searchForm" id="searchForm" method="GET" action="/results">

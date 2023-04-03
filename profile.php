@@ -12,8 +12,7 @@ if(!isset($_GET['vanity'])) {
 }
 
 if($profile->rowCount() == 0) {
-	$error = "This page could not be found.";
-	require './includes/home.php';
+	header("Location: /");
 } else {
 	$profile = $profile->fetch(PDO::FETCH_ASSOC);
 }
@@ -65,18 +64,9 @@ $favorites = $conn->prepare(
 $favorites->execute([$profile['member_id']]);
 }
 
-if(empty($profile['channelicon']) || $profile['channelicon']  == "none" && !empty($profile_latest_video['video_id'])) {
+if(empty($profile['channelicon'])) {
 	$profile['channelicon'] = $profile_latest_video['video_id'];
 }
-
-if(empty($profile_latest_video['video_id']) || $profile['channelicon']  == "none" && empty($profile_latest_video['video_id'])) {
-	$profile['channelicon'] = "none";
-}
-
-if(!empty($profile['channelicon']) && strlen($profile['channelicon']) == 11) {
-	$profile['channelicon'] = $profile_latest_video['video_id'];
-}
-
 if(!empty($profile['channelicon']) && strpos($profile['channelicon'], 'watch?v=') !== false) {
 	// Use parse_url() to get the query string from the URL
 	$queryString = parse_url($profile['channelicon'], PHP_URL_QUERY);
