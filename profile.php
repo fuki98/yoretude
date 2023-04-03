@@ -79,9 +79,6 @@ if(!empty($profile['channelicon']) && strpos($profile['channelicon'], 'watch?v='
 
 	//$profile['channelicon'] = substr($profile['channelicon'], -11);
 }
-if(!empty($profile['channelicon']) && strlen($profile['channelicon']) == 11) {
-	$profile['channelicon'] = $profile_latest_video['video_id'];
-}
 ?>
 
 	<link rel="stylesheet" href="/styles.css" type="text/css">
