@@ -3,36 +3,29 @@ require __DIR__ . "/functions.php";
 
 if(!isset($_SESSION)) {
 	session_start();
-	echo '<!-- fucking your mother -->';
-}else{
-	echo '<!-- doing your mother 2 -->';
 }
 
 $header_loaded = true;
 
 preg_match('/^\/(\w+)/', $_SERVER['REQUEST_URI'], $matches, PREG_OFFSET_CAPTURE, 0);
-if(empty($matches[0])) $matches[1][0] = "index"; // If the request URI is just "/", then we can just say it's "index"
-$current_page = $matches[1][0]; // If the current page is "/index.php", $current_page will be "index".
+$current_page = !empty($matches[0]) ? $matches[1][0] : "index"; // Use "index" if no match was found
 
-// If a user is logged in, information about that user will be available in $session.
 if(isset($_SESSION['member_id'])) {
-	echo '<!-- logged in -->';
 	$session = $conn->prepare("SELECT * FROM members WHERE member_id = ?");
 	$session->execute([$_SESSION['member_id']]);
 	if($session->rowCount() == 0) {
 		unset($session);
 		unset($_SESSION['member_id']);
-		die();
 	} else {
 		$session = $session->fetch(PDO::FETCH_ASSOC);
 	}
-}else{
-	echo '<!-- what the fuck -->';
 }
-// Banning in general
- if($session['banned'] == 1) {
-    die("You are banned!");
+
+if(isset($session) && $session['banned'] == 1) {
+	unset($session);
+	unset($_SESSION['member_id']);
 }
+
 ?>
 <html>
 <head>
