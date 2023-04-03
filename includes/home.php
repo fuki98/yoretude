@@ -26,7 +26,7 @@ $tag_list = [];
 foreach($tags_strings as $result) $tag_list = array_merge($tag_list, explode(" ", $result['tags']));
 $tag_list = array_slice(array_count_values($tag_list), 0, 50);
 ?>
-<table width="790" align="center" cellpadding="0" cellspacing="0" border="0">
+<table width="875" align="center" cellpadding="0" cellspacing="0" border="0">
 	<tr valign="top">
 		<td style="padding-right: 15px;">
 					<table class="roundedTable" width="595" align="center" cellpadding="0" cellspacing="0" border="0" bgcolor="#EFEFEF">
