@@ -13,6 +13,7 @@ $current_page = $matches[1][0]; // If the current page is "/index.php", $current
 
 // If a user is logged in, information about that user will be available in $session.
 if(isset($_SESSION['member_id'])) {
+	echo '<!-- logged in -->';
 	$session = $conn->prepare("SELECT * FROM members WHERE member_id = ?");
 	$session->execute([$_SESSION['member_id']]);
 	if($session->rowCount() == 0) {
@@ -22,6 +23,8 @@ if(isset($_SESSION['member_id'])) {
 	} else {
 		$session = $session->fetch(PDO::FETCH_ASSOC);
 	}
+}else{
+	echo '<!-- what the fuck -->';
 }
 // Banning in general
  if($session['banned'] == 1) {
