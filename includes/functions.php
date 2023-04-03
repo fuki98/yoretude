@@ -1,6 +1,8 @@
 <?php
 ob_start(); // Makes redirects easier.
-session_start(); // This allows sessions to work. If this is removed, you cannot log in.
+if(!isset($_SESSION)) {
+	session_start();
+}
 
 $config = parse_ini_file(__DIR__ . "/../config.ini");
 

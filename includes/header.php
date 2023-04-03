@@ -1,10 +1,6 @@
 <?php
 require __DIR__ . "/functions.php";
 
-if(!isset($_SESSION)) {
-	session_start();
-}
-
 $header_loaded = true;
 
 preg_match('/^\/(\w+)/', $_SERVER['REQUEST_URI'], $matches, PREG_OFFSET_CAPTURE, 0);

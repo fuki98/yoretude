@@ -1,4 +1,5 @@
 <?php
+session_start();
 if(!isset($header_loaded)) {
 	require __DIR__ . "/includes/header.php";
 }
