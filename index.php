@@ -6,5 +6,5 @@ if(isset($_GET['v'])) {
 	die();
 }
 
-require 'home.php';
+require './includes/home.php';
 ?>
