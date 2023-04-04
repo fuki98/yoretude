@@ -30,7 +30,7 @@ if($session['admin'] == 1 && isset($_POST['title'])) {
 
 <div class="pageTable" bis_skin_checked="1">
 
-  <?php if($session['admin'] == 1): ?>
+  <?php if($session['admin'] == 1) { ?>
     <h2>Add new blog post</h2>
     <form method="post">
       <div>
@@ -44,7 +44,7 @@ if($session['admin'] == 1 && isset($_POST['title'])) {
       <button type="submit">Submit</button>
     </form>
     <hr>
-  <?php endif; 
+  <?php } ?><?php
 	// Query the database to retrieve all blog posts
 	$sql = "SELECT * FROM blogs ORDER BY date DESC";
 	$result = $conn->query($sql);
