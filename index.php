@@ -46,16 +46,17 @@ $tag_list = array_slice(array_count_values($tag_list), 0, 50);
 		<td style="padding-right: 15px;">
 
 <?php
-$views = $conn->query("SELECT * FROM views LEFT JOIN videos ON videos.video_id = views.video_id  ORDER BY views.viewed_at DESC LIMIT 4");
+$views = $conn->query("SELECT * FROM views LEFT JOIN videos ON videos.video_id = views.video_id  ORDER BY views.viewed_at DESC LIMIT 5");
 $vista = $conn->prepare("SELECT * FROM views ORDER BY views.viewed_at DESC LIMIT 4");
 ?>	
 <!-- begin recently viewed -->
+<table class="roundedTable" width="550" align="center" cellpadding="0" cellspacing="0" border="0" bgcolor="#FFFFFF">
 	<div style="padding-left: 10px; padding-right: 10px;">
 	<table width="100%" height="28" cellpadding="0" cellspacing="0" border="0" background="http://web.archive.org/web/2005im_/https://youtube.com/img/MediumGenericTab.jpg">
 		<tbody><tr>
 			<td width="380px">
 				<span style="padding-left: 5px; font-size: 13px; color: #6D6D6D; font-weight: bold; padding-right: 5px;">Recently Viewed</span>
-				<span style="font-size: 10px; color: #999999;"><span id="counter_recently_viewed">[1 - 4 of 12]</span>
+				<span style="font-size: 10px; color: #999999;"><span id="counter_recently_viewed">[1 - 4 of 5]</span>
 			</span></td>
 			<td align="left">		
 					<span style="font-size: 13px; color: #6D6D6D;"><span></span>
@@ -104,6 +105,7 @@ $vista = $conn->prepare("SELECT * FROM views ORDER BY views.viewed_at DESC LIMIT
 			</tr>
 		</tbody></table>
 		</div>
+</table>
 		<!-- end recently viewed -->
         <br>
 		<table width="100%" align="center" cellpadding="0" cellspacing="0" border="0" bgcolor="#CCCCCC">
