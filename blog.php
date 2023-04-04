@@ -39,25 +39,23 @@ if($session['administrator'] == 1 && isset($_POST['title'])) {
       </div>
       <div>
         <label for="content">Content:</label>
-        <textarea name="content" id="content" rows="10" required></textarea>
+        <textarea name="content" id="content" rows="5" required></textarea>
       </div>
       <button type="submit">Submit</button>
     </form>
     <hr>
   <?php } ?><?php
-	// Query the database to retrieve all blog posts
-	$sql = "SELECT * FROM blogs ORDER BY date DESC";
 	echo '<!-- hi -->';
-	$result = $conn->query($sql);
+	$stmt = $conn->query("SELECT * FROM blogs ORDER BY date DESC");
 	echo '<!-- hi1 -->';
 	// Loop through the results and display each post
-	while ($row = $result->fetch_assoc()) {
+	while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 		$title = $row['title'];
 		$content = $row['content'];
 		$author = $row['author'];
-		?>
-		<div class="tableSubTitle"><?php echo $title; ?></div>
-		<div class="tableSubContent"><?php echo $content; ?><br>- <a href="/user/<?php echo $row['author'] ?>"><?php echo $row['author'] ?></a></div>
+	?>
+	<div class="tableSubTitle"><?php echo $title; ?></div>
+	<div class="tableSubContent"><?php echo $content; ?><br><blockquote>- <a href="/user/<?php echo $author ?>"><?php echo $author ?></a><blockquote></div>
 	<?php }
 	echo '<!-- hi2 -->';
 	?>
