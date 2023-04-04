@@ -1,5 +1,11 @@
 <?php
 $down = "1";
+if ($down == "1") {
+    ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+ini_set('error_reporting', 1);
+error_reporting(1);
+}
 if(!isset($_COOKIE['debug']) AND $down == "1") {
 	require 'errors/maintenance.php';
 	die();
