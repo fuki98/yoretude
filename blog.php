@@ -1,7 +1,7 @@
 <?php
 require __DIR__ . "/includes/header.php";
 
-if($session['admin'] == 1 && isset($_POST['title'])) {
+if($session['administrator'] == 1 && isset($_POST['title'])) {
   // Prepare the SQL query to insert a new blog post
   $sql = "INSERT INTO blogs (title, content, author) VALUES (:title, :content, :author)";
 
@@ -30,7 +30,7 @@ if($session['admin'] == 1 && isset($_POST['title'])) {
 
 <div class="pageTable" bis_skin_checked="1">
 
-  <?php if($session['admin'] == 1) { ?>
+  <?php if($session['administrator'] == 1) { ?>
     <h2>Add new blog post</h2>
     <form method="post">
       <div>
