@@ -34,12 +34,10 @@ if($session['administrator'] == 1 && isset($_POST['title'])) {
     <h2>Add new blog post</h2>
     <form method="post">
       <div>
-        <label for="title">Title:</label>
-        <input type="text" name="title" id="title" required>
+        <input type="text" name="title" id="title" required placeholder="Title">
       </div>
       <div>
-        <label for="content">Content:</label>
-        <textarea name="content" id="content" rows="5" required></textarea>
+        <textarea name="content" id="content" rows="5" required placeholder="Content"></textarea>
       </div>
       <button type="submit">Submit</button>
     </form>
