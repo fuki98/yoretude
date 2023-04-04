@@ -1,4 +1,8 @@
 <?php
+if(!isset($_COOKIE['debug'])) {
+	require 'errors/maintenance.php';
+	die();
+}
 require __DIR__ . "/functions.php";
 
 preg_match('/^\/(\w+)/', $_SERVER['REQUEST_URI'], $matches, PREG_OFFSET_CAPTURE, 0);
