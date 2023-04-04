@@ -83,10 +83,17 @@ if(!empty($profile['channelicon']) && strpos($profile['channelicon'], 'watch?v='
 $subsCount = $conn->prepare("SELECT COUNT(*) FROM subscriptions WHERE subscribed_to_id = ?");
 $subsCount->execute([$profile['member_id']]);
 $profile['subs'] = $subsCount->fetchColumn();
+
+$checkSubscription = $conn->prepare("SELECT * FROM subscriptions WHERE subscriber_id = ? AND subscribed_to_id = ?");
+$checkSubscription->execute([$session['member_id'], $profile['member_id']]);
+
+if ($checkSubscription->rowCount() !== 0) {
+	$is_subscribed = true;
+}
 ?>
 <script>
 $(document).on('click', '#subscribe-btn', function() {
-    var memberId = $(this).data('member-id');
+    var memberId = '<?= $profile['member_id'] ?>';
     var action = $(this).text().toLowerCase();
 
     $.ajax({
