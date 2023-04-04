@@ -67,18 +67,6 @@ $favorites->execute([$profile['member_id']]);
 if(empty($profile['channelicon'])) {
 	$profile['channelicon'] = $profile_latest_video['video_id'];
 }
-if(!empty($profile['channelicon']) && strpos($profile['channelicon'], 'watch?v=') !== false) {
-	// Use parse_url() to get the query string from the URL
-	$queryString = parse_url($profile['channelicon'], PHP_URL_QUERY);
-
-	// Use parse_str() to parse the query string into an array
-	parse_str($queryString, $queryParams);
-
-	// Get the video ID from the array
-	$profile['channelicon'] = $queryParams['v'];
-
-	//$profile['channelicon'] = substr($profile['channelicon'], -11);
-}
 ?>
 
 	<link rel="stylesheet" href="/styles.css" type="text/css">

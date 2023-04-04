@@ -78,12 +78,12 @@ if($_SERVER['REQUEST_METHOD'] == "POST") {
 					<td><input type="text" size="20" maxlength="500" name="name" value="<?php echo (!empty($member['name'])) ? htmlspecialchars($member['name']) : ""; ?>"></td>
                 </tr>
 				<tr valign="top">
-					<td align="right"><span class="label">Birthday:</span></td>
-					<td><input type="date" size="20" maxlength="500" name="birthday" value="<?php echo (!empty($member['birthday'])) ? htmlspecialchars($member['birthday']) : ""; ?>"></td>
+					<td align="right"><span class="label">Channel icon:</span></td>
+					<td><input type="text" size="20" maxlength="500" name="channelicon" value="<?php echo htmlspecialchars($member['channelicon']); ?>"></td>
                 </tr>
 				<tr valign="top">
-					<td align="right"><span class="label">Channel icon:</span></td>
-					<td><input type="text" size="38" maxlength="120" name="channelicon" value="<?php echo htmlspecialchars($member['channelicon']); ?>"></td>
+					<td align="right"><span class="label">Birthday:</span></td>
+					<td><input type="date" size="20" maxlength="500" name="birthday" value="<?php echo (!empty($member['birthday'])) ? htmlspecialchars($member['birthday']) : ""; ?>"></td>
                 </tr>
 				<tr valign="top">
 					<td align="right"><span class="label">Gender:</span></td>

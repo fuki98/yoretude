@@ -1,11 +1,7 @@
 <?php
 if(!isset($_GET['still_id'])) $_GET['still_id'] = 2;
 if(!isset($_GET['video_id'])) $_GET['video_id'] = false;
-$_GET['video_id'] = str_replace("yoretude.com", "",$_GET['video_id']);
-$_GET['video_id'] = str_replace("https://", "",$_GET['video_id']);
-$_GET['video_id'] = str_replace("http://", "",$_GET['video_id']);
-$_GET['video_id'] = str_replace("watch.php?v=", "",$_GET['video_id']);
-$_GET['video_id'] = str_replace("watch?v=", "",$_GET['video_id']);
+
 $still_file = __DIR__ . "/stills/".$_GET['video_id']."_".$_GET['still_id'].".jpg";
 
 if(isset($_GET['video_id']) && file_exists($still_file)) {
