@@ -97,7 +97,7 @@ function CommentHandler()
 			<div style="text-align: center; padding-bottom: 10px;">
 				<div id="flashcontent">
 					<div style="padding: 20px; font-size:14px; font-weight: bold;">
-						Hello, you either have JavaScript turned off or an old version of Adobe's Flash Player, <a href="https://archive.org/details/fp6_archive">click here</a> to get the latest flash player.
+						Hello, you either have JavaScript turned off or an old version of Macromedia's Flash Player, <a href="https://archive.org/details/fp6_archive">click here</a> to get the latest flash player.
 					</div>
 				</div>
 			</div>
@@ -112,8 +112,8 @@ function CommentHandler()
 			<script src="player.js"></script>
 			<table width="425" cellpadding="0" cellspacing="0" border="0" align="center"><div style="font-size: 12px; font-weight: bold; text-align: center; padding-bottom: 10px;">
 			        <a href="#comment">Post Comments</a>
-				// <a href="add_favorites.php?video_id=<?php echo htmlspecialchars($video_info['video_id']); ?>" target="invisible" onClick="return FavoritesHandler();">Add to Favorites</a><!--
-				// <a href="outbox.php?user=<?php echo htmlspecialchars($creator_info['username']); ?>&subject=Re: <?php echo htmlspecialchars($video_info['title']); ?>">Contact Me</a><br>-->
+				// <a href="add_favorites.php?video_id=<?php echo htmlspecialchars($video_info['video_id']); ?>" target="invisible" onClick="return FavoritesHandler();">Add to Favorites</a>
+				// <a href="outbox.php?user=<?php echo htmlspecialchars($creator_info['username']); ?>&subject=Re: <?php echo htmlspecialchars($video_info['title']); ?>">Contact Me</a><br>
 		<table width="400" cellpadding="0" cellspacing="0" border="0" align="center">
 			<tr>
 				<td style="padding-bottom: 15px;"> 
@@ -126,7 +126,7 @@ function CommentHandler()
 														<img style="border:0px; padding:0px; margin:0px; vertical-align:middle;" src="/img/star.gif">
 														<img style="border:0px; padding:0px; margin:0px; vertical-align:middle;" src="/img/star.gif">
 														<img style="border:0px; padding:0px; margin:0px; vertical-align:middle;" src="/img/star.gif">
-														<img style="border:0px; padding:0px; margin:0px; vertical-align:middle;" src="/img/star.gif">
+														<img style="border:0px; padding:0px; margin:0px; vertical-align:middle;" src="/img/star_half.gif">
 							</nobr>
 		
 						</div>
@@ -167,7 +167,7 @@ function CommentHandler()
 			<?php echo htmlspecialchars($video_info['description']); ?>			</div>
 			
 			<div style="font-size: 11px; padding-bottom: 18px;">
-			Added on <?php echo date("F j, Y, h:i a", strtotime($video_info ['uploaded_at']. ' - 17 years')); ?> by <a href="/<?= ucfirst(strtolower($creator_info['username'])); ?>"><?php echo htmlspecialchars($creator_info['username']);
+			Added on <?php echo date("F j, Y, h:i a", strtotime($video_info ['uploaded_at']. ' - 17 years')); ?> by <a href="profile.php?user=<?php echo htmlspecialchars($creator_info['username']); ?>"><?php echo htmlspecialchars($creator_info['username']);
             ?></a>
 			</div>
 			
@@ -189,7 +189,7 @@ function CommentHandler()
 						}
 						?>			</div>
 
-			<!--<div style="padding-bottom: 10px;"><span style="background-color: #FFFFAA; padding: 2px;">Channels:</span>&nbsp; 
+			<div style="padding-bottom: 10px;"><span style="background-color: #FFFFAA; padding: 2px;">Channels:</span>&nbsp; 
 						<a href="channels.php?c=5">Entertainment</a>
 
 						, 
@@ -206,7 +206,7 @@ function CommentHandler()
 
 						</div>			
 			<div style="font-size: 11px; padding-bottom: 10px;">
-						</div>-->
+						</div>
 			
 			</td>
 			<td width="240" style="padding-left: 10px;">
@@ -217,16 +217,16 @@ function CommentHandler()
 			 <a href="profile_videos.php?user=<?php echo htmlspecialchars($creator_info['username']); ?>">Videos</a>: <?php echo $creator_videos->rowCount(); ?>			 | <a href="profile_favorites.php?user=<?php echo htmlspecialchars($creator_info['username']); ?>">Favorites</a>: <?php echo $creator_favorites->rowCount(); ?>			 | <a href="profile_friends.php?user=<?php echo htmlspecialchars($creator_info['username']); ?>">Friends</a>: 0			</div>
 			
 			<div style="padding-bottom: 5px;">
-			<span style="background-color: #FFFFAA; padding: 2px;">User Name:</span>&nbsp; <a href="/<?= ucfirst(strtolower($creator_info['username'])); ?>"><?php echo htmlspecialchars($creator_info['username']); ?></a>
+			<span style="background-color: #FFFFAA; padding: 2px;">User Name:</span>&nbsp; <a href="profile.php?user=<?php echo htmlspecialchars($creator_info['username']); ?>"><?php echo htmlspecialchars($creator_info['username']); ?></a>
 			</div>
 			
 			<div style="padding-bottom: 10px;">
 									<div style="padding-bottom: 10px;">I was on the site <?php echo str_replace("ago", "ago", timeAgo($creator_info['last_login'])); ?>.
 							</div>
-			<!--
+			
 			<div style="font-weight: bold; padding-bottom: 10px;">
 						<a href="outbox.php?user=<?php echo htmlspecialchars($creator_info['username']); ?>">Send Me a Private Message!</a>
-						</div>-->
+						</div>
 
 		</td>
 	</tr>
@@ -261,7 +261,7 @@ function CommentHandler()
                       <div style="font-size: 11px;">(Put this video on your website. Works on Friendster, eBay, Blogger, MySpace!)<br>
                         <br>
                       </div></td>
-                    </tr><!--
+                    </tr>
 					
 					
 													<tr>
@@ -270,7 +270,7 @@ function CommentHandler()
 									<div style="font-size: 11px; padding-bottom: 7px;"></div>
 								
 								&#187; <b>3866 clicks from </b><a href="r.php?u=http%3A%2F%2Fcuriosoperoinutil.blogspot.com%2F">http://curiosoperoinutil.blogspot.com/</a><br>&#187; <b>1988 clicks from </b><a href="r.php?u=http%3A%2F%2Fblog.suziexxx.com%2F">http://blog.suziexxx.com/</a><br>&#187; <b>1389 clicks from </b><a href="r.php?u=http%3A%2F%2Fwww.myspace.com%2F">http://www.myspace.com/</a><br>&#187; <b>904 clicks from </b><a href="r.php?u=http%3A%2F%2Fwww.foto-aficion.com%2Fblog%2F">http://www.foto-aficion.com/blog/</a><br>&#187; <b>652 clicks from </b><a href="r.php?u=http%3A%2F%2Fwww.basicthinking.de%2Fblog%2F">http://www.basicthinking.de/blog/</a><br>								</td>
-								</tr>-->
+								</tr>
 								
               </table>
 			</form>
@@ -331,9 +331,9 @@ function CommentHandler()
 			</tr>
 		</tbody></table>
 		</td>
-		<td width="300">
+		<td width="280">
 		<div style="padding-bottom: 10px;">
-						<table width="300" align="center" cellpadding="0" cellspacing="0" border="0" bgcolor="#EEEEEE">
+						<table width="280" align="center" cellpadding="0" cellspacing="0" border="0" bgcolor="#EEEEEE">
 							<tbody><tr>
 								<td><img src="/img/box_login_tl.gif" width="5" height="5"></td>
 								<td><img src="/img/pixel.gif" width="1" height="5"></td>
@@ -364,7 +364,7 @@ function CommentHandler()
 							</tr>
 						</tbody></table>
 						</div><br>
-			<table width="300" align="center" cellpadding="0" cellspacing="0" border="0" bgcolor="#CCCCCC">
+			<table width="280" align="center" cellpadding="0" cellspacing="0" border="0" bgcolor="#CCCCCC">
 				<tr>
 					<td><img src="img/box_login_tl.gif" width="5" height="5"></td>
 					<td><img src="img/pixel.gif" width="1" height="5"></td>
@@ -372,9 +372,9 @@ function CommentHandler()
 				</tr>
 				<tr>
 					<td><img src="img/pixel.gif" width="5" height="1"></td>
-					<td width="300">
+					<td width="270">
 					<div class="moduleTitleBar">
-					<table width="300" cellpadding="0" cellspacing="0" border="0">
+					<table width="270" cellpadding="0" cellspacing="0" border="0">
 							<tr valign="top">
 								<?php
 								$search = str_replace(" ", "|", $video_info['tags']);
@@ -386,7 +386,7 @@ function CommentHandler()
 							</tr>
 						</table>
 					</div>
-					<iframe id="side_results" name="side_results" src="include_results.php?v=<?php echo $video_info['video_id']; ?>&search=<?php echo htmlspecialchars($video_info['tags']); ?>#selected" scrolling="auto" width="300" height="400" frameborder="0" marginheight="0" marginwidth="0">
+					<iframe id="side_results" name="side_results" src="include_results.php?v=<?php echo $video_info['video_id']; ?>&search=<?php echo htmlspecialchars($video_info['tags']); ?>#selected" scrolling="auto" width="270" height="400" frameborder="0" marginheight="0" marginwidth="0">
 						[Content for browsers that don't support iframes goes here]
 					</iframe>
 					</td>
