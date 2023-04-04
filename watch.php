@@ -1,11 +1,13 @@
 <?php
 require __DIR__ . "/includes/header.php";
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
 
 $video_info = $conn->prepare("SELECT * FROM videos WHERE video_id = ? AND converted = 1");
 $video_info->execute([$_GET['v']]);
 
 if($video_info->rowCount() == 0) {
-	header("Location: index.php");
+	header("Location: /?error=1");
 	die();
 } else {
 	$video_info = $video_info->fetch(PDO::FETCH_ASSOC);
