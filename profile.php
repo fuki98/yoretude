@@ -79,7 +79,28 @@ if(!empty($profile['channelicon']) && strpos($profile['channelicon'], 'watch?v='
 
 	//$profile['channelicon'] = substr($profile['channelicon'], -11);
 }
+
+$subsCount = $conn->prepare("SELECT COUNT(*) FROM subscriptions WHERE subscribed_to_id = ?");
+$subsCount->execute([$profile['member_id']]);
+$profile['subs'] = $subsCount->fetchColumn();
 ?>
+<script>
+$(document).on('click', '#subscribe-btn', function() {
+    var memberId = $(this).data('member-id');
+    var action = $(this).text().toLowerCase();
+
+    $.ajax({
+        url: '/subscribe.php',
+        method: 'POST',
+        data: { member_id: memberId, action: action },
+        success: function(response) {
+            if (response === 'success') {
+                $('#subscribe-btn').text(action === 'subscribe' ? 'Unsubscribe' : 'Subscribe');
+            }
+        }
+    });
+});
+</script>
 
 	<link rel="stylesheet" href="/styles.css" type="text/css">
 	<link rel="stylesheet" href="/base.css" type="text/css">
@@ -460,7 +481,8 @@ if(!empty($profile['channelicon']) && strpos($profile['channelicon'], 'watch?v='
 						<br>
 						<span class="profileTitles">URL: </span> <a href="/<?= $profile['url']  ?>">http://www.yoretude.com/<?= $profile['url']  ?></a>
 					</td>
-				</tr>
+				</tr><button id="subscribe-btn" data-member-id="<?php echo $profile['member_id']; ?>"><?php echo $is_subscribed ? 'Unsubscribe' : 'Subscribe'; ?></button>
+
 			</tbody></table>
 		
 			<div>&nbsp;</div>
@@ -534,13 +556,17 @@ if(!empty($profile['channelicon']) && strpos($profile['channelicon'], 'watch?v='
 					<td>
 					<?php if(!empty($profile['name'])) { ?>
 						<div class="spaceMaker">		<div class="spaceMaker">
-		<span class="profileTitles">Name: </span> <?php if(!empty($profile['name'])) { ?> 
+		<span class="profileTitles">Name: </span> <?php echo $profile['name']; ?> 
 		<br>
 		</div>
         <?php } ?>	
 
 </div>
-					
+
+	<div class="spaceMaker">		<div class="spaceMaker">
+		<span class="profileTitles">subscribers: </span> <?php echo $profile['subs']; ?> 
+		<br>
+		</div>
 							<div class="spaceMaker">
 		<span class="profileTitles">Videos Watched: </span> 0
 		<br>
