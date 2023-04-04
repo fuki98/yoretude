@@ -12,7 +12,7 @@ if(!isset($_GET['vanity'])) {
 }
 
 if($profile->rowCount() == 0) {
-	header("Location: /");
+	header("Location: /?error=1");
 } else {
 	$profile = $profile->fetch(PDO::FETCH_ASSOC);
 }
@@ -66,6 +66,18 @@ $favorites->execute([$profile['member_id']]);
 
 if(empty($profile['channelicon'])) {
 	$profile['channelicon'] = $profile_latest_video['video_id'];
+}
+if(!empty($profile['channelicon']) && strpos($profile['channelicon'], 'watch?v=') !== false) {
+	// Use parse_url() to get the query string from the URL
+	$queryString = parse_url($profile['channelicon'], PHP_URL_QUERY);
+
+	// Use parse_str() to parse the query string into an array
+	parse_str($queryString, $queryParams);
+
+	// Get the video ID from the array
+	$profile['channelicon'] = $queryParams['v'];
+
+	//$profile['channelicon'] = substr($profile['channelicon'], -11);
 }
 ?>
 
@@ -446,7 +458,7 @@ if(empty($profile['channelicon'])) {
 						<br>
 						<span class="profileTitles">Signed Up: </span><?php echo str_replace("ago", "ago", timeAgo($profile['created_at'])); ?>
 						<br>
-						<span class="profileTitles">URL: </span> <a href="/<?= $profile['url']  ?>">http://www.yoretude.com/user/<?= $profile['url']  ?></a>
+						<span class="profileTitles">URL: </span> <a href="/<?= $profile['url']  ?>">http://www.yoretude.com/<?= $profile['url']  ?></a>
 					</td>
 				</tr>
 			</tbody></table>
@@ -530,13 +542,13 @@ if(empty($profile['channelicon'])) {
 </div>
 					
 							<div class="spaceMaker">
-		<span class="profileTitles">Videos Watched: </span> 151
+		<span class="profileTitles">Videos Watched: </span> 0
 		<br>
 		</div>
 
 
 							<div class="spaceMaker">
-		<span class="profileTitles">Profile Viewed: </span> 66
+		<span class="profileTitles">Profile Viewed: </span> 0
 		<br>
 		</div>
 
@@ -729,7 +741,7 @@ if(empty($profile['channelicon'])) {
 							<td style="border-bottom:none;">
 							<div class="videobarthumbnail_block" id="div_recent_friends_0">
 								<center>
-									<div><a id="href_recent_friends_0" href="/profile?user=Devro"><img class="videobarthumbnail_white" id="img_recent_friends_0" src="/get_still.php=?video_id=" width="80" height="60"></a></div>
+									<div><a id="href_recent_friends_0" href="/Devro"><img class="videobarthumbnail_white" id="img_recent_friends_0" src="/get_still.php=?video_id=" width="80" height="60"></a></div>
 									<div id="title1_recent_friends_0" style="font-family: Arial, Helvetica, sans-serif; font-size: 10px; font-color: #666666; padding-bottom: 3px;"><a href="/profile?user=Devro" title="Devro">Devro</a></div>
 									<div id="title2_recent_friends_0" style="font-family: Arial, Helvetica, sans-serif; font-size: 10px; font-color: #666666; padding-bottom: 3px;"></div>
 								</center>
