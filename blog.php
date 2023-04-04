@@ -47,8 +47,9 @@ if($session['administrator'] == 1 && isset($_POST['title'])) {
   <?php } ?><?php
 	// Query the database to retrieve all blog posts
 	$sql = "SELECT * FROM blogs ORDER BY date DESC";
+	echo '<!-- hi -->';
 	$result = $conn->query($sql);
-
+	echo '<!-- hi1 -->';
 	// Loop through the results and display each post
 	while ($row = $result->fetch_assoc()) {
 		$title = $row['title'];
@@ -57,8 +58,8 @@ if($session['administrator'] == 1 && isset($_POST['title'])) {
 		?>
 		<div class="tableSubTitle"><?php echo $title; ?></div>
 		<div class="tableSubContent"><?php echo $content; ?><br>- <a href="/user/<?php echo $row['author'] ?>"><?php echo $row['author'] ?></a></div>
-		<?php
-	}
+	<?php }
+	echo '<!-- hi2 -->';
 	?>
 		<div class="tableSubTitle" bis_skin_checked="1">April 1, 2006</div>
 	<div class="tableSubContent" bis_skin_checked="1"><b>WE HAVE BEEN BOUGHT OUT!</b>
