@@ -117,12 +117,12 @@ $vista = $conn->prepare("SELECT * FROM views ORDER BY views.viewed_at DESC LIMIT
 				<td>
 				<div class="moduleTitleBar">
 				<div class="moduleTitle"><div style="float: right; padding: 1px 5px 0px 0px; font-size: 12px;"><a href="browse.php">See More Videos</a></div>
-				Today's Featured Videos
+				Recently Featured Videos
 				</div>
 				</div>
 		
 				<?php
-$featured_videos = $conn->query("SELECT * FROM featured LEFT JOIN videos ON videos.video_id = featured.video_id LEFT JOIN members ON members.member_id = videos.member_id WHERE videos.converted = 1 ORDER BY featured.feature_id DESC LIMIT 5");
+$featured_videos = $conn->query("SELECT * FROM featured LEFT JOIN videos ON videos.video_id = featured.video_id LEFT JOIN members ON members.member_id = videos.member_id WHERE videos.converted = 1 ORDER BY featured.feature_id DESC LIMIT 10");
 ?>
 				<table width="100%" cellpadding="0" cellspacing="0" border="0">
 					<tr valign="top">
