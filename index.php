@@ -51,7 +51,7 @@ $vista = $conn->prepare("SELECT * FROM views ORDER BY views.viewed_at DESC LIMIT
 ?>	
 <!-- begin recently viewed -->
 	<div style="padding-left: 10px; padding-right: 10px;">
-	<table width="571" height="28" cellpadding="0" cellspacing="0" border="0" background="http://web.archive.org/web/2005im_/https://youtube.com/img/MediumGenericTab.jpg">
+	<table width="100%" height="28" cellpadding="0" cellspacing="0" border="0" background="http://web.archive.org/web/2005im_/https://youtube.com/img/MediumGenericTab.jpg">
 		<tbody><tr>
 			<td width="380px">
 				<span style="padding-left: 5px; font-size: 13px; color: #6D6D6D; font-weight: bold; padding-right: 5px;">Recently Viewed</span>
@@ -71,7 +71,7 @@ $vista = $conn->prepare("SELECT * FROM views ORDER BY views.viewed_at DESC LIMIT
 
 	
 		<div style="padding-left: 1px;">					
-		<table width="21" height="121" cellpadding="0" cellspacing="0">
+		<table width="100%" height="121" cellpadding="0" cellspacing="0">
 			<tbody><tr>
 				<td><img src="http://web.archive.org/web/2005im_/https://youtube.com/img/LeftTableArrowWhite.jpg" onclick="shiftLeft('recently_viewed')" width="21" height="121" border="0"></td>
 				<td>
@@ -269,7 +269,7 @@ $featured_videos = $conn->query("SELECT * FROM featured LEFT JOIN videos ON vide
 				<td width="170" style="padding: 5px; text-align: center;">
 				<div style="font-weight: bold; font-size: 13px;">April Video Contest!</div>
 				
-				<a href="/watch.php?v=mEysvUf4LXK&search=backtoschool"><img src="/get_still.php?video_id=mEysvUf4LXK" width="90" height="60" style="border: 5px solid #FFFFFF; margin-top: 10px;"></a>
+				<a href="/watch?v=fhRMaUrmGzp&search=prankeddd"><img src="/get_still.php?video_id=fhRMaUrmGzp" width="90" height="60" style="border: 5px solid #FFFFFF; margin-top: 10px;"></a>
 			<div style="font-size: 16px; font-weight: bold; padding-top: 5px;"><a href="monthly_contest.php">Pranks!</a></div>
 				<br>
 
