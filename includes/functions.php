@@ -46,20 +46,34 @@ function generateId($length = 11) {
 }
 
 function timeAgo($datetime, $full = false) {
-	$now = new DateTime;
-	$ago = new DateTime($datetime);
-	$diff = $now->diff($ago);
+    $now = new DateTime;
+    $ago = new DateTime($datetime);
+    $diff = $now->diff($ago);
 
-	$diff->w = floor($diff->d / 7);
-	$diff->d -= $diff->w * 7;
+    $units = array(
+        'y' => 'year',
+        'm' => 'month',
+        'd' => 'day',
+        'h' => 'hour',
+        'i' => 'minute',
+        's' => 'second'
+    );
 
-	$string = array('y' => 'year', 'm' => 'month', 'w' => 'week', 'd' => 'day', 'h' => 'hour', 'i' => 'minute', 's' => 'second');
+    $string = array();
+    foreach ($units as $unit => $label) {
+        if ($diff->$unit > 0) {
+            $string[] = $diff->$unit . ' ' . $label . ($diff->$unit > 1 ? 's' : '');
+        }
+    }
 
-	if (!$full) $string = array_slice($string, 0, 1);
-	return $string ? implode(', ', $string) . ' ago' : 'just now';
+    if (!$full) {
+        $string = array_slice($string, 0, 1);
+    }
+
+    return $string ? implode(', ', $string) . ' ago' : 'just now';
 }
+
 
 function GetHostURL() {
     return (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on' ? 'https://' : 'http://') . $_SERVER['HTTP_HOST'];
 }
-?>
