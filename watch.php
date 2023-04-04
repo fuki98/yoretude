@@ -36,8 +36,8 @@ $video_info['views'] = $views->fetchColumn();
 $already_viewed = $conn->prepare("SELECT COUNT(view_id) FROM views WHERE video_id = ? AND session_id = ? AND viewed_at > DATE_SUB(NOW(), INTERVAL 10 MINUTE)");
 $already_viewed->execute([$video_info['video_id'], session_id()]);
 if($already_viewed->fetchColumn() == 0) {
-	$add_view = $conn->prepare("INSERT INTO views (view_id, video_id, session_id, member) VALUES (?, ?, ?, ?)");
-	$add_view->execute([generateId(26), $video_info['video_id'], session_id(), $session['member_id']]);	
+	$add_view = $conn->prepare("INSERT INTO views (view_id, video_id, session_id) VALUES (?, ?, ?)");
+	$add_view->execute([generateId(26), $video_info['video_id'], session_id()]);	
 }
 ?>
 <iframe id="invisible" name="invisible" src="" scrolling="yes" width="0" height="0" frameborder="0" marginheight="0" marginwidth="0"></iframe>   
@@ -91,7 +91,7 @@ function CommentHandler()
 <div style="font-size: 16px; font-weight: bold; color: #333333; padding: 5px; border-top: 1px dotted #CCCCCC;">
 		<?php echo htmlspecialchars($video_info['title']); ?>		</div>
 <link rel="stylesheet" href="player.css">
-<table width="100%" align="center" cellpadding="0" cellspacing="0" border="0">
+<table width="795" align="center" cellpadding="0" cellspacing="0" border="0">
 	<tr valign="top">
 		<td width="515" style="padding-right: 15px;">
 			
