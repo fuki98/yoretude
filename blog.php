@@ -44,7 +44,7 @@ if($session['administrator'] == 1 && isset($_POST['title'])) {
     <hr>
   <?php } ?><?php
 	echo '<!-- hi -->';
-	$stmt = $conn->query("SELECT * FROM blogs ORDER BY date DESC");
+	$stmt = $conn->query("SELECT * FROM blogs ORDER BY created_at DESC");
 	echo '<!-- hi1 -->';
 	// Loop through the results and display each post
 	while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
