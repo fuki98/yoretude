@@ -91,7 +91,7 @@ function CommentHandler()
 <div style="font-size: 16px; font-weight: bold; color: #333333; padding: 5px; border-top: 1px dotted #CCCCCC;">
 		<?php echo htmlspecialchars($video_info['title']); ?>		</div>
 <link rel="stylesheet" href="player.css">
-<table width="795" align="center" cellpadding="0" cellspacing="0" border="0">
+<table width="100%" align="center" cellpadding="0" cellspacing="0" border="0">
 	<tr valign="top">
 		<td width="515" style="padding-right: 15px;">
 			
