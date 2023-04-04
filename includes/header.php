@@ -1,5 +1,6 @@
 <?php
-if(!isset($_COOKIE['debug'])) {
+$down = "1";
+if(!isset($_COOKIE['debug']) AND $down == "1") {
 	require 'errors/maintenance.php';
 	die();
 }
