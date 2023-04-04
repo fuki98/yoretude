@@ -265,13 +265,7 @@ function CommentHandler()
                     </tr>
 					
 					
-													<tr>
-								<td colspan="2" valign="top">
-								<span style="background-color: #FFFFAA; padding: 2px;">Sites linking to this video:</span>
-									<div style="font-size: 11px; padding-bottom: 7px;"></div>
-								
-								&#187; <b>3866 clicks from </b><a href="r.php?u=http%3A%2F%2Fcuriosoperoinutil.blogspot.com%2F">http://curiosoperoinutil.blogspot.com/</a><br>&#187; <b>1988 clicks from </b><a href="r.php?u=http%3A%2F%2Fblog.suziexxx.com%2F">http://blog.suziexxx.com/</a><br>&#187; <b>1389 clicks from </b><a href="r.php?u=http%3A%2F%2Fwww.myspace.com%2F">http://www.myspace.com/</a><br>&#187; <b>904 clicks from </b><a href="r.php?u=http%3A%2F%2Fwww.foto-aficion.com%2Fblog%2F">http://www.foto-aficion.com/blog/</a><br>&#187; <b>652 clicks from </b><a href="r.php?u=http%3A%2F%2Fwww.basicthinking.de%2Fblog%2F">http://www.basicthinking.de/blog/</a><br>								</td>
-								</tr>
+													
 								
               </table>
 			</form>
