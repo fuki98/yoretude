@@ -124,7 +124,7 @@ if($browse_sort == "rf") {
 }
 ?>
 
-<table width="80%" align="center" cellpadding="0" cellspacing="0" border="0" bgcolor="#CCCCCC">
+<table width="875" align="left" cellpadding="0" cellspacing="0" border="0" bgcolor="#CCCCCC">
 	<tr>
 		<td><img src="img/box_login_tl.gif" width="5" height="5"></td>
 		<td width="100%"><img src="img/pixel.gif" width="1" height="5"></td>
@@ -168,8 +168,7 @@ if($browse_sort == "rf") {
 				}
 				?></div>
 			</div>
-			<div class="moduleFeatured"> 
-				<table width="100%" cellpadding="0" cellspacing="0" border="0">
+				<td align="left" valign="top" width="740"><table width="740" align="center" cellpadding="0" cellspacing="0" border="0" bgcolor="#CCCCCC">
 					<?php
 					$i = 0;
 					foreach($videos as $video) {
@@ -200,8 +199,9 @@ if($browse_sort == "rf") {
 					}
 					
 					?>
-				</table>
-			</div>
+				</table></td><td width="120" valign="top" style="padding-left: 12px;">
+				<a href="/my_videos_upload"><img src="/web/20060410003451im_/http://youtube.com/img/upload_banner.jpg" border="0"></a>
+				</td>
 		</td>
 		<td><img src="img/pixel.gif" width="5" height="1"></td>
 	</tr>
