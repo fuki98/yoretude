@@ -2,7 +2,7 @@
 require __DIR__ . "/includes/header.php";
 
 if(!empty($_SESSION)) {
-	header("Location: index.php");
+	header("Location: browse");
 }
 
 if($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -13,7 +13,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 			$member = $member->fetch(PDO::FETCH_ASSOC);
 			if(password_verify(trim($_POST['password']), $member['password'])) {
 				$_SESSION['member_id'] = $member['member_id'];
-				header("Location: index.php");
+				header("Location: browse");
 				$last_login = $conn->prepare("UPDATE members SET last_login = CURRENT_TIMESTAMP WHERE member_id = ?");
 				$last_login->execute([$member['member_id']]);
 			} else {
@@ -25,84 +25,88 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 	}
 }
 ?>
-<div style="padding: 0px 5px 0px 5px;">
-
-
 <div class="tableSubTitle">Log In</div>
 
-<table width="790" align="center" cellpadding="0" cellspacing="0" border="0">
-	<tr valign="top">
-		<td style="padding-right: 15px;" width="510">
-		
-		
-		<span class="highlight">What is YoreTude?</span>
 
-		YoreTude is a way to get your videos to the people who matter to you. With YoreTude you can:
-		
-		<ul>
-		<li> Show off your favorite videos to the world
-		<li> Blog the videos you take with your digital camera or cell phone
-		<li> Securely and privately show videos to your friends and family around the world
-		<li> ... and much, much more!
+
+<div id="siSignupDiv">
+	<h4>New to YoreTude?</h4>
+	
+	<div id="siSignupDesc">
+		YoreTude is a way to get your videos to the people who matter to you.<br/>
+		With YoreTude you can:
+		<ul>			
+			<li>Upload, tag and share your videos worldwide
+			<li>Browse thousands of original videos uploaded by community members
+			<li>Find, join and create video groups to connect with people with similar interests
+			<li>Customize your experience with playlists and subscriptions
+			<li>Integrate YoreTude with your website using video embeds or APIs</li>
 		</ul>
-
-		<br><span class="highlight"><a href="signup.php">Sign up now</a> and open a free account.</span>
-		<br><br><br>
 		
-		To learn more about our service, please see our <a href="help.php">Help</a> section.<br><br><br>
-		</td>
-		<td width="280">
-		
-		<table width="280" align="center" cellpadding="0" cellspacing="0" border="0" bgcolor="#E5ECF9">
-			<tr>
-				<td><img src="/img/box_login_tl.gif" width="5" height="5"></td>
-				<td width="100%"><img src="/img/pixel.gif" width="1" height="5"></td>
-				<td><img src="/img/box_login_tr.gif" width="5" height="5"></td>
-			</tr>
-			<tr>
-				<td><img src="/img/pixel.gif" width="5" height="1"></td>
-				<td align="center">
-		<table width="100%" cellpadding="5" cellspacing="0" border="0">
-			<form method="post" action="login.php">
-			
-			<input type="hidden" name="field_command" value="login_submit">
-				<tr>
-					<td align="center" colspan="2"><div style="font-size: 14px; font-weight: bold; color:#003366; margin-bottom: 5px;">YoreTude Log In</div></td>
-				</tr>
-				<tr>
-					<td align="right"><span class="label">User Name:</span></td>
-					<td><input type="text" size="20" name="username" value=""></td>
-				</tr>
-				<tr>
-					<td align="right"><span class="label">Password:</span></td>
-					<td><input type="password" size="20" name="password"></td>
-				</tr>
-				<tr>
-					<td align="right"><span class="label">&nbsp;</span></td>
-					<td><input type="submit" value="Log In"></td>
-				</tr>
-				<tr>
-					<td align="center" colspan="2"><a href="contact.php">Forgot your password?</a></td>
-				</tr>
-			</table>
-			<br>
-			</td>
-				<td><img src="/img/pixel.gif" width="5" height="1"></td>
-			</tr>
-			<tr>
-				<td><img src="/img/box_login_bl.gif" width="5" height="5"></td>
-				<td><img src="/img/pixel.gif" width="1" height="5"></td>
-				<td><img src="/img/box_login_br.gif" width="5" height="5"></td>
-			</tr>
-		</table>
-			
-		</td>
-	</tr>
-</table>
+		<div id="siSignupLinkDiv" class="highlight"><a href="/signup">Sign up now</a>
+		and open a free account.
 		</div>
-		</td>
-	</tr>
-</table>
+		
+		To learn more about our service, please see our <a href="help">Help</a> section.
+	</div>
+</div>
+
+
+
+<div id="siSigninDiv" class="lightFocusBox">
+	<h4>YoreTude Members</h4>
+	<div id="siSigninSubhead">
+	Login to access your account
+	</div>
+	<table id="sisuLoginTable">
+		<form name="loginForm" id="loginForm" method="post">
+		<input type="hidden" name="current_form" value="loginForm" />
+			
+		
+	
+		
+	
+		
+	
+		
+	
+		
+	
+
+		<tr>
+			<td align="right" class="label">	<nobr>User Name</nobr>
+:</td>
+			<td><input tabindex="1" type="text" size="20" name="username" value=""></td>
+		</tr>
+		<tr>
+			<td align="right" class="label">	<nobr>Password</nobr>
+:</td>
+			<td><input tabindex="2" type="password" size="20" name="password"></td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+			<td><input type="submit" name="action_login" value="Log In"></td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+			<td>
+			<div id="sisuForgotDiv">
+			<b>Forgot:</b>&nbsp;
+			<a href="forgot_username">username</a> |
+			<a href="/forgot">password</a>
+			</div>
+			</td>
+		</tr>
+		</form>
+
+	</table>
+</div>
+
+
+<script type="text/javascript">
+document.loginForm.username.focus();
+</script></div> <!-- end baseDiv -->
+
 <?php
 require __DIR__ . "/includes/footer.php";
 ?>
