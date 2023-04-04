@@ -1,7 +1,6 @@
 <?php
 require __DIR__ . "/includes/header.php";
-error_reporting(E_ALL);
-ini_set('display_errors', '1');
+
 
 $video_info = $conn->prepare("SELECT * FROM videos WHERE video_id = ? AND converted = 1");
 $video_info->execute([$_GET['v']]);
