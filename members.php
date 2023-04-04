@@ -13,7 +13,7 @@ if(isset($_GET['t']) && in_array($_GET['t'], ["t", "w", "m", "a"])) {
 	$time = "t";
 }
 
-$user = $conn->query("SELECT * FROM members ORDER BY last_login DESC LIMIT 20");
+$users = $conn->query("SELECT * FROM members ORDER BY last_login DESC LIMIT 20");
 ?>
 
 <table width="100%" align="center" cellpadding="0" cellspacing="0" border="0" bgcolor="#CCCCCC">
@@ -64,7 +64,7 @@ $user = $conn->query("SELECT * FROM members ORDER BY last_login DESC LIMIT 20");
 				<table width="100%" cellpadding="0" cellspacing="0" border="0">
 					<?php
 					$i = 0;
-					foreach($videos as $video) {
+					foreach($users as $user) {
 						$i = $i + 1;
 						if($i == 1) {
 							echo '<tr valign="top">';
