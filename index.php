@@ -234,7 +234,7 @@ $featured_videos = $conn->query("SELECT * FROM featured LEFT JOIN videos ON vide
 				<td><img src="/img/pixel.gif" width="5" height="1"></td>
 				<td width="170">
 							<div style="font-size: 16px; font-weight: bold; text-align: center; padding: 5px 5px 10px 5px;">
-		<div style="font-size: 13px; font-weight: bold; text-align: center; color: #444444; padding-bottom: 5px;"><img src="https://web.archive.org/web/20051216110110im_/http://www.youtube.com/img/gray_arrow.gif" width="14" height="14" broder="0" align="absmiddle">&nbsp;Explore New Features</div>
+		<div style="font-size: 13px; font-weight: bold; text-align: center; color: #444444; padding-bottom: 5px;"><img src="https://web.archive.org/web/20051216110110im_/http://www.youtube.com/img/gray_arrow.gif" width="14" height="14" broder="0" align="absmiddle">&nbsp;New Features</div>
 		<table style="background-color: #EAEAEA;" width="100%">
 			<tbody><tr>
 				<td style="text-align: center;">
