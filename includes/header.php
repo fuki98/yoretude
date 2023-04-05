@@ -1,5 +1,5 @@
 <?php
-$down = "1";
+$down = "0";
 if(!isset($_COOKIE['debug']) AND $down == "1") {
 	require 'errors/maintenance.php';
 	die();
@@ -33,27 +33,27 @@ if(isset($_SESSION['member_id'])) {
 		<meta name="description" content="Share your videos with friends and family">
 	<meta name="keywords" content="video,sharing,camera phone,video phone,revival, recreation, YoreTude, 2005, yoretude ">
 	
-		<link rel="stylesheet" href="styles.css" type="text/css">
-	<link rel="stylesheet" href="base.css" type="text/css">
+		<link rel="stylesheet" href="/styles.css" type="text/css">
+	<link rel="stylesheet" href="/base.css" type="text/css">
 
 <div id="baseDiv">
 		
-<div id="logoDiv"><a href="/"><img src="/img/logo_sm.gif" width="120" height="48" alt="YouTube" border="0"></a></div>
+<div id="logoDiv"><a href="/"><img src="/img/logo_sm.gif" width="120" height="48" alt="YoreTude" border="0"></a></div>
 <div id="taglineDiv"><img src="/img/tagline-20pt.gif"></div>
 <div id="utilDiv">
 	<?php if(isset($session)) { ?>	
-						<td><b>Hello, <a href="profile.php?user=<?php echo htmlspecialchars($session['username']); ?>"><?php echo htmlspecialchars($session['username']); ?></a></b>        
-						| <img src="/img/mail.gif" border="0"> (<a href="./my_messages.php">0</a>)</td>
+						<td>Hello, <b><a href="profile?user=<?php echo htmlspecialchars($session['username']); ?>"><?php echo htmlspecialchars($session['username']); ?></a></b>        
+						| <img src="/img/mail.gif" border="0"> (<a href="/my_messages">0</a>)</td>
 						<td style="padding: 0px 5px 0px 5px;">|</td>
-						<td><a href="logout.php?next=<?php echo $_SERVER['REQUEST_URI'] ?>">Log Out</a></td>
+						<td><a href="/logout?next=<?php echo $_SERVER['REQUEST_URI'] ?>">Log Out</a></td>
 						<td style="padding: 0px 5px 0px 5px;">|</td>
-						<td style="padding-right: 5px;"><a href="help.php">Help</a></td>
+						<td style="padding-right: 5px;"><a href="/t/help">Help</a></td>
 						<?php } else { ?>
-						<td><a href="signup.php"><strong>Sign Up</strong></a></td>
+						<td><a href="/signup"><strong>Sign Up</strong></a></td>
 						<td style="padding: 0px 5px 0px 5px;">|</td>
-						<td><a href="login.php">Log In</a></td>
+						<td><a href="/login">Log In</a></td>
 						<td style="padding: 0px 5px 0px 5px;">|</td>
-						<td style="padding-right: 5px;"><a href="help.php">Help</a></td>
+						<td style="padding-right: 5px;"><a href="/t/help">Help</a></td>
 		                                <?php } ?>
 </div>
 	<div id="searchDiv">
