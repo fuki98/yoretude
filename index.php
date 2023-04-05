@@ -82,7 +82,7 @@ $vista = $conn->prepare("SELECT * FROM views ORDER BY views.viewed_at DESC LIMIT
 							<div class="videobarthumbnail_block" id="div_recently_viewed_0">
 								<center>
 									<div><a id="href_recently_viewed_0" href="/watch.php?v=<?php echo $video['video_id']; ?>"><img class="videobarthumbnail_gray" id="img_recently_viewed_0" src="get_still.php?video_id=<?php echo $video['video_id']; ?>" width="80" height="60"></a></div>
-									<div id="title1_recently_viewed_0" style="font-family: Arial, Helvetica, sans-serif; font-size: 10px; font-color: #666666; padding-bottom: 3px;"><a href="/watch.php?v=<?php echo $video['video_id']; ?>" title="WOW meets Porn"><?php echo $video['title']; ?></a></div>
+									<div id="title1_recently_viewed_0" style="font-family: Arial, Helvetica, sans-serif; font-size: 10px; font-color: #666666; padding-bottom: 3px;"><a href="/watch.php?v=<?php echo $video['video_id']; ?>" title="<?php echo htmlspecialchars($video['title']); ?>"><?php echo htmlspecialchars($video['title']); ?></a></div>
 									<div id="title2_recently_viewed_0" style="font-family: Arial, Helvetica, sans-serif; font-size: 10px; font-color: #666666; padding-bottom: 3px;"><?php echo str_replace("ago", "ago", timeAgo($vistas['viewed_at'])); ?></div> 
 								</center>
                                 
