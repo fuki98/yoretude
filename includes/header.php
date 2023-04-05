@@ -42,7 +42,7 @@ if(isset($_SESSION['member_id'])) {
 <div id="taglineDiv"><img src="/img/tagline-20pt.gif"></div>
 <div id="utilDiv">
 	<?php if(isset($session)) { ?>	
-						<td>Hello, <b><a href="profile?user=<?php echo htmlspecialchars($session['username']); ?>"><?php echo htmlspecialchars($session['username']); ?></a></b>        
+						<td><b>Hello, <a href="profile?user=<?php echo htmlspecialchars($session['username']); ?>"><?php echo htmlspecialchars($session['username']); ?></a></b>        
 						| <img src="/img/mail.gif" border="0"> (<a href="/my_messages">0</a>)</td>
 						<td style="padding: 0px 5px 0px 5px;">|</td>
 						<td><a href="/logout?next=<?php echo $_SERVER['REQUEST_URI'] ?>">Log Out</a></td>
