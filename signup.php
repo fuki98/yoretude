@@ -82,14 +82,39 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 ?>
-<?php if(isset($username_err)) { ?>
- <table width="100%" align="center" bgcolor="#FF0000" cellpadding="6" cellspacing="3" border="0">
-		<tbody><tr>
-			<td align="center" bgcolor="#FFFFFF"><span class="error">asasdsasassa</span></td>
-		</tr>
-	</tbody></table><br>
-    <?php } ?>
 <div class="tableSubtitle">Sign Up</div>
+<?php if (!empty($password_err)) { ?>
+<table width="100%" align="center" bgcolor="#FF0000" cellpadding="6" cellspacing="3" border="0">
+		<tbody><tr>
+			<td align="center" bgcolor="#FFFFFF"><span class="error"><?php echo htmlspecialchars($password_err); ?><br>
+		</span></td></tr>
+	</tbody></table>
+    <br>
+<? } ?>
+<?php if (!empty($confirm_password_err)) { ?>
+<table width="100%" align="center" bgcolor="#FF0000" cellpadding="6" cellspacing="3" border="0">
+		<tbody><tr>
+			<td align="center" bgcolor="#FFFFFF"><span class="error"><?php echo htmlspecialchars($confirm_password_err); ?><br>
+		</span></td></tr>
+	</tbody></table>
+    <br>
+<? } ?>
+<?php if (!empty($email_err)) { ?>
+<table width="100%" align="center" bgcolor="#FF0000" cellpadding="6" cellspacing="3" border="0">
+		<tbody><tr>
+			<td align="center" bgcolor="#FFFFFF"><span class="error"><?php echo htmlspecialchars($email_err); ?><br>
+		</span></td></tr>
+	</tbody></table>
+    <br>
+<? } ?>
+<?php if (!empty($username_err)) { ?>
+<table width="100%" align="center" bgcolor="#FF0000" cellpadding="6" cellspacing="3" border="0">
+		<tbody><tr>
+			<td align="center" bgcolor="#FFFFFF"><span class="error"><?php echo htmlspecialchars($username_err); ?><br>
+		</span></td></tr>
+	</tbody></table>
+    <br>
+<? } ?>
 <div class="formTable">				
 	<div class="formIntro">Please enter your account information below. All fields are required.</div>
 	<form method="post" action="signup.php">
