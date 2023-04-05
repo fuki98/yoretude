@@ -302,22 +302,8 @@ $featured_videos = $conn->query("SELECT * FROM featured LEFT JOIN videos ON vide
 		<div style="font-size: 14px; font-weight: bold; margin-top: 10px;"><a href="tags.php">See More Tags</a></div>
 		
 		</div>
-	<!--
-	<?php
-		require __DIR__ . "/includes/whos_on_now.php";
-	?>-->
-="font-size: 13px;" href="results.php?search='.htmlspecialchars($tag).'">'.htmlspecialchars($tag).'</a> :'."\r\n";
-				} ?>
-		
-					
-		<div style="font-size: 14px; font-weight: bold; margin-top: 10px;"><a href="tags.php">See More Tags</a></div>
 		
 		</div>
-	<!--
-	<?php
-		require __DIR__ . "/includes/whos_on_now.php";
-	?>-->
-
 		</div>
 		</td>
 	</tr>
