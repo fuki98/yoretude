@@ -17,7 +17,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 				$last_login = $conn->prepare("UPDATE members SET last_login = CURRENT_TIMESTAMP WHERE member_id = ?");
 				$last_login->execute([$member['member_id']]);
 			} else {
-				$password_err = "Password is incorrect!";
+				$password_err = "Username or password is incorrect!";
 			}
 		} else {
 			$username_err = "That user doesn't exist!";
@@ -27,7 +27,22 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 ?>
 <div class="tableSubTitle">Log In</div>
 
-
+<?php if (!empty($password_err)) { ?>
+<table width="100%" align="center" bgcolor="#FF0000" cellpadding="6" cellspacing="3" border="0">
+		<tbody><tr>
+			<td align="center" bgcolor="#FFFFFF"><span class="error"><?php echo htmlspecialchars($password_err); ?><br>
+		</span></td></tr>
+	</tbody></table>
+    <br>
+<? } ?>
+<?php if (!empty($username_err)) { ?>
+<table width="100%" align="center" bgcolor="#FF0000" cellpadding="6" cellspacing="3" border="0">
+		<tbody><tr>
+			<td align="center" bgcolor="#FFFFFF"><span class="error"><?php echo htmlspecialchars($username_err); ?><br>
+		</span></td></tr>
+	</tbody></table>
+    <br>
+<? } ?>
 
 <div id="siSignupDiv">
 	<h4>New to YoreTude?</h4>
