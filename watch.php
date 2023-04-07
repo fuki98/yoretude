@@ -36,10 +36,18 @@ $video_info['views'] = $views->fetchColumn();
 $already_viewed = $conn->prepare("SELECT COUNT(view_id) FROM views WHERE video_id = ? AND session_id = ? AND viewed_at > DATE_SUB(NOW(), INTERVAL 10 MINUTE)");
 $already_viewed->execute([$video_info['video_id'], session_id()]);
 if($already_viewed->fetchColumn() == 0) {
-	$add_view = $conn->prepare("INSERT INTO views (view_id, video_id, session_id) VALUES (?, ?, ?)");
-	$add_view->execute([generateId(26), $video_info['video_id'], session_id()]);	
+    if(!$_SESSION) {
+     $add_view = $conn->prepare("INSERT INTO views (view_id, video_id, session_id) VALUES (?, ?, ?)");
+	$add_view->execute([generateId(26), $video_info['video_id'], session_id()]);   
+    }
+     if($_SESSION) {
+	$add_view = $conn->prepare("INSERT INTO views (view_id, video_id, session_id, member) VALUES (?, ?, ?, ?)");
+	$add_view->execute([generateId(26), $video_info['video_id'], session_id(), $session['member_id']]);	
+     }
 }
 ?>
+<title> YoreTude - <?php echo htmlspecialchars($video_info['title']); ?></title>
+</head>
 <iframe id="invisible" name="invisible" src="" scrolling="yes" width="0" height="0" frameborder="0" marginheight="0" marginwidth="0"></iframe>   
 <script type="text/javascript" src="swfobject.js"></script>
 <script>
@@ -105,7 +113,7 @@ function CommentHandler()
 			
 			<script type="text/javascript">
 			if(swfobject.hasFlashPlayerVersion("6")) {	
-				swfobject.embedSWF("player.swf?video_id=<?php echo $video_info['video_id']; ?>&l=<?php echo ceil($video_info['duration']); ?>", "flashcontent", "425", "350", "6");
+				swfobject.embedSWF("/players/player2.swf?video_id=<?php echo $video_info['video_id']; ?>&l=<?php echo ceil($video_info['duration']); ?>", "flashcontent", "425", "350", "6");
 			} else if(typeof(document.createElement('video').canPlayType) != 'undefined' && document.createElement('video').canPlayType('video/webm;codecs="vp8,opus"') == "probably") {
 				document.getElementById('flashcontent').innerHTML = '<figure id="videoContainer" oncontextmenu="return false;"><video id="video" controls preload="metadata" src="/get_video.php?video_id=<?php echo $video_info['video_id'] ?>&format=webm"></video><img class="watermark" src="img/watermark.png"><br><a href="mailto:?subject=<?php echo htmlspecialchars($video_info['title']); ?>&body=http://www.yoretude.com/?v=<?php echo htmlspecialchars($video_info['video_id']); ?>" class="bold">Share This Video</a><div id="video-controls" class="controls" data-state="hidden"><button id="playpause" type="button" data-state="play">Play/Pause</button><div class="progress"><progress id="progress" value="0" min="0"><span id="progress-bar"></span></progress></div><button id="mute" type="button" data-state="mute">Mute/Unmute</button></div></figure></div>';
 			}
@@ -294,7 +302,7 @@ function CommentHandler()
 					$comment_favorites = $conn->prepare("SELECT COUNT(favorite_id) FROM favorites WHERE member_id = ?");
 					$comment_favorites->execute([$comment["member_id"]]);
 					
-					echo '<div class="commentsEntry">"'.htmlspecialchars($comment['body']).'"<br>- <a href="profile.php?user='.htmlspecialchars($comment['username']).'">'.htmlspecialchars($comment['username']).'</a> // <a href="profile_videos.php?user='.htmlspecialchars($comment['username']).'">Videos</a> ('.$comment_videos->fetchColumn().') | <a href="profile_favorites.php?user='.htmlspecialchars($comment['username']).'">Favorites</a> ('.$comment_favorites->fetchColumn().') - ('.timeAgo($comment['posted_at']).')</div>';
+					echo '<div class="commentsEntry">'.htmlspecialchars($comment['body']).'<br>- <a href="profile.php?user='.htmlspecialchars($comment['username']).'">'.htmlspecialchars($comment['username']).'</a> // <a href="profile_videos.php?user='.htmlspecialchars($comment['username']).'">Videos</a> ('.$comment_videos->fetchColumn().') | <a href="profile_favorites.php?user='.htmlspecialchars($comment['username']).'">Favorites</a> ('.$comment_favorites->fetchColumn().') - ('.timeAgo($comment['posted_at']).')</div>';
 				}
 			}
 			?><a name="flag"></a>
