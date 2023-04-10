@@ -19,12 +19,17 @@ if($profile->rowCount() == 0) {
 
 $profile['videos'] = $conn->prepare("SELECT video_id FROM videos WHERE member_id = ? AND converted = 1");
 $profile['videos']->execute([$profile["member_id"]]);
+$profile['bulletins'] = $conn->prepare("SELECT bulletin_id FROM bulletins WHERE member_id = ?");
+$profile['bulletins']->execute([$profile["member_id"]]);
+if($profile['bulletins']->rowCount() == 0) {
+    $any_bulletins = "nah";
+}
+
 $profile['videos'] = $profile['videos']->rowCount();
 $profile['favorites'] = $conn->prepare("SELECT favorite_id FROM favorites WHERE member_id = ?");
 $profile['favorites']->execute([$profile["member_id"]]);
 $profile['favorites'] = $profile['favorites']->rowCount();
 $profile['url'] = ucfirst(strtolower($profile['username']));
-
 
 $profile_latest_video = $conn->prepare(
 	"SELECT * FROM videos
@@ -79,14 +84,12 @@ if(!empty($profile['channelicon']) && strpos($profile['channelicon'], 'watch?v='
 
 	//$profile['channelicon'] = substr($profile['channelicon'], -11);
 }
-
 $subsCount = $conn->prepare("SELECT COUNT(*) FROM subscriptions WHERE subscribed_to_id = ?");
 $subsCount->execute([$profile['member_id']]);
 $profile['subs'] = $subsCount->fetchColumn();
 
 $checkSubscription = $conn->prepare("SELECT * FROM subscriptions WHERE subscriber_id = ? AND subscribed_to_id = ?");
 $checkSubscription->execute([$session['member_id'], $profile['member_id']]);
-
 if ($checkSubscription->rowCount() !== 0) {
 	$is_subscribed = true;
 }
@@ -97,7 +100,7 @@ $(document).on('click', '#subscribe-btn', function() {
     var action = $(this).text().toLowerCase();
 
     $.ajax({
-        url: '/subscribe.php',
+        url: '/subscription_center.php',
         method: 'POST',
         data: { member_id: memberId, action: action },
         success: function(response) {
@@ -108,14 +111,14 @@ $(document).on('click', '#subscribe-btn', function() {
     });
 });
 </script>
-
 	<link rel="stylesheet" href="/styles.css" type="text/css">
 	<link rel="stylesheet" href="/base.css" type="text/css">
     		
 <style type="text/css">
 	.userTable {
 	border: 1px solid #999999;
-	background-color: #F4F4F4;
+	background-color: <?php echo htmlspecialchars($profile['boxFill']); ?>;
+    color: <?php echo htmlspecialchars($profile['text']); ?>;
 	width: 300px;
 	}
 	
@@ -164,7 +167,7 @@ $(document).on('click', '#subscribe-btn', function() {
 	font-family:  Arial, Helvetica, sans-serif;
 	font-size: 12px;
 	font-weight: bold;
-	color: #999999;
+	color: <?php echo htmlspecialchars($profile['profileTitles']); ?>;
 	padding-top: 4px;
 	padding-bottom: 4px;
 	}
@@ -240,7 +243,7 @@ $(document).on('click', '#subscribe-btn', function() {
 	}
 	
 	tr.bulletin td {
-	background-color: #F4F4F4;
+	background-color: <?php echo htmlspecialchars($profile['boxFill']); ?>;
 	border-right: 1px solid #FFFFFF;
 	padding-top: 3px;
 	padding-bottom: 3px;
@@ -254,7 +257,10 @@ $(document).on('click', '#subscribe-btn', function() {
 	padding-bottom: 3px;
 	border-bottom: 1px solid #999999;
 	}
-	
+	.bulletinPost
+    {
+        color: <?php echo htmlspecialchars($profile['text']); ?>;
+    }
 	tr.bulletinPost td {
 	padding-top: 5px;
 	padding-bottom: 5px;
@@ -265,7 +271,7 @@ $(document).on('click', '#subscribe-btn', function() {
 	padding-top: 5px;
 	padding-bottom: 5px;
 	border-top: 1px solid #999999;
-	background-color: #F4F4F4;
+	background-color: <?php echo htmlspecialchars($profile['boxFill']); ?>;
 	}
 	
 	td.buttonPost {
@@ -280,7 +286,7 @@ $(document).on('click', '#subscribe-btn', function() {
 	}
 	
 	td.checkBoxSection {
-	background-color: #F4F4F4;
+	background-color: <?php echo htmlspecialchars($profile['boxFill']); ?>;
 	width: 15px;
 	border-right: 1px solid #999999;
 	}
@@ -308,32 +314,32 @@ $(document).on('click', '#subscribe-btn', function() {
 	}
 	
 	td.bulletinRead {
-	background-color: #F4F4F4;
+	background-color: <?php echo htmlspecialchars($profile['boxFill']); ?>;
 	border-right: 1px solid #999999;
 	border-bottom: 1px solid #999999;
 	}
 	
 	td.bulletinReadBottom {
-	background-color: #F4F4F4;
+	background-color: <?php echo htmlspecialchars($profile['boxFill']); ?>;
 	border-right: 1px solid #999999;
 	}
 	
 	
 	td.bulletinReadLast {
-	background-color: #F4F4F4;
+	background-color: <?php echo htmlspecialchars($profile['boxFill']); ?>;
 	border-bottom: 1px solid #999999;
 	}
 	
 	
 	tr.emptyBulletin td{
-	background-color: #F4F4F4;
+	background-color: <?php echo htmlspecialchars($profile['boxFill']); ?>;
 	padding-top: 3px;
 	padding-bottom: 5px;
 	}
 	
 	
 	td.leftBg {
-	background-color: #F4F4F4;
+	background-color: <?php echo htmlspecialchars($profile['boxFill']); ?>;
 	border-right: 1px solid #999999;
 	}
 	
@@ -355,7 +361,7 @@ $(document).on('click', '#subscribe-btn', function() {
 	}
 	
 	td.bulletinReadBottom {
-	background-color: #F4F4F4;
+	background-color: <?php echo htmlspecialchars($profile['boxFill']); ?>;
 	border-right: 1px solid #999999;
 	border-bottom: none;
 	}
@@ -374,6 +380,7 @@ $(document).on('click', '#subscribe-btn', function() {
 	}
 
 </style>	
+
 	
 <table align="center" width="800" cellpadding="0" cellspacing="0" border="0" style="margin-bottom: 10px;">
 	<tr>
@@ -488,8 +495,7 @@ $(document).on('click', '#subscribe-btn', function() {
 						<br>
 						<span class="profileTitles">URL: </span> <a href="/<?= $profile['url']  ?>">http://www.yoretude.com/<?= $profile['url']  ?></a>
 					</td>
-				</tr><button id="subscribe-btn" data-member-id="<?php echo $profile['member_id']; ?>"><?php echo $is_subscribed ? 'Unsubscribe' : 'Subscribe'; ?></button>
-
+				</tr>
 			</tbody></table>
 		
 			<div>&nbsp;</div>
@@ -538,12 +544,29 @@ $(document).on('click', '#subscribe-btn', function() {
 					<td align="center" class="bulletinTopFirstCells" valign="top"><span class="profileTitles">Date</span></td>
 					<td align="center" valign="top"><span class="profileTitles">Bulletin</span></td>
 				</tr>
+                <?php if ($any_bulletins == "nah") { ?>
 				<!--Begin only show this row if no postings-->
 				<tr class="emptyBulletin">
 					<td colspan="3" align="center"><span class="profileTitles">There are no bulletins.</span></td>
 				</tr>
 				<!--End only show this row if no postings-->
-				
+				<?php } ?>
+                 <?php foreach($profile['bulletins'] as $bulletin) { 
+                     ?>
+                <tr class="bulletin">
+						<td align="center"><span class="profileTitles"><a href="/profile?user=<?php echo htmlspecialchars($profile["username"]); ?>"><?php echo htmlspecialchars($profile["username"]); ?></a></span></td>
+						<td align="center"><?php echo date("m.d.y", strtotime($bulletin['posted_at']. ' - 17 years')); ?></td>
+						<td align="center">
+							<a href=/bulletin_read?id=<?php echo htmlspecialchars($bulletin["bulletin_id"]); ?>><?php echo htmlspecialchars($bulletin["bulletin_id"]); ?>
+                            </a>
+						</td>
+					</tr>
+                    <?php } ?>
+                    <?php if ($_SESSION['member_id'] == $profile['member_id']) { ?>
+<tr class="emptyBulletin">
+					<td colspan="3" align="center"><span class="profileTitles"><a href="bulletin_post.php">Post A Bulletin</a></span></td>
+				</tr>
+                    <?php } ?>
 			</tbody></table>
 			
 		
@@ -563,19 +586,15 @@ $(document).on('click', '#subscribe-btn', function() {
 					<td>
 					<?php if(!empty($profile['name'])) { ?>
 						<div class="spaceMaker">		<div class="spaceMaker">
-		<span class="profileTitles">Name: </span> <?php echo $profile['name']; ?> 
+		<span class="profileTitles">Name: </span> <?php if(!empty($profile['name'])) { ?> 
 		<br>
 		</div>
         <?php } ?>	
 
 </div>
-
-	<div class="spaceMaker">		<div class="spaceMaker">
-		<span class="profileTitles">subscribers: </span> <?php echo $profile['subs']; ?> 
-		<br>
-		</div>
+					
 							<div class="spaceMaker">
-		<span class="profileTitles">Videos Watched: </span> 0
+		<span class="profileTitles">Videos Watched: </span>: <?php echo htmlspecialchars($profile['views']); ?>
 		<br>
 		</div>
 
@@ -617,7 +636,7 @@ $(document).on('click', '#subscribe-btn', function() {
 <?php if(!empty($profile['relationship_status']) && $profile['relationship_status'] !== 0) { ?>
 							<div class="spaceMaker">
 		<span class="profileTitles">Marital Status: </span> 	<?php
-					switch($profile['gender']) {
+					switch($profile['relationship_status']) {
 						case '0':
 							break;
 						case '1':
