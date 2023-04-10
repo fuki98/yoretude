@@ -49,20 +49,22 @@ if($session['administrator'] == 1 && isset($_POST['title'])) {
 	// Loop through the results and display each post
 	while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 		$title = $row['title'];
+        $date = $row['created_at'];
 		$content = $row['content'];
 		$author = $row['author'];
 	?>
-	<div class="tableSubTitle"><?php echo $title; ?></div>
-	<div class="tableSubContent"><?php echo $content; ?><br><blockquote>- <a href="/user/<?php echo $author ?>"><?php echo $author ?></a><blockquote></div>
+    <h4><?php echo $title; ?></h4>
+    <i><?php echo date("F j, Y", strtotime($date. ' - 17 years')); ?></i><br>
+	<div class="tableSubContent"><?php echo $content; ?><br><a href="/user/<?php echo $author ?>"><?php echo $author ?></a><br>The YoreTude Team</div>
 	<?php }
 	echo '<!-- hi2 -->';
 	?>
-		<div class="tableSubTitle" bis_skin_checked="1">April 1, 2006</div>
+		<i bis_skin_checked="1">April 1, 2006</i>
 	<div class="tableSubContent" bis_skin_checked="1"><b>WE HAVE BEEN BOUGHT OUT!</b>
     <br>"Google is excited to announce the acquisition of Yoretude, a dynamic video streaming platform that we believe will greatly enhance the user experience of our customers. <br>In an effort to unify our brand and make our services more accessible, we have decided to rename Yoretude to Google Video. <br>The integration of Yoretude's cutting-edge technology and highly skilled team into Google will undoubtedly strengthen our position as a leading tech company and allow us to further innovate in the video streaming market. <br>With Google Video, we are confident that we will continue to provide our customers with the highest quality video content, and we look forward to the future of this exciting partnership."
 <blockquote>- Sundar Pichai</blockquote>
 </div>
-		<div class="tableSubTitle" bis_skin_checked="1">March 25th, 2006</div>
+		<i bis_skin_checked="1">March 25th, 2006</i>
 	<div class="tableSubContent" bis_skin_checked="1">The revival that nobody needed but happened anyways.
     <br>That's right! After critical acclaim of what was <b>supposed</b> to be a joke with a friend, YoreTude is offically back for good. This time, I will promise to properly moderate it, keep it secure, and always be active.
     <br>My friend <b>qfx</b> now co-owns the site and me and them will be working to give you a great revival experience.
@@ -71,7 +73,7 @@ if($session['administrator'] == 1 && isset($_POST['title'])) {
     <br>Thanks everyone for the support through the dark times, and <s>stay tudy</s>.
     <br>-jr
 </div>
-		<div class="tableSubTitle" bis_skin_checked="1">October 1st, 2005</div>
+		<i bis_skin_checked="1">October 1st, 2005</i>
 	<div class="tableSubContent" bis_skin_checked="1">Hi! It's been 2 months since we last updated this thing. Since then, we have pushed out many updates - check them out!
 		<ul>
 <li><b>Actual embedding</b><br>
@@ -84,7 +86,7 @@ if($session['administrator'] == 1 && isset($_POST['title'])) {
 	</li>
 		</ul>
 	</div>
-	<div class="tableSubTitle" bis_skin_checked="1">August 12th, 2005</div>
+	<i bis_skin_checked="1">August 12th, 2005</i>
 	<div class="tableSubContent" bis_skin_checked="1"> Whew! A couple busy, busy weeks. These are some of the changes we've made:
 		<ul>
 <li><b>New front page</b><br>
@@ -97,10 +99,10 @@ if($session['administrator'] == 1 && isset($_POST['title'])) {
 	</li>
 		</ul>
 	</div>
-	<div class="tableSubTitle" bis_skin_checked="1">August 11th, 2005</div>
+	<i bis_skin_checked="1">August 11th, 2005</i>
 	<div class="tableSubContent" bis_skin_checked="1">Yesterday, a lot happened. We now have to use a new database - so if you don't seem to be able to login, clear your cookies for YoreTude.com and create a new account. Also, the layout was updated early yesterday.
 	</div>
-	<div class="tableSubTitle" bis_skin_checked="1">August 10th, 2005</div>
+	<i bis_skin_checked="1">August 10th, 2005</i>
 	<div class="tableSubContent" bis_skin_checked="1">
 		There has been no updates for a while, but we do want to tell you that in 2 days, the layout will change! It will be updated to show off the best of YoreTude and be more precise. Some new features will come with this update.
 		<ul>
@@ -113,7 +115,7 @@ For each video that you uploaded to YoreTude, you can decide to share the video 
 			</li><li><b>Show related video in comments</b><br>While browsing through the site, we've seen that many users reference videos they've posted when they leave comments in other people's videos. To help this effort, we will push out a new feature that allows you to reference one of your videos directly from the comments section.</li><br>
 			<p></p>
 	</ul></div>
-	<div class="tableSubTitle" bis_skin_checked="1">August 5th, 2005</div>
+	<i bis_skin_checked="1">August 5th, 2005</i>
 	<div class="tableSubContent" bis_skin_checked="1">
 		<p>You know, I really can't believe the pace that we're releasing new features. I mean, it really does seem like like just yesterday we launched something and, yet, here we are again... back with more.
 			<br>And since the last two days, here they are:
@@ -123,12 +125,12 @@ For each video that you uploaded to YoreTude, you can decide to share the video 
 			<li><b>Search</b><br>You can now search for videos by tags! For example, search up Scratch and you'll see my two videos on the first versions of Scratch.</li><br>
 			<p></p>
 	</ul></div>
-	<div class="tableSubTitle" bis_skin_checked="1">August 2nd, 2005</div>
+	<i bis_skin_checked="1">August 2nd, 2005</i>
 	<div class="tableSubContent" bis_skin_checked="1">
 		<p>Related videos have been implemented and the logo has been given a slight makeover. Also tags were added to the index so this outside doesn't look unfinished af on the outside anymore.</p>
 	</div>
 	
-	<div class="tableSubTitle" bis_skin_checked="1">August 1st, 2005</div>
+	<i bis_skin_checked="1">August 1st, 2005</i>
 	<div class="tableSubContent" bis_skin_checked="1">
 		<p>More things added, more sleepless nights. <b>Jacob</b> has added some more things to this website:
 		</p><ul>
@@ -139,17 +141,17 @@ For each video that you uploaded to YoreTude, you can decide to share the video 
 		<p>That's all for now. Keep following all the stuff we do, this thing is actually supposed to come out this month! As always, thank you for visiting YoreTude. Your support means everything to us</p>
 	</div>
 
-	<div class="tableSubTitle" bis_skin_checked="1">July 30th, 2005</div>
+	<i bis_skin_checked="1">July 30th, 2005</i>
 	<div class="tableSubContent" bis_skin_checked="1">
 		<p>This is the first update from Billygoat891. Anyways, we now use PDO instead of MySQLi since it is much better, and also some graphics were updated to be local. Pretty much a cleanup, that's all for Billygoat.<br>Jacob is our new developer! He is known for his website https://blips.club which is an incredibly accurate Twitter clone! Anyways, he mostly did code cleanup. So on the outsiders side, he contributed an old YouTube 2005 player he made for modern browser people. There is also a thumbnail generator to be made soon and featured videos have arrived! Hooray! </p>
 	</div>
 	
-	<div class="tableSubTitle" bis_skin_checked="1">July 29th, 2005</div>
+	<i bis_skin_checked="1">July 29th, 2005</i>
 	<div class="tableSubContent" bis_skin_checked="1">
 		<p>Today we are adding accounts. Currently you can sign up, i will work on logging in and sessions a bit later.</p>
 	</div>
 	
-	<div class="tableSubTitle" bis_skin_checked="1">July 28th, 2005</div>
+	<i bis_skin_checked="1">July 28th, 2005</i>
 	<div class="tableSubContent" bis_skin_checked="1">
 		<p>Greetings everyone!</p>
 		<p>Thanks for visiting YoreTude! We are currently in development. In an effort to communicate improvements and changes, this blog was created.</p>
