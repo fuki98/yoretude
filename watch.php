@@ -45,6 +45,23 @@ if($already_viewed->fetchColumn() == 0) {
 	$add_view->execute([generateId(26), $video_info['video_id'], session_id(), $session['member_id']]);	
      }
 }
+// categories
+$_CHANNELS = [
+"0" => "Not defined",
+"1" => "Arts and Animation",
+"2" => "Autos & Vehicles",
+"3" => "Comedy",
+"4" => "Entertainment",
+"5" => "Music",
+"6" => "People",
+"7" => "Science and Technology",
+"8" => "Travel & Places",
+"9" => "News & Blogs",
+"10" => "Pets & Animals",
+"11" => "Sports",
+"12" => "Video Games",
+];
+$CHANNELNUM = $video_info['category'];
 ?>
 <title> YoreTude - <?php echo htmlspecialchars($video_info['title']); ?></title>
 </head>
@@ -177,7 +194,7 @@ function CommentHandler()
 			
 			<div style="font-size: 11px; padding-bottom: 18px;">
 			Added on <?php echo date("F j, Y, h:i a", strtotime($video_info ['uploaded_at']. ' - 17 years')); ?> by <a href="profile.php?user=<?php echo htmlspecialchars($creator_info['username']); ?>"><?php echo htmlspecialchars($creator_info['username']);
-            ?></a>
+            ?> </a>
 			</div>
 			
 			</td>
@@ -199,19 +216,7 @@ function CommentHandler()
 						?>			</div>
 
 			<div style="padding-bottom: 10px;"><span style="background-color: #FFFFAA; padding: 2px;">Channels:</span>&nbsp; 
-						<a href="channels.php?c=5">Entertainment</a>
-
-						, 
-						<a href="channels.php?c=8">Hobbies &amp; Interests</a>
-
-						, 
-						<a href="channels.php?c=9">Humor</a>
-
-						, 
-						<a href="channels.php?c=10">Music</a>
-
-						, 
-						<a href="channels.php?c=12">Odd &amp; Outrageous</a>
+<?php echo $_CHANNELS[$CHANNELNUM]; ?>
 
 						</div>			
 			<div style="font-size: 11px; padding-bottom: 10px;">
@@ -226,7 +231,7 @@ function CommentHandler()
 			 <a href="profile_videos.php?user=<?php echo htmlspecialchars($creator_info['username']); ?>">Videos</a>: <?php echo $creator_videos->rowCount(); ?>			 | <a href="profile_favorites.php?user=<?php echo htmlspecialchars($creator_info['username']); ?>">Favorites</a>: <?php echo $creator_favorites->rowCount(); ?>			 | <a href="profile_friends.php?user=<?php echo htmlspecialchars($creator_info['username']); ?>">Friends</a>: 0			</div>
 			
 			<div style="padding-bottom: 5px;">
-			<span style="background-color: #FFFFAA; padding: 2px;">User Name:</span>&nbsp; <a href="profile.php?user=<?php echo htmlspecialchars($creator_info['username']); ?>"><?php echo htmlspecialchars($creator_info['username']); ?></a>
+			<span style="background-color: #FFFFAA; padding: 2px;">User Name:</span>&nbsp; <a href="profile.php?user=<?php echo htmlspecialchars($creator_info['username']); ?>"><?php echo htmlspecialchars($creator_info['username']); ?></a><?php if($creator_info['ctype']  == "2") { ?><img src="/img/director.gif" width="55" border="0"><?php } ?>
 			</div>
 			
 			<div style="padding-bottom: 10px;">
@@ -335,6 +340,35 @@ function CommentHandler()
 		</tbody></table>
 		</td>
 		<td width="280">
+        <?php if($creator_info['ctype']  == "2") { ?>
+        <table width="300" align="center" cellpadding="0" cellspacing="2" style="border: 1px solid #CCCCCC; padding: 10px;">
+					<tbody><tr>
+						<td align="left" width="100">
+							<img src="<?php if($creator_info['channelicon']  != "none") { ?>
+						<a href="/<?= $creator_info['url']  ?>"><img src="/get_still.php?video_id=<?php echo htmlspecialchars($creator_info['channelicon']); ?>" class="aboutImg"></a>
+                        <?php } ?>
+                        <?php if($creator_info['channelicon']  == "none") { ?>
+						<a href="/<?= $creator_info['url']  ?>"><img src="/img/no_videos_140.jpg" class="aboutImg"></a>
+                        <?php } ?>
+							<br>
+								<a href="/director"><img src="/img/director.gif" border="0"></a>
+							<br>
+						</td>
+						<td valign="top" align="left" width="200">
+							<strong>&nbsp;Provided By:</strong>
+							<br> 
+							&nbsp;<a href="<?php echo htmlspecialchars($creator_info['personal_website']); ?>" target="_blank"><?php echo htmlspecialchars($creator_info['name']); ?></a>
+							<br>
+						</td>
+					</tr>
+					<tr>
+						<td align="center" width="300" colspan="2">
+								<a href="<?php echo htmlspecialchars($creator_info['personal_website']); ?>" target="_blank"><?php echo htmlspecialchars($creator_info['personal_website']); ?></a>
+							<br>
+						</td>
+					</tr>
+				</tbody></table>
+                <?php } ?>
 		<div style="padding-bottom: 10px;">
 						<table width="280" align="center" cellpadding="0" cellspacing="0" border="0" bgcolor="#EEEEEE">
 							<tbody><tr>
@@ -418,4 +452,4 @@ function CommentHandler()
 
 <?php 
 require __DIR__ . "/includes/footer.php";
-?>
+?> 
