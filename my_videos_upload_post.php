@@ -22,6 +22,7 @@ $request = (object) [
     "vtitle" => trim($_POST['title']),
     "vdesc" => trim($_POST['description']),
     "vtags" => trim($_POST['tags']),
+    "vcat" => trim($_POST['cat']),
     "v_id" =>  randstr(11),
     "error" => (object) [
         "status" => "OK",
@@ -47,20 +48,21 @@ switch(true) {
 
 if($request->error->status == "OK") {
     if(move_uploaded_file($request->vfile['tmp_name'], $request->targetdir.$request->v_id."_temp.".$request->vext)) {
-        $stmt = $conn->prepare("INSERT INTO videos (video_id, member_id, title, description, tags, file, duration) 
-        VALUES (:video_id, :member_id, :title, :desc, :tags, :file, '0')");
+        $stmt = $conn->prepare("INSERT INTO videos (video_id, member_id, title, description, tags, category, file, duration) 
+        VALUES (:video_id, :member_id, :title, :desc, :tags, :cat, :file, '0')");
         $stmt->execute([
             ':video_id' => $request->v_id,
             ':member_id' => $_SESSION['member_id'],
             ':title' => htmlspecialchars($request->vtitle),
             ':desc' => $request->vdesc,
             ':tags' => $request->vtags,
+            ':cat' => $request->vcat,
 			':file' => trim($_FILES["fileToUpload"]["name"])
         ]);
         system(sprintf('php scripts/upload_processingworker.php "%s" "%s" "%s" > %s 2>&1 &', $request->targetdir, $request->vext, $request->v_id, './videos/.log'));
         
         
-        header("Location: /my_videos_upload_complete.php?v=". $request->v_id);
+        header("Location: /my_videos_edit.php?success&v=". $request->v_id);
     }
 } else {
     $_SESSION['error'] = $request->error->msg;
