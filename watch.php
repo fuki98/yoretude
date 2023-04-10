@@ -155,15 +155,15 @@ function CommentHandler()
 														<img style="border:0px; padding:0px; margin:0px; vertical-align:middle;" src="/img/star_half.gif">
 							</nobr>
 		
-						</div>
+						</div>        
 														<div id="ratingDiv" style="float:right; margin-right:5em;">
 							<span id="ratingMessage">Rate this video!</span><br/>
 															<?php if(isset($session)) { ?>
-															<a href="rate_video.php?am=1" style="text-decoration:none;"><img style="border:0px; padding:0px; margin:0px; vertical-align:middle;" src="/img/star_bg.gif">
-														<a href="rate_video.php?am=2" style="text-decoration:none;"><img style="border:0px; padding:0px; margin:0px; vertical-align:middle;" src="/img/star_bg.gif">
-														<a href="rate_video.php?am=3" style="text-decoration:none;"><img style="border:0px; padding:0px; margin:0px; vertical-align:middle;" src="/img/star_bg.gif">
-														<a href="rate_video.php?am=4" style="text-decoration:none;"><img style="border:0px; padding:0px; margin:0px; vertical-align:middle;" src="/img/star_bg.gif">
-														<a href="rate_video.php?am=5" style="text-decoration:none;"><img style="border:0px; padding:0px; margin:0px; vertical-align:middle;" src="/img/star_bg.gif">
+															<a href="rate_video.php?video_id=<?php echo htmlspecialchars($video_info['video_id']); ?>&am=1" style="text-decoration:none;"><img style="border:0px; padding:0px; margin:0px; vertical-align:middle;" src="/img/star_bg.gif">
+														<a href="rate_video.php?video_id=<?php echo htmlspecialchars($video_info['video_id']); ?>&am=2" style="text-decoration:none;"><img style="border:0px; padding:0px; margin:0px; vertical-align:middle;" src="/img/star_bg.gif">
+														<a href="rate_video.php?video_id=<?php echo htmlspecialchars($video_info['video_id']); ?>&am=3" style="text-decoration:none;"><img style="border:0px; padding:0px; margin:0px; vertical-align:middle;" src="/img/star_bg.gif">
+														<a href="rate_video.php?video_id=<?php echo htmlspecialchars($video_info['video_id']); ?>&am=4" style="text-decoration:none;"><img style="border:0px; padding:0px; margin:0px; vertical-align:middle;" src="/img/star_bg.gif">
+														<a href="rate_video.php?video_id=<?php echo htmlspecialchars($video_info['video_id']); ?>&am=5" style="text-decoration:none;"><img style="border:0px; padding:0px; margin:0px; vertical-align:middle;" src="/img/star_bg.gif">
 															<?php } else { ?>
 																
 														<a href="signup.php" style="text-decoration:none;" title="Please sign up and login to rate this video.">
