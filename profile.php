@@ -611,13 +611,13 @@ $(document).on('click', '#subscribe-btn', function() {
 
 
 							<div class="spaceMaker">
-		<span class="profileTitles">Last Login: </span> <?php echo str_replace("ago", "ago", timeAgo($profile['last_login'])); ?>
+		<span class="profileTitles">Last Login: </span> <?php echo timeAgo($profile['last_login']); ?>
 		<br>
 		</div>
 
 
 							<div class="spaceMaker">
-		<span class="profileTitles">Member Since: </span> <?php echo str_replace("ago", "ago", timeAgo($profile['created_at'])); ?>
+		<span class="profileTitles">Member Since: </span> <?php echo timeAgo($profile['created_at']); ?>
 		<br>
 		</div>
         <?php if(!empty($profile['birthday'])) { ?>
