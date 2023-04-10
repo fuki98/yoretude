@@ -447,11 +447,16 @@ $(document).on('click', '#subscribe-btn', function() {
 					
 				
 					<td width="142" align="left">
-                    <?php if($profile['channelicon']  != "none") { ?>
+                    <?php if(!$profile['channelicon']) { ?>
 						<a href="/<?= $profile['url']  ?>"><img src="/get_still.php?video_id=<?php echo htmlspecialchars($profile['channelicon']); ?>" class="aboutImg"></a>
                         <?php } ?>
-                        <?php if($profile['channelicon']  == "none") { ?>
+                        <?php if($profile['channelicon'] OR $profile['channelicon'] == "none") { ?>
+                        <?php if ($profile_latest_video) { ?>
+<a href="/<?= $profile['url']  ?>"><img src="/get_still.php?video_id=<?php echo htmlspecialchars($profile_latest_video['video_id']); ?>" class="aboutImg"></a>
+                        <?php } ?>
+                         <?php if(!$profile_latest_video) { ?>
 						<a href="/<?= $profile['url']  ?>"><img src="/img/no_videos_140.jpg" class="aboutImg"></a>
+                        <?php } ?>
                         <?php } ?>
 					</td>
 					
