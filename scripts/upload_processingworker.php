@@ -16,6 +16,13 @@ try {
 
     // Duration
     $duration = round(exec($config['ffprobe'] . ' -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 '.$request->targetdir.$request->v_id.'_temp.'.$request->vext));
+    if ($duration > 600 AND $_SESSION['ctype'] != "2") {
+        
+     unlink($request->targetdir.$request->v_id."_temp.".$request->vext);   
+     die ("You are not allowed to upload videos more than 10 minutes.");
+     $stmt = $conn->prepare('DELETE FROM videos video_id = :video_id');
+     $stmt->execute([':video_id' => $request->v_id]);
+    }
     
     // Still 1
     exec($config['ffmpeg'] . ' -i '.$request->targetdir.$request->v_id.'_temp.'.$request->vext.' -c:v mjpeg -ss '.($duration*0.25).' -vframes 1 -vf scale=120:90 -an -q:v 5 stills/'.$request->v_id.'_1.jpg');
