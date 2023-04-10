@@ -591,7 +591,7 @@ $(document).on('click', '#subscribe-btn', function() {
 					<td>
 					<?php if(!empty($profile['name'])) { ?>
 						<div class="spaceMaker">		<div class="spaceMaker">
-		<span class="profileTitles">Name: </span> <?php if(!empty($profile['name'])) { ?> 
+		<span class="profileTitles">Name: </span> <?php if(!empty($profile['name'])) { ?> <?php echo htmlspecialchars($profile['name']); ?> 
 		<br>
 		</div>
         <?php } ?>	
