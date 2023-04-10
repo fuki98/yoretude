@@ -115,11 +115,22 @@ $(document).on('click', '#subscribe-btn', function() {
 	<link rel="stylesheet" href="/base.css" type="text/css">
     		
 <style type="text/css">
+
 	.userTable {
 	border: 1px solid #999999;
 	background-color: <?php echo htmlspecialchars($profile['boxFill']); ?>;
     color: <?php echo htmlspecialchars($profile['text']); ?>;
 	width: 300px;
+	}
+    	.aboutTable {
+	border: 1px solid #999999;
+	background-color: <?php echo htmlspecialchars($profile['boxFilln']); ?>;
+    color: <?php echo htmlspecialchars($profile['textn']); ?>;
+	width: 300px;
+	}
+    	.normal-box {
+	background-color: <?php echo htmlspecialchars($profile['boxFilln']); ?>;
+    color: <?php echo htmlspecialchars($profile['textn']); ?>;
 	}
 	
 	.spaceMaker {
@@ -579,7 +590,7 @@ $(document).on('click', '#subscribe-btn', function() {
 		
 	  <td width="15" valign="top"></td>
 	  <td width="560" valign="top">
-			<table class="aboutTable" style="border-color:<?php echo htmlspecialchars($profile["aboutTable"]); ?>" cellpadding="0" cellspacing="0">
+			<table class="aboutTable" style="border-color:<?php echo htmlspecialchars($profile["aboutTable"]); ?> background-color: <?php echo htmlspecialchars($profile["aboutTable"]); ?>" cellpadding="0" cellspacing="0">
 				<tbody><tr class="profileHeaders" style="background-color:<?php echo htmlspecialchars($profile["profileHeaders"]); ?>">
 					<td>	<div style="float: left; padding-top: 2px; padding-bottom: 2px; padding-left: 5px; padding-right: 5px">More About Me</div>
 	<div style="float: right; padding-right: 5px">
@@ -745,7 +756,7 @@ $(document).on('click', '#subscribe-btn', function() {
 			<tbody><tr>
 				<td><img src="/img/LeftSingleArrowOff.gif" onclick="shiftLeft('profile_videos')" border="0"></td>
 				<td>
-					<table width="500" height="121" style="background-color: #FFFFFF; " cellpadding="0" cellspacing="0">
+					<table width="500" height="121" class="normal-box" cellpadding="0" cellspacing="0">
 						<tbody><tr>
 							<td style="border-bottom:none;">
                             <?php foreach($videos as $video) { ?>
@@ -793,7 +804,7 @@ $(document).on('click', '#subscribe-btn', function() {
 			<tbody><tr>
 				<td><img src="/img/LeftSingleArrowOff.gif" onclick="shiftLeft('recent_friends')" border="0"></td>
 				<td>
-					<table width="500" height="121" style="background-color: #FFFFFF; " cellpadding="0" cellspacing="0">
+					<table width="500" height="121" " class="normal-box" cellpadding="0" cellspacing="0">
 						<tbody><tr>
 							<td style="border-bottom:none;">
 							<div class="videobarthumbnail_block" id="div_recent_friends_0">
