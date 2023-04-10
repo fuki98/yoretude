@@ -1,9 +1,7 @@
-<br>
-<table bgcolor="#FFFFFF" align="center" cellpadding="10" border="0">
-	<tr>
-		<td align="center" valign="center"><span class="footer"><a href="whats_new.php">What's New</a> | <a href="about.php">About Us</a> | <a href="help.php">Help</a> | <a href="terms.php">Terms of Use</a> | <a href="privacy.php">Privacy Policy</a><br><br> Copyright &copy; 2005 YoreTude, LLC&#8482; | <a href="rss/global/recently_added.rss"><img src="img/rss.gif" width="36" height="14" border="0" style="vertical-align: text-top;"></a></span></td>
-	</tr>
-</table>
-
-</body>
-</html>
+<div id="footerDiv">
+		<a href="/blog">Our Blog</a> | <a href="/t/explore_YoreTude">Explore YoreTude</a> | <a href="/t/about">About Us</a> |
+		<a href="/t/help_center">Help Center</a> | <a href="/t/safety">Safety Tips</a> | <a href="/dev">Developers</a> |
+		<a href="/t/terms">Terms of Use</a> | <a href="/t/privacy">Privacy Policy</a> | <a href="https://discord.gg/fF66XvBhYE">Discord</a>
+		<br><br>
+		Copyright © 2006 YoreTude, Inc.&nbsp;&nbsp;&nbsp;&nbsp;<a href="/rss"><img src="/img/rss.gif" width="36" height="14" border="0" style="vertical-align: text-top;"></a>
+	</div>
