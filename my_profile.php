@@ -14,7 +14,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST") {
 	
         
     if($_POST['birthday'] == "1970-01-01") {
-		$update_video = $conn->prepare("UPDATE members SET name = ?, birthday = NULL, gender = ?, relationship_status = ?, about_me = ?, personal_website = ?, hometown = ?, current_city = ?, current_country = ?, occupations = ?, companies = ?, schools = ?, interests_and_hobbies = ?, favorite_movies_and_shows = ?, favorite_music = ?, favorite_books = ?, channelicon = ?, aboutTable = ?, profileHeaders = ? WHERE member_id = ?");
+		$update_video = $conn->prepare("UPDATE members SET name = ?, birthday = NULL, gender = ?, relationship_status = ?, about_me = ?, personal_website = ?, hometown = ?, current_city = ?, current_country = ?, occupations = ?, companies = ?, schools = ?, interests_and_hobbies = ?, favorite_movies_and_shows = ?, favorite_music = ?, favorite_books = ?, channelicon = ?, aboutTable = ?, profileHeaders = ?, profileTitles = ?, boxFill = ?, text = ? WHERE member_id = ?");
 		$update_video->execute([
 			trim($_POST['name']),
 			trim($_POST['gender']),
@@ -34,10 +34,13 @@ if($_SERVER['REQUEST_METHOD'] == "POST") {
 			trim($_POST['channelicon']),
             trim($_POST['aboutTable']),
             trim($_POST['profileHeaders']),
+            trim($_POST['profileTitles']),
+            trim($_POST['boxFill']),
+            trim($_POST['text']),
 			$session['member_id']
 		]);
 	} else {
-		$update_video = $conn->prepare("UPDATE members SET name = ?, birthday = ?, gender = ?, relationship_status = ?, about_me = ?, personal_website = ?, hometown = ?, current_city = ?, current_country = ?, occupations = ?, companies = ?, schools = ?, interests_and_hobbies = ?, favorite_movies_and_shows = ?, favorite_music = ?, favorite_books = ?, channelicon = ?, aboutTable = ?, profileHeaders = ? WHERE member_id = ?");
+		$update_video = $conn->prepare("UPDATE members SET name = ?, birthday = ?, gender = ?, relationship_status = ?, about_me = ?, personal_website = ?, hometown = ?, current_city = ?, current_country = ?, occupations = ?, companies = ?, schools = ?, interests_and_hobbies = ?, favorite_movies_and_shows = ?, favorite_music = ?, favorite_books = ?, channelicon = ?, aboutTable = ?, profileHeaders = ?, profileTitles = ?, boxFill = ?, text = ?  WHERE member_id = ?");
 		$update_video->execute([
 			trim($_POST['name']),
 			trim($_POST['birthday']),
@@ -58,6 +61,9 @@ if($_SERVER['REQUEST_METHOD'] == "POST") {
 			trim($_POST['channelicon']),
             trim($_POST['aboutTable']),
             trim($_POST['profileHeaders']),
+            trim($_POST['profileTitles']),
+            trim($_POST['boxFill']),
+            trim($_POST['text']),
 			$session['member_id']
 		]);
 	}
@@ -169,6 +175,18 @@ if($_SERVER['REQUEST_METHOD'] == "POST") {
 				<tr valign="top">
 					<td align="right"><span class="label">Headers:&nbsp;</span></td>
 					<td><input type="color" size="50" maxlength="500" name="profileHeaders" value="<?php echo (!empty($member['profileHeaders'])) ? htmlspecialchars($member['profileHeaders']) : ""; ?>"></td>
+                </tr>
+                				<tr valign="top">
+					<td align="right"><span class="label">Box Fills:&nbsp;</span></td>
+					<td><input type="color" size="50" maxlength="500" name="boxFill" value="<?php echo (!empty($member['boxFill'])) ? htmlspecialchars($member['boxFill']) : ""; ?>"></td>
+                </tr>
+                				<tr valign="top">
+					<td align="right"><span class="label">Info:&nbsp;</span></td>
+					<td><input type="color" size="50" maxlength="500" name="profileTitles" value="<?php echo (!empty($member['profileTitles'])) ? htmlspecialchars($member['profileTitles']) : ""; ?>"></td>
+                </tr>
+                                				<tr valign="top">
+					<td align="right"><span class="label">Text:&nbsp;</span></td>
+					<td><input type="color" size="50" maxlength="500" name="text" value="<?php echo (!empty($member['text'])) ? htmlspecialchars($member['text']) : ""; ?>"></td>
                 </tr>
 				<tr valign="top">
                     <td></td>
