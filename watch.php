@@ -32,6 +32,16 @@ $views = $conn->prepare("SELECT COUNT(view_id) AS views FROM views WHERE video_i
 $views->execute([$video_info['video_id']]);
 $video_info['views'] = $views->fetchColumn();
 
+$ratingscount = $conn->prepare("SELECT COUNT(rating) FROM star_rating WHERE video_id = ?");
+$ratingscount->execute([$video_info['video_id']]);
+$video_info['ratnum'] = $ratingscount->fetchColumn();
+
+$avg = $conn->prepare("SELECT AVG(rating) FROM star_rating WHERE video_id = ?");
+$avg->execute([$video_info['video_id']]);
+$average = $avg->fetchColumn();
+$average_rating = substr($average, 0, 1); // Removes all characters after the first one
+
+
 // Create view if it hasn't already been made within the past 10 minutes (spam prevention)
 $already_viewed = $conn->prepare("SELECT COUNT(view_id) FROM views WHERE video_id = ? AND session_id = ? AND viewed_at > DATE_SUB(NOW(), INTERVAL 10 MINUTE)");
 $already_viewed->execute([$video_info['video_id'], session_id()]);
@@ -47,7 +57,7 @@ if($already_viewed->fetchColumn() == 0) {
 }
 // categories
 $_CHANNELS = [
-"0" => "Not defined",
+"0" => "This video does not have any categories!",
 "1" => "Arts and Animation",
 "2" => "Autos & Vehicles",
 "3" => "Comedy",
@@ -145,14 +155,50 @@ function CommentHandler()
 				<td style="padding-bottom: 15px;"> 
 								
 										<div style="float:left; margin-left:5em; padding-right: 18px;">
-							<span>Average (0 votes)</span><br/>
+							<span>Average (<?php echo htmlspecialchars($video_info['ratnum']); ?> votes)</span><br/>
 								
 	<nobr>
 									<img style="border:0px; padding:0px; margin:0px; vertical-align:middle;" src="/img/star.gif">
+                                    <?php if ($average_rating == 1) { ?>
+														<img style="border:0px; padding:0px; margin:0px; vertical-align:middle;" src="/img/star.gif">
+														<img style="border:0px; padding:0px; margin:0px; vertical-align:middle;" src="/img/star_bg.gif">
+														<img style="border:0px; padding:0px; margin:0px; vertical-align:middle;" src="/img/star_bg.gif">
+														<img style="border:0px; padding:0px; margin:0px; vertical-align:middle;" src="/img/star_bg.gif">
+                                                       
+                                                        <?php } ?>
+                                                        <?php if ($average_rating == 0) { ?>
+														<img style="border:0px; padding:0px; margin:0px; vertical-align:middle;" src="/img/star_bg.gif">
+														<img style="border:0px; padding:0px; margin:0px; vertical-align:middle;" src="/img/star_bg.gif">
+														<img style="border:0px; padding:0px; margin:0px; vertical-align:middle;" src="/img/star_bg.gif">
+														<img style="border:0px; padding:0px; margin:0px; vertical-align:middle;" src="/img/star_bg.gif">
+                                                       
+                                                        <?php } ?>
+                                                         <?php if ($average_rating == 2) { ?>
+														<img style="border:0px; padding:0px; margin:0px; vertical-align:middle;" src="/img/star.gif">
+														<img style="border:0px; padding:0px; margin:0px; vertical-align:middle;" src="/img/star.gif">
+														<img style="border:0px; padding:0px; margin:0px; vertical-align:middle;" src="/img/star_bg.gif">
+														<img style="border:0px; padding:0px; margin:0px; vertical-align:middle;" src="/img/star_bg.gif">
+                                                        
+                                                        <?php } ?>
+                                                        <?php if ($average_rating == 3) { ?>
+														<img style="border:0px; padding:0px; margin:0px; vertical-align:middle;" src="/img/star.gif">
+														<img style="border:0px; padding:0px; margin:0px; vertical-align:middle;" src="/img/star.gif">
+														<img style="border:0px; padding:0px; margin:0px; vertical-align:middle;" src="/img/star_bg.gif">
+														<img style="border:0px; padding:0px; margin:0px; vertical-align:middle;" src="/img/star_bg.gif">
+                                                        
+                                                        <?php } ?>
+                                                        <?php if ($average_rating == 4) { ?>
 														<img style="border:0px; padding:0px; margin:0px; vertical-align:middle;" src="/img/star.gif">
 														<img style="border:0px; padding:0px; margin:0px; vertical-align:middle;" src="/img/star.gif">
 														<img style="border:0px; padding:0px; margin:0px; vertical-align:middle;" src="/img/star.gif">
-														<img style="border:0px; padding:0px; margin:0px; vertical-align:middle;" src="/img/star_half.gif">
+														<img style="border:0px; padding:0px; margin:0px; vertical-align:middle;" src="/img/star_bg.gif">
+                                                        <?php } ?>
+                                                        <?php if ($average_rating == 5) { ?>
+														<img style="border:0px; padding:0px; margin:0px; vertical-align:middle;" src="/img/star.gif">
+														<img style="border:0px; padding:0px; margin:0px; vertical-align:middle;" src="/img/star.gif">
+														<img style="border:0px; padding:0px; margin:0px; vertical-align:middle;" src="/img/star.gif">
+														<img style="border:0px; padding:0px; margin:0px; vertical-align:middle;" src="/img/star.gif">
+                                                        <?php } ?>
 							</nobr>
 		
 						</div>        
@@ -452,4 +498,4 @@ function CommentHandler()
 
 <?php 
 require __DIR__ . "/includes/footer.php";
-?> 
+?>
