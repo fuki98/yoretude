@@ -158,15 +158,24 @@ function CommentHandler()
 							<span>Average (<?php echo htmlspecialchars($video_info['ratnum']); ?> votes)</span><br/>
 								
 	<nobr>
-									<img style="border:0px; padding:0px; margin:0px; vertical-align:middle;" src="/img/star.gif">
                                     <?php if ($average_rating == 1) { ?>
 														<img style="border:0px; padding:0px; margin:0px; vertical-align:middle;" src="/img/star.gif">
+														<img style="border:0px; padding:0px; margin:0px; vertical-align:middle;" src="/img/star_bg.gif">
+														<img style="border:0px; padding:0px; margin:0px; vertical-align:middle;" src="/img/star_bg.gif">
+														<img style="border:0px; padding:0px; margin:0px; vertical-align:middle;" src="/img/star_bg.gif">
+														<img style="border:0px; padding:0px; margin:0px; vertical-align:middle;" src="/img/star_bg.gif">
+                                                       
+                                                        <?php } ?>
+                                                        <?php if (!$average_rating) { ?>
+														<img style="border:0px; padding:0px; margin:0px; vertical-align:middle;" src="/img/star_bg.gif">
+														<img style="border:0px; padding:0px; margin:0px; vertical-align:middle;" src="/img/star_bg.gif">
 														<img style="border:0px; padding:0px; margin:0px; vertical-align:middle;" src="/img/star_bg.gif">
 														<img style="border:0px; padding:0px; margin:0px; vertical-align:middle;" src="/img/star_bg.gif">
 														<img style="border:0px; padding:0px; margin:0px; vertical-align:middle;" src="/img/star_bg.gif">
                                                        
                                                         <?php } ?>
                                                         <?php if ($average_rating == 0) { ?>
+														<img style="border:0px; padding:0px; margin:0px; vertical-align:middle;" src="/img/star_bg.gif">
 														<img style="border:0px; padding:0px; margin:0px; vertical-align:middle;" src="/img/star_bg.gif">
 														<img style="border:0px; padding:0px; margin:0px; vertical-align:middle;" src="/img/star_bg.gif">
 														<img style="border:0px; padding:0px; margin:0px; vertical-align:middle;" src="/img/star_bg.gif">
@@ -178,9 +187,11 @@ function CommentHandler()
 														<img style="border:0px; padding:0px; margin:0px; vertical-align:middle;" src="/img/star.gif">
 														<img style="border:0px; padding:0px; margin:0px; vertical-align:middle;" src="/img/star_bg.gif">
 														<img style="border:0px; padding:0px; margin:0px; vertical-align:middle;" src="/img/star_bg.gif">
+														<img style="border:0px; padding:0px; margin:0px; vertical-align:middle;" src="/img/star_bg.gif">
                                                         
                                                         <?php } ?>
                                                         <?php if ($average_rating == 3) { ?>
+														<img style="border:0px; padding:0px; margin:0px; vertical-align:middle;" src="/img/star.gif">
 														<img style="border:0px; padding:0px; margin:0px; vertical-align:middle;" src="/img/star.gif">
 														<img style="border:0px; padding:0px; margin:0px; vertical-align:middle;" src="/img/star.gif">
 														<img style="border:0px; padding:0px; margin:0px; vertical-align:middle;" src="/img/star_bg.gif">
@@ -191,9 +202,11 @@ function CommentHandler()
 														<img style="border:0px; padding:0px; margin:0px; vertical-align:middle;" src="/img/star.gif">
 														<img style="border:0px; padding:0px; margin:0px; vertical-align:middle;" src="/img/star.gif">
 														<img style="border:0px; padding:0px; margin:0px; vertical-align:middle;" src="/img/star.gif">
+														<img style="border:0px; padding:0px; margin:0px; vertical-align:middle;" src="/img/star.gif">
 														<img style="border:0px; padding:0px; margin:0px; vertical-align:middle;" src="/img/star_bg.gif">
                                                         <?php } ?>
                                                         <?php if ($average_rating == 5) { ?>
+														<img style="border:0px; padding:0px; margin:0px; vertical-align:middle;" src="/img/star.gif">
 														<img style="border:0px; padding:0px; margin:0px; vertical-align:middle;" src="/img/star.gif">
 														<img style="border:0px; padding:0px; margin:0px; vertical-align:middle;" src="/img/star.gif">
 														<img style="border:0px; padding:0px; margin:0px; vertical-align:middle;" src="/img/star.gif">
