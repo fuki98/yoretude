@@ -1,55 +1,3 @@
-/* HTML Overrides */
-
-body {
-	font-family: Arial, Helvetica, sans-serif;
-	font-size: 12px;
-	background-color: #FFFFFF;
-	color: #222222;
-/*
-	margin: 0px;
-	padding: 0px;
-*/
-}
-
-a:link, a:visited, a:active {
-	color: #0033CC;
-}
-
-td {
-	font-family: Arial, Helvetica, sans-serif;
-	font-size: 12px;
-}
-
-form {
-	margin: 0px;
-	padding: 0px;
-}
-
-h1 {
-	font-size: 18px;
-	font-weight: bold;
-	color: #333333;
-}
-h2 {
-	font-size: 16px;
-	font-weight: bold;
-	color: #333333;
-}
-h3 {
-}
-h4 {
-	font-size: 14px;
-	font-weight: bold;
-	color: #333333;
-	margin: 2px 0px 6px 0px;
-	padding: 0px;
-}
-h5 {
-}
-h6 {
-}
-
-
 /* Common Elements */
 
 .bodystyle {
@@ -59,13 +7,6 @@ h6 {
 
 .small {
 	font-size: 10px;
-}
-
-.label {
-	font-family: Arial, Helvetica, sans-serif;
-	font-size: 12px;
-	font-weight: bold;
-	color: #333333;
 }
 
 .bold {
@@ -132,14 +73,6 @@ a.title:hover {font-family: Arial, Helvetica, sans-serif; color: #CCFFFF; font-s
 	color: #FF0000;
 }
 
-.confirmation {
-	font-size: 14px;
-	font-weight: bold;
-	color: #000000;
-	border: 3px solid #666666;
-	padding: 5px;
-	text-align: center; 
-}
 
 .tableFavRemove {
 	margin-right: 5px;
@@ -151,7 +84,7 @@ a.title:hover {font-family: Arial, Helvetica, sans-serif; color: #CCFFFF; font-s
 
 .tableVideoStats {
 	width: 100%;
-	background-image: url(/img/table_results_selected_bg.gif);
+	background-image: url(/web/20060430054526im_/http://www.youtube.com/img/table_results_selected_bg.gif);
 	background-repeat: repeat-x;
 	background-color: #FFFFCC;
 	background-position: left top;
@@ -195,7 +128,7 @@ a.title:hover {font-family: Arial, Helvetica, sans-serif; color: #CCFFFF; font-s
 /* Modules */
 
 .moduleEntrySelected {
-	background-image: url(/img/table_results_selected_bg.gif);
+	background-image: url(/web/20060430054526im_/http://www.youtube.com/img/table_results_selected_bg.gif);
 	background-repeat: repeat-x;
 	background-color: #FFFFCC;
 	background-position: left top;
@@ -204,7 +137,7 @@ a.title:hover {font-family: Arial, Helvetica, sans-serif; color: #CCFFFF; font-s
 }
 
 .moduleEntryPremium {
-	background-image: url(/img/table_results_selected_bg.gif);
+	background-image: url(/web/20060430054526im_/http://www.youtube.com/img/table_results_selected_bg.gif);
 	background-color: #FFFFCC;
 	background-position: left top;
 	background-repeat: repeat-x;
@@ -214,7 +147,7 @@ a.title:hover {font-family: Arial, Helvetica, sans-serif; color: #CCFFFF; font-s
 
 .moduleEntry {
 	background-color: #DDD;
-	background-image: url(/img/table_results_bg.gif);
+	background-image: url(/web/20060430054526im_/http://www.youtube.com/img/table_results_bg.gif);
 	background-position: left top;
 	background-repeat: repeat-x;
 	border-bottom: 1px dashed #999999;
@@ -273,7 +206,7 @@ a.title:hover {font-family: Arial, Helvetica, sans-serif; color: #CCFFFF; font-s
 
 .moduleFeatured {
 	background-color: #DDD;
-	background-image: url(/img/table_results_bg.gif);
+	background-image: url(/web/20060430054526im_/http://www.youtube.com/img/table_results_bg.gif);
 	background-position: left top;
 	background-repeat: repeat-x;
 	border-bottom: 1px dashed #999999;
@@ -281,7 +214,7 @@ a.title:hover {font-family: Arial, Helvetica, sans-serif; color: #CCFFFF; font-s
 }
 .moduleFeaturedVideoBar {
 	background-color: #DDD;
-	background-image: url(/img/table_results_bg.gif);
+	background-image: url(/web/20060430054526im_/http://www.youtube.com/img/table_results_bg.gif);
 	background-position: left top;
 	background-repeat: repeat-x;
 	padding: 0px 0px 0px 0px;
@@ -321,7 +254,7 @@ a.title:hover {font-family: Arial, Helvetica, sans-serif; color: #CCFFFF; font-s
 .moduleFrameEntrySelected {
 	width: 270px;
 	background-color: #FFFFCC;
-	background-image: url(/img/table_results_selected_bg.gif);
+	background-image: url(/web/20060430054526im_/http://www.youtube.com/img/table_results_selected_bg.gif);
 	background-repeat: repeat-x;
 	background-position: left top;
 	border-bottom: 1px dashed #999999;
@@ -331,7 +264,7 @@ a.title:hover {font-family: Arial, Helvetica, sans-serif; color: #CCFFFF; font-s
 .moduleFrameEntry {
 	width: 270px;
 	background-color: #DDD;
-	background-image: url(/img/table_results_bg.gif);
+	background-image: url(/web/20060430054526im_/http://www.youtube.com/img/table_results_bg.gif);
 	background-position: left top;
 	background-repeat: repeat-x;
 	border-bottom: 1px dashed #999999;
@@ -386,26 +319,6 @@ a.title:hover {font-family: Arial, Helvetica, sans-serif; color: #CCFFFF; font-s
 	font-weight: normal;
 	margin-bottom: 15px;
 	padding-left: 10px;
-}
-
-.formHighlight {
-	background-image: url(/img/table_results_selected_bg.gif);
-	background-repeat: repeat-x;
-	background-color: #FFFFCC;
-	background-position: left top;
-	border: 1px dashed #CCCC66;
-	padding: 7px;
-	padding-bottom: 10px;
-	margin-bottom: 5px;
-}
-
-.formHighlightText {
-	font-family: Arial, Helvetica, sans-serif;
-	font-size: 11px;
-	font-weight: normal;
-	color: #666633;
-	margin-top: 5px;
-	margin-left: 6px;
 }
 
 .formFieldInfo {
@@ -481,7 +394,7 @@ a.title:hover {font-family: Arial, Helvetica, sans-serif; color: #CCFFFF; font-s
 
 .watchTable {
 	background-color: #DDDDDD;
-	background-image: url(/img/table_results_bg.gif);
+	background-image: url(/web/20060430054526im_/http://www.youtube.com/img/table_results_bg.gif);
 	background-repeat: repeat-x;
 	background-position: left top;
 	border-bottom: 1px dashed #999999;
@@ -508,8 +421,6 @@ a.title:hover {font-family: Arial, Helvetica, sans-serif; color: #CCFFFF; font-s
 	font-size: 12px;
 	padding: 10px 0px 5px 0px;
 	color: #000;
-        width: 523px;
-    overflow-wrap: break-word;
 	border-top: 1px dotted #CCCCCC;
 }
 
@@ -567,17 +478,15 @@ a.title:hover {font-family: Arial, Helvetica, sans-serif; color: #CCFFFF; font-s
 }
 .vertLeftDashTable {
 	border-left: 1px dashed #CCCCCC;
-	background-image: url(/img/long_grad_bg.jpg);
+	background-image: url(/web/20060430054526im_/http://www.youtube.com/img/long_grad_bg.jpg);
 	background-repeat: repeat-x;
 	background-repeat: repeat-y;
 }
 .commentsEntry {
-    font-size: 11px;
-    width: 523px;
-    background-color: #FFFFCC;
-    overflow-wrap: break-word;
-    padding: 10px;
-    border-bottom: 1px dashed #999999;
+	font-size: 11px;
+	background-color: #FFFFCC;
+	padding: 10px;
+	border-bottom: 1px dashed #999999;
 }
 
 .commentsThumb {
@@ -595,24 +504,6 @@ a.title:hover {font-family: Arial, Helvetica, sans-serif; color: #CCFFFF; font-s
 
 
 /* Code Elements */
-
-.codeArea {
-	background-color: #FFFFFF;
-	border: 1px dashed #999999;
-	padding: 7px;
-	margin-bottom: 15px;
-}
-
-.apiLabel {
-	background-color: #E5ECF9; 
-	margin-top: 20px; 
-	margin-bottom: 10px; 
-	padding-left: 10px; 
-	padding-right: 10px; 
-	padding-top: 10px; 
-	padding-bottom: 10px;
-}
-
 .standoutLabel {
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 12px;
@@ -625,37 +516,6 @@ a.title:hover {font-family: Arial, Helvetica, sans-serif; color: #CCFFFF; font-s
 	font-weight: bold;
 	color: #FFFFFF;
 }	
-
-#set_of_links {
-	position:relative;
-	padding:0px;
-	border:none;
-	background:#ffffff;
-	margin-bottom:20px
-}
-#set_of_links a {
-	display:inline;
-	padding:2px 9px 2px 9px;
-	text-decoration:none;
-	color: #000000;
-	background:#FFFFAA
-}
-#set_of_links a:hover {
-	background:#E1EAF0;
-	text-decoration:none
-}
-
-#set_of_links a span {
-	display:none
-}
-#set_of_links a:hover span {
-	display:inline;
-	position:absolute;
-	padding-top:30px;
-	left:0px;
-	background: #FFFFAA;
-	padding:5px 15px 5px 0
-}
 
 .SubscriptionTables {
 	border: none;
@@ -776,7 +636,7 @@ margin: 0px auto 1em auto;
 
 .sunkenContent {
 	background-color: #ddd;
-	background-image: url(/img/table_results_bg.gif);
+	background-image: url(/web/20060430054526im_/http://www.youtube.com/img/table_results_bg.gif);
 	background-position: left top;
 	background-repeat: repeat-x;
 	padding: 10px;
@@ -786,7 +646,7 @@ margin: 0px auto 1em auto;
 {
 	float: left;
 	width: 120px;
-	padding: 2px;
+	padding: 1px;
 }
 img.videobarthumbnail_gray
 {
@@ -817,22 +677,16 @@ img.videobarthumbnail_white
 }
 .videotitlebarLink
 {
-	horizontal-align: right; 
+	text-align: right; 
 	width: 150px;
 }
 img.videotitlebarLinkIcon
 {
-	horizontal-align: right; 
+	text-align: right; 
 	vertical-align: bottom;
 	border: 0px;
 	width: 23px;
 	height: 14px;
-}
-
-hr {
-	border: none 0; 
-	border-top: 1px dashed #999; /* the border */
-	height: 1px; /* whatever the total width of the border-top and border-bottom equal */
 }
 
 img.rating {
@@ -863,3 +717,4 @@ span.rating {
 .moduleEntry input {
 	margin: 1em 0px 0px 0px;
 }
+
