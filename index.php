@@ -23,11 +23,8 @@ If you have recently uploaded this video, you may need to wait a few minutes for
 	</tbody></table><br>
 <?php } ?>
 <?php if(isset($_GET['error'])) { ?>
-	 <table width="100%" align="center" bgcolor="#FF0000" cellpadding="6" cellspacing="3" border="0">
-		<tbody><tr>
-			<td align="center" bgcolor="#FFFFFF"><span class="error"><?php if($_GET['error'] == 1) { echo 'This page was not found.'; } ?><br>
-		</tr>
-	</tbody></table><br>
+	 <div class="errorBox"><?php if($_GET['error'] == 1) { echo 'This page was not found.'; } ?><br>
+		</div>
 <?php } ?>
 <div id="searchbox">
   <!-- ... -->
@@ -41,6 +38,7 @@ $tag_list = [];
 foreach($tags_strings as $result) $tag_list = array_merge($tag_list, explode(" ", $result['tags']));
 $tag_list = array_slice(array_count_values($tag_list), 0, 50);
 ?>
+<div class="errorBox">If this homepage looks broken, clear your browser cache. Your browser is still loading the outdated stylesheets for YoreTude.</div></br>
 <table width="100%" align="center" cellpadding="0" cellspacing="0" border="0">
 	<tr valign="top">
 		<td style="padding-right: 15px;">
@@ -49,88 +47,85 @@ $tag_list = array_slice(array_count_values($tag_list), 0, 50);
 $views = $conn->query("SELECT * FROM views LEFT JOIN videos ON videos.video_id = views.video_id  ORDER BY views.viewed_at DESC LIMIT 4");
 $vista = $conn->prepare("SELECT * FROM views ORDER BY views.viewed_at DESC LIMIT 4");
 ?>	
-<!-- begin recently viewed -->
-	<div style="padding-left: 10px; padding-right: 10px;">
-	<table width="100%" height="28" cellpadding="0" cellspacing="0" border="0" background="http://web.archive.org/web/2005im_/https://youtube.com/img/MediumGenericTab.jpg">
-		<tbody><tr>
-			<td width="380px">
-				<span style="padding-left: 5px; font-size: 13px; color: #6D6D6D; font-weight: bold; padding-right: 5px;">Recently Viewed</span>
-				<span style="font-size: 10px; color: #999999;"><span id="counter_recently_viewed">[1 - 4 of 4]</span>
-			</span></td>
-			<td align="left">		
-					<span style="font-size: 13px; color: #6D6D6D;"><span></span>
-			</span></td>	
-			<td align="right">	
-				<span style="padding-right: 10px; padding-left: 10px;"><img src="http://web.archive.org/web/2005im_/https://youtube.com/img/icon_todo.gif" border="0" width="23" height="14" style="padding-right: 5px; vertical-align: middle;">
-						<a href="/browse.php?s=mp">More Recently Viewed..</a>
-				</span>
-			</td>
-		</tr>
-	</tbody></table>
+
+<div id="standardContent" style="width: 685px;">
+<?php if(!isset($session)) { ?>	
+		<div class="contentBox" style="margin-bottom: 15px;">
+			<table cellpadding="6" cellspacing="0" border="0">
+				<tr valign="top">
+					<td width="33%">
+						<h1><a href="/browse">Watch</a></h1>
+						Instantly find and watch 1000's of fast streaming videos.
+					</td>
+					<td width="33%">
+						<h1><a href="my_videos_upload">Upload</a></h1>
+						Quickly upload and tag videos in almost any video format.
+					</td>
+					<td width="34%">
+						<h1><a href="my_friends_invite">Share</a></h1>
+						Easily share your videos with family, friends, or co-workers.
+					</td>
+				</tr>
+			</table>
+		</div>
+ <?php } ?>	
+         <?php if(isset($session)) { ?>	
+<!-- Logged In index -->
+<div class="welcomebox">
+        <div class="welcomemsg">Welcome, <?php echo htmlspecialchars($session['username']); ?></div>
+        <div class="statcontainer">
+            <div class="statbox">
+            <div class="statbox_header">
+                <p>My Stats</p>
+            </div>
+            <div class="statbox_content">
+                <div class="stattext">
+                <div><a href="/my_videos">My Videos</a> have been viewed 0 times</div>
+                <div>I have 0 <a href="#">Friends</a></div>
+                <div>I've watched 0 videos</div>
+                <div>My Profile has been viewed 0 times</div>
+                </div>
+
+            </div>
+        </div>
+        <div class="statbox">
+            <div class="statbox_header">
+                <p>My Inbox</p>
+            </div>
+            <div class="statbox_content">
+                <div class="stattext">
+                    <div><img class="mailico" src="/img/mail.png">You have <a href="#">0 new messages</a></div>
+                    <div>You have <a href="#">0 friend request</a></div>
+                </div>
+                <div class="weeklytude">
+                    <div><a href="#">Sign up for "The Weekly Tude" e-mail</a></div>
+                    <div>The best YoreTude videos delivered to you!</div>
+                </div>
+            </div>
+        </div></div>
+    </div><br>
+    <?php } ?>
+		<div class="headerRCBox">
+	<b class="rch">
+	<b class="rch1"><b></b></b>
+	<b class="rch2"><b></b></b>
+	<b class="rch3"></b>
+	<b class="rch4"></b>
+	<b class="rch5"></b>
+	</b> <div class="content">		<div class="headerTitle">
+			<div class="headerTitleRight">
+				<a href="/browse?s=mp">See More Videos</a>
+			</div>
+			<span>Today's Featured Videos...</span>
+		</div>
+</div>
 	</div>
 
-	
-		<div style="padding-left: 1px;">					
-		<table width="100%" height="121" cellpadding="0" cellspacing="0">
-			<tbody><tr>
-				<td><img src="http://web.archive.org/web/2005im_/https://youtube.com/img/LeftTableArrowWhite.jpg" onclick="shiftLeft('recently_viewed')" width="21" height="121" border="0"></td>
-				<td>
-					<table width="548" height="121" style="background-color: #FFFFFF; border-bottom: 1px solid #CCCCCC;" cellpadding="0" cellspacing="0">
-						<tbody><tr>
-							<td>
-                            <?php foreach($views as $video) { ?>
-							<div class="videobarthumbnail_block" id="div_recently_viewed_0">
-								<center>
-									<div><a id="href_recently_viewed_0" href="/watch.php?v=<?php echo $video['video_id']; ?>"><img class="videobarthumbnail_gray" id="img_recently_viewed_0" src="get_still.php?video_id=<?php echo $video['video_id']; ?>" width="80" height="60"></a></div>
-									<div id="title1_recently_viewed_0" style="font-family: Arial, Helvetica, sans-serif; font-size: 10px; font-color: #666666; padding-bottom: 3px;"><a href="/watch.php?v=<?php echo $video['video_id']; ?>" title="<?php echo htmlspecialchars($video['title']); ?>"><?php echo htmlspecialchars($video['title']); ?></a></div>
-									<div id="title2_recently_viewed_0" style="font-family: Arial, Helvetica, sans-serif; font-size: 10px; font-color: #666666; padding-bottom: 3px;"><?php echo str_replace("ago", "ago", timeAgo($vistas['viewed_at'])); ?></div> 
-								</center>
-                                
-							</div>
-                            <?php } ?>
-				</td>
-							<div class="videobarthumbnail_block" id="div_recently_viewed_3_alternate" style="display: none">
-								<center>
-									<div><img src="/img/pixel.gif" width="80" height="60"></div>
-									<div style="font-family: Arial, Helvetica, sans-serif; font-size: 10px; font-color: #666666; padding-bottom: 3px;">&nbsp;</div>
-									<div style="font-family: Arial, Helvetica, sans-serif; font-size: 10px; font-color: #666666; padding-bottom: 3px;">&nbsp;</div>
-								</center>
-							</div>
-							</td>
-						</tr>
-					</tbody></table>
-				</td>
-				<td><img src="http://web.archive.org/web/2005im_/https://youtube.com/img/RightTableArrowWhite.jpg" onclick="shiftRight('recently_viewed')" width="21" height="121" border="0"></td>
-			</tr>
-		</tbody></table>
-		</div>
-		<!-- end recently viewed -->
-        <br>
-		<table width="100%" align="center" cellpadding="0" cellspacing="0" border="0" bgcolor="#CCCCCC">
-			<tr>
-				<td><img src="/img/box_login_tl.gif" width="5" height="5"></td>
-				<td width="100%"><img src="/img/pixel.gif" width="1" height="5"></td>
-				<td><img src="/img/box_login_tr.gif" width="5" height="5"></td>
-			</tr>
-			<tr>
-				<td><img src="/img/pixel.gif" width="5" height="1"></td>
-				<td>
-				<div class="moduleTitleBar">
-				<div class="moduleTitle"><div style="float: right; padding: 1px 5px 0px 0px; font-size: 12px;"><a href="browse.php">See More Videos</a></div>
-				Recently Featured Videos
-				</div>
-				</div>
-		
-				<?php
+	<div class="contentListBox" style="margin-bottom: 15px;">
+    <?php
 $featured_videos = $conn->query("SELECT * FROM featured LEFT JOIN videos ON videos.video_id = featured.video_id LEFT JOIN members ON members.member_id = videos.member_id WHERE videos.converted = 1 ORDER BY featured.feature_id DESC LIMIT 10");
 ?>
-				<table width="100%" cellpadding="0" cellspacing="0" border="0">
-					<tr valign="top">
-					</tr>
-				</table>
-				</div>
-				
-				<?php foreach($featured_videos as $video) { ?>
+    <?php foreach($featured_videos as $video) { ?>
 				<?php
 				$video['views'] = $conn->prepare("SELECT COUNT(view_id) FROM views WHERE video_id = ?");
 				$video['views']->execute([$video['video_id']]);
@@ -139,176 +134,164 @@ $featured_videos = $conn->query("SELECT * FROM featured LEFT JOIN videos ON vide
 				$video['comments'] = $conn->prepare("SELECT COUNT(comment_id) FROM comments WHERE video_id = ?");
 				$video['comments']->execute([$video['video_id']]);
 				$video['comments'] = $video['comments']->fetchColumn();
+
+                $video['rating'] = $conn->prepare("SELECT AVG(rating) FROM star_rating WHERE video_id = ?");
+				$video['rating']->execute([$video['video_id']]);
+				$stars = $video['rating']->fetchColumn();
+                $average_rating = substr($stars, 0, 1); // Removes all characters after the first one
+                $video['ratings'] = $conn->prepare("SELECT COUNT(r_id) FROM star_rating WHERE video_id = ?");
+				$video['ratings']->execute([$video['video_id']]);
+				$video['ratings'] = $video['ratings']->fetchColumn();
 				?>
-				<div class="moduleEntry"> 
-					<table width="100%" cellpadding="0" cellspacing="0" border="0">
-						<tr valign="top">
-							<td>
-							<table cellpadding="0" cellspacing="0" border="0">
+		<div class="contentListStandard">
+			<div class="vDetailEntry">
+				<table cellpadding="0" cellspacing="0">
+					<tr valign="top">
+						<td>
+							<table class="image" cellpadding="0" cellspacing="0">
 								<tr>
-									<a href="index.php?v=<?php echo $video['video_id']; ?>"><img src="get_still.php?still_id=2&video_id=<?php echo $video['video_id']; ?>" class="moduleFeaturedThumb" width="120" height="90"></a>
+									<td><a href="/watch?v=<?php echo $video['video_id']; ?>"><img src="get_still?still_id=2&video_id=<?php echo $video['video_id']; ?>" class="vimg" style="margin-left: 6px;" /></a></td>
 								</tr>
 							</table>
-							
-							</td>
-							<td width="100%"><div class="moduleEntryTitle"><a href="watch.php?v=<?php echo $video['video_id']; ?>&search=<?php echo urlencode($_GET['search']); ?>"><?php echo htmlspecialchars($video['title']); ?></a></div>
-							<div class="moduleEntryDescription"><?php echo htmlspecialchars($video['description']); ?></div>
-							<div class="moduleEntryTags">Tags // <?php foreach(explode(" ", $video['tags']) as $tag) echo '<a href="results.php?search='.htmlspecialchars($tag).'">'.htmlspecialchars($tag).'</a> : '; ?></div>
-							<div class="moduleEntryDetails">Added: <?php echo str_replace("ago", "ago", timeAgo($video['uploaded_at'])); ?> by <a href="profile.php?user=<?php echo htmlspecialchars($video['username']); ?>"><?php echo htmlspecialchars($video['username']); ?></a></div>
-							<div class="moduleEntryDetails"> Runtime: <?php echo gmdate("i:s", $video['duration']); ?> | Views: <?php echo $video['views']; ?> | Comments: <?php echo $video['comments']; ?></div>
-		<br>
-							</td>
-						</tr>
-					</table>
-				</div>
-				<?php } ?>
-				
-				</td>
-				<td><img src="img/pixel.gif" width="5" height="1"></td>
-			</tr>
-			<tr>
-				<td><img src="img/box_login_bl.gif" width="5" height="5"></td>
-				<td><img src="img/pixel.gif" width="1" height="5"></td>
-				<td><img src="img/box_login_br.gif" width="5" height="5"></td>
-			</tr>
-		</table>
-		</td>
-		
-		<td width="180">
-		<!--
-		<table class="roundedTable" width="180" align="center" cellpadding="0" cellspacing="0" border="0" bgcolor="#ffeebb">
-			<tbody><tr>
-				<td><img src="/img/box_login_tl.gif" width="5" height="5"></td>
-				<td width="100%"><img src="/img/pixel.gif" width="1" height="5"></td>
-				<td><img src="/img/box_login_tr.gif" width="5" height="5"></td>
-			</tr>
-			<tr>
-				<td><img src="/img/pixel.gif" width="5" height="1"></td>
-				<td width="170">
-									<div style="font-size: 16px; font-weight: bold; text-align: center; padding: 5px 5px 10px 5px;">
-					<?php if(isset($session)) { ?>
-								
-				<div style="font-size: 16px; font-weight: bold; text-align: center; padding: 5px 5px 10px 5px;"><a href="my_friends_invite.php">Invite your friends to join YoreTude!</a></div>
-				 <?php } else { ?>
-				<div style="font-size: 16px; font-weight: bold; text-align: center; padding: 5px 5px 10px 5px;"><a href="signup.php">Sign up for your free account!</a></div>	
-					<?php } ?>
-					
-					<div style="font-size: 11px; font-weight: 400; padding: 5px 5px 10px 5px; margin-top: 10px; background-color:#FFFFCC;"><a href="nano_contest.php"><strong>Nano a Day Giveaway Extended!</strong></a>
+						</td>
+						<td>
+							<div class="vListInfo1Still">
+								<div class="title">
+									<b><a href="/watch?v=<?php echo $video['video_id']; ?>"><?php echo htmlspecialchars($video['title']); ?></a></b><br/>
+									<span class="runtime"><?php echo gmdate("i:s", $video['duration']); ?></span>
+								</div>
+								<div class="desc"><?php echo htmlspecialchars($video['description']); ?></div>
+								<div class="facets">
+									<table class="tagTable" cellpadding="0" cellspacing="0">
+										<tr>
+											<td><span class="grayText">Tags:</span>&nbsp;</td>
+											<td><?php foreach(explode(" ", $video['tags']) as $tag) echo '<a href="results.php?search='.htmlspecialchars($tag).'" class="dg">'.htmlspecialchars($tag).'</a> : '; ?></td>
+										</tr>
+									</table>
+									<span class="grayText">Added:</span> <?php echo (timeAgo($video['uploaded_at'])); ?> <br/>
+									<span class="grayText">From:</span> <a href="/profile?user=<?php echo htmlspecialchars($video['username']); ?>" class="dg"><?php echo htmlspecialchars($video['username']); ?></a><br/>
+									<span class="grayText">Views:</span> <?php echo $video['views']; ?>
+								</div>
+											
+	<nobr>
+			<?php if ($average_rating == 1) { ?>
+														<img  src="/img/star_sm.gif">
+														<img  src="/img/star_sm_bg.gif">
+														<img  src="/img/star_sm_bg.gif">
+														<img  src="/img/star_sm_bg.gif">
+														<img  src="/img/star_sm_bg.gif">
+                                                       
+                                                        <?php } ?>
+                                                        <?php if (!$average_rating) { ?>
+														<img  src="/img/star_sm_bg.gif">
+														<img  src="/img/star_sm_bg.gif">
+														<img  src="/img/star_sm_bg.gif">
+														<img  src="/img/star_sm_bg.gif">
+														<img  src="/img/star_sm_bg.gif">
+                                                       
+                                                        <?php } ?>
+                                                        <?php if ($average_rating == 0) { ?>
+														<img  src="/img/star_sm_bg.gif">
+														<img  src="/img/star_sm_bg.gif">
+														<img  src="/img/star_sm_bg.gif">
+														<img  src="/img/star_sm_bg.gif">
+														<img  src="/img/star_sm_bg.gif">
+                                                       
+                                                        <?php } ?>
+                                                         <?php if ($average_rating == 2) { ?>
+														<img  src="/img/star_sm.gif">
+														<img  src="/img/star_sm.gif">
+														<img  src="/img/star_sm_bg.gif">
+														<img  src="/img/star_sm_bg.gif">
+														<img  src="/img/star_sm_bg.gif">
+                                                        
+                                                        <?php } ?>
+                                                        <?php if ($average_rating == 3) { ?>
+														<img  src="/img/star_sm.gif">
+														<img  src="/img/star_sm.gif">
+														<img  src="/img/star_sm.gif">
+														<img  src="/img/star_sm_bg.gif">
+														<img  src="/img/star_sm_bg.gif">
+                                                        
+                                                        <?php } ?>
+                                                        <?php if ($average_rating == 4) { ?>
+														<img  src="/img/star_sm.gif">
+														<img  src="/img/star_sm.gif">
+														<img  src="/img/star_sm.gif">
+														<img  src="/img/star_sm.gif">
+														<img  src="/img/star_sm_bg.gif">
+                                                        <?php } ?>
+                                                        <?php if ($average_rating == 5) { ?>
+														<img  src="/img/star_sm.gif">
+														<img  src="/img/star_sm.gif">
+														<img  src="/img/star_sm.gif">
+														<img  src="/img/star_sm.gif">
+														<img  src="/img/star_sm.gif">
+                                                        <?php } ?>
+	</nobr>
+	<div class="rating"><?php echo $video['ratings']; ?> ratings</div>
 
-<div style="text-align: left;">
-<br><br><img src="https://web.archive.org/web/20051216110110im_/http://www.youtube.com/img/nano_sm.jpg" width="40" height="88" align="right" hspace="5">We're giving away a 4GB iPod Classic <strong>every week through the end of the year</strong>!  Increase your chances of winning by:
 
+							</div>
+						</td>
+						
+					</tr>
+				</table>
+			</div>
+		</div>
+	<?php } ?>
 
-<ul>
-	<li><a href="signup.php">Signing Up</a></li>
-	<li><a href="signup_login.php?next=my_friends_invite.php">Inviting Your friends</a></li>
-	<li><a href="signup_login.php?next=my_videos_upload.php">Uploading Videos</a></li>
-</ul>
-
-<div style="text-align: center;">View full <a href="_contest.php">contest details</a>.</div>
-</div></div>
-
-
-<span style="font-size: 13px; padding-top: 4px;"><a href="classic_contest_winners.php">See all classic winners!</a></span>
+	</div>
 </div>
 
-				
-				
 
-				</td>
-				<td><img src="/img/pixel.gif" width="5" height="1"></td>
-			</tr>
-			<tr>
-				<td valign="bottom"><img src="/img/box_login_bl.gif" width="5" height="5"></td>
-				<td><img src="/img/pixel.gif" width="1" height="5"></td>
-				<td valign="bottom"><img src="/img/box_login_br.gif" width="5" height="5"></td>
-			</tr>
-		</tbody></table>-->
-		<table class="roundedTable" width="180" align="center" cellpadding="0" cellspacing="0" border="0" bgcolor="#cccccc">
-			<tbody><tr>
-				<td><img src="/img/box_login_tl.gif" width="5" height="5"></td>
-				<td width="100%"><img src="/img/pixel.gif" width="1" height="5"></td>
-				<td><img src="/img/box_login_tr.gif" width="5" height="5"></td>
-			</tr>
-			<tr>
-				<td><img src="/img/pixel.gif" width="5" height="1"></td>
-				<td width="170">
-							<div style="font-size: 16px; font-weight: bold; text-align: center; padding: 5px 5px 10px 5px;">
-		<div style="font-size: 13px; font-weight: bold; text-align: center; color: #444444; padding-bottom: 5px;"><img src="https://web.archive.org/web/20051216110110im_/http://www.youtube.com/img/gray_arrow.gif" width="14" height="14" broder="0" align="absmiddle">&nbsp;New Features</div>
-		<table style="background-color: #EAEAEA;" width="100%">
-			<tbody><tr>
-				<td style="text-align: center;">
-				<div style="padding-top: 5px;"><a href="/my_profile">Custom Profiles</a></div>
-				<div style="font-size: 11px; font-weight: normal; padding-bottom: 8px;">Choose your colors and interact with comments and bulletin boards</div>
-				<div style="padding-top: 5px;"><a href="/signup_login.php?next=members.php">Members</a></div>
-				<div style="font-size: 11px; font-weight: normal; padding-bottom: 12px;">New Members tab—improved search, featured members, and more!</div>	
-				<div style="font-size: 14px; font-weight: bold; padding-bottom: 3px;" bis_skin_checked="1"><a href="/browse">Explore YoreTude</a></div>	
-				</td>
-			</tr>
-		</tbody></table>
+
+<div id="standardSidebar" style="width: 165px;">
+	
+
+	
+		<div class="headerRCBox">
+	<b class="rch">
+	<b class="rch1"><b></b></b>
+	<b class="rch2"><b></b></b>
+	<b class="rch3"></b>
+	<b class="rch4"></b>
+	<b class="rch5"></b>
+	</b> <div class="content">		<div style="text-align: center;">
+			<img src="/img/new_features.gif" border="0" />
 		</div>
+</div>
+	</div>
 
-				</td>
-				<td><img src="/img/pixel.gif" width="5" height="1"></td>
-			</tr>
-			<tr>
-				<td valign="bottom"><img src="/img/box_login_bl.gif" width="5" height="5"></td>
-				<td><img src="/img/pixel.gif" width="1" height="5"></td>
-				<td valign="bottom"><img src="/img/box_login_br.gif" width="5" height="5"></td>
-			</tr>
-		</tbody></table>
-		
-		<div style="margin-top: 10px;">
-		<table width="180" align="center" cellpadding="0" cellspacing="0" border="0" bgcolor="#FFCC99">
-			<tr>
-				<td><img src="/img/box_login_tl.gif" width="5" height="5"></td>
-				<td><img src="/img/pixel.gif" width="1" height="5"></td>
-				<td><img src="/img/box_login_tr.gif" width="5" height="5"></td>
-			</tr>
-			<tr>
-				<td><img src="/img/pixel.gif" width="5" height="1"></td>
-				<td width="170" style="padding: 5px; text-align: center;">
-				<div style="font-weight: bold; font-size: 13px;">April Video Contest!</div>
-				
-				<a href="/watch?v=fhRMaUrmGzp&search=prankeddd"><img src="/get_still.php?video_id=fhRMaUrmGzp" width="90" height="60" style="border: 5px solid #FFFFFF; margin-top: 10px;"></a>
-			<div style="font-size: 16px; font-weight: bold; padding-top: 5px;"><a href="monthly_contest.php">Pranks!</a></div>
-				<br>
-
-				<?php if(isset($session)) { ?>
-		                <div style="font-size: 12px; font-weight: bold; margin-bottom: 7px;"><a href="my_videos_upload.php">Learn more</a></div>
-				<?php } else { ?>				
-				<div style="font-size: 12px; font-weight: bold; margin-bottom: 7px;"><a href="/my_videos_upload">Join the contest now!</a></div>
-				<?php } ?>
-				<!--<div style="font-size: 10px; font-weight: normal; margin-bottom: 3px;"><a href="monthly_contest_august_2005.php">August winners!</a></div>				
-				</td>-->
-				<td><img src="/img/pixel.gif" width="5" height="1"></td>
-			</tr>
-			<tr>
-				<td><img src="/img/box_login_bl.gif" width="5" height="5"></td>
-				<td><img src="/img/pixel.gif" width="1" height="5"></td>
-				<td><img src="/img/box_login_br.gif" width="5" height="5"></td>
-			</tr>
-		</table>
-		</div>
-		
-		<div style="margin: 10px 0px 5px 0px; font-size: 12px; font-weight: bold; color: #333;">Recent Tags:</div>
-		<div style="font-size: 13px; color: #333333;">
-		
-				<?php foreach($tag_list as $tag => $frequency	) {
-					echo '<a style="font-size: 13px;" href="results.php?search='.htmlspecialchars($tag).'">'.htmlspecialchars($tag).'</a> :'."\r\n";
+	<div class="contentBox" style="text-align: center; margin-bottom: 15px;">
+		<!--
+		<div id="set_of_links"><a href="javascript:;"><strong>New Video Watch Page</strong><span>Just choose the video you want to see, and then click on "Watch this video on our new Video Watch Page" link in the top right corner to see how it will look with the new design.</span></a><br />Check out the new design&#8212;we'd love your feedback!</div> 
+		-->
+		<!-- <b><a href="/blog">New Video Watch Page</a></b><br/>
+		Check out the new design&#8212;we'd love your feedback!
+		<p> -->
+		<strong><a href="/t/howto_copyright">Learn About Copyright</a></strong><br/>
+		Answers to your questions about copyright and YoreTude's policy
+		</p>
+		<span class="largeText"><strong><a href="/t/explore_YoreTude">Explore YoreTude</a></strong></span>
+	</div>
+	
+	
+	
+	
+	<h3>Recent Tags:</h3>
+	<div class="tagCloud">
+	<?php foreach($tag_list as $tag => $frequency	) {
+        $taggie = $frequency*2;
+        $taggie2 = $taggie+10;
+        if ($taggie2 > 20) {
+            $taggie2 = 20;
+        }
+					echo '<a style="font-size: '.htmlspecialchars($taggie2).'px;" href="results.php?search='.htmlspecialchars($tag).'">'.htmlspecialchars($tag).'</a> :'."\r\n";
 				} ?>
-		
-					
-		<div style="font-size: 14px; font-weight: bold; margin-top: 10px;"><a href="tags.php">See More Tags</a></div>
-		
-		</div>
-		
-		</div>
-		</div>
-		</td>
-	</tr>
-</table>
-
+	</div>
+	<h4><a href="/tags">See More Tags</a></h4>
+</div>
 <?php
 require __DIR__ . "/includes/footer.php";
 ?>
