@@ -31,31 +31,30 @@ if(isset($_SESSION['member_id'])) {
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<title>YoreTude - Rebroadcast Yourself.</title>
 		<meta name="description" content="Share your videos with friends and family">
-	<meta name="keywords" content="video,sharing,camera phone,video phone,revival, recreation, YoreTude, 2005, yoretude ">
+	<meta name="keywords" content="video,sharing,camera phone,video phone,revival, recreation, YoreTude, 2005, yoretude, nostalgia, youtube in 2005, 2006, youtube in 2006, youtube in 2008, pre-google youtube, star ratings, zippcast, youtube, old websites, yesterweb, 2008, 2009, 2010, 2007, youtube evolution, time machine, youtube time machine, google, jawed karim, chad hurley, steve chen, me at the zoo, my snowboarding skillz, bootiechrist dance">
 	
 		<link rel="stylesheet" href="/styles.css" type="text/css">
 	<link rel="stylesheet" href="/base.css" type="text/css">
 
 <div id="baseDiv">
-		
-<div id="logoDiv"><a href="/"><img src="/img/logo_sm.gif" width="120" height="48" alt="YoreTude" border="0"></a></div>
-<div id="taglineDiv"><img src="/img/tagline-20pt.gif"></div>
+<div id="logoTagDiv"><a href="/"><img src="/img/logo_tagline_sm.gif" alt="YoreTude" width="250" height="48" border="0"></a></div>
 <div id="utilDiv">
-	<?php if(isset($session)) { ?>	
-						<td><b>Hello, <a href="profile?user=<?php echo htmlspecialchars($session['username']); ?>"><?php echo htmlspecialchars($session['username']); ?></a></b>        
-						| <img src="/img/mail.gif" border="0"> (<a href="/my_messages">0</a>)</td>
-						<td style="padding: 0px 5px 0px 5px;">|</td>
-						<td><a href="/logout?next=<?php echo $_SERVER['REQUEST_URI'] ?>">Log Out</a></td>
-						<td style="padding: 0px 5px 0px 5px;">|</td>
-						<td style="padding-right: 5px;"><a href="/t/help">Help</a></td>
+    <?php if(isset($session)) { ?>	
+						<b>Hello, <a href="profile?user=<?php echo htmlspecialchars($session['username']); ?>"><?php echo htmlspecialchars($session['username']); ?></a></b>    
+    <img id="mailico" src="/img/mail.gif" border="0"> (<a href="/my_messages">0</a>)
+    <span class="utilDelim">|</span>
+	<a href="//logout?next=<?php echo $_SERVER['REQUEST_URI'] ?>">Log Out</a>
+	<span class="utilDelim">|</span>
+	<a href="/t/help_center">Help</a> <?php if($session['administrator'] == 1) {?><a href="admin.php" class="bold">Admin</a> <?php } ?>
 						<?php } else { ?>
-						<td><a href="/signup"><strong>Sign Up</strong></a></td>
-						<td style="padding: 0px 5px 0px 5px;">|</td>
-						<td><a href="/login">Log In</a></td>
-						<td style="padding: 0px 5px 0px 5px;">|</td>
-						<td style="padding-right: 5px;"><a href="/t/help">Help</a></td>
+							<a href="/signup"><strong>Sign Up</strong></a>
+	<span class="utilDelim">|</span>
+	<a href="/login">Log In</a>
+	<span class="utilDelim">|</span>
+	<a href="/t/help_center">Help</a>
 		                                <?php } ?>
-</div>
+</div><!-- end utilDiv -->
+
 	<div id="searchDiv">
 		<form name="searchForm" id="searchForm" method="GET" action="/results">
 			<input tabindex="1" type="text" name="search" maxlength="128" id="searchField" value="<?php echo (isset($_GET['search'])) ? htmlspecialchars($_GET['search']) : ''; ?>">
@@ -65,179 +64,152 @@ if(isset($_SESSION['member_id'])) {
 			<option value="search_groups">Groups</option>
 			<option value="search_playlists">Playlists</option>
 			</select>
-			<input type="submit" value="Search Videos">
+			<input type="submit" value="Search">
 		</form>
-	</div>
+	</div> <!-- end searchDiv -->
 
-<div id="globalNavDiv">
-	<table width="875" cellpadding="0" cellspacing="0" border="0">
-	<tbody><tr>
-		<td>
-		<table style=" background-color: #BECEEE; <?php echo ($current_page == "index") ? 'background-color: #DDDDDD;' : ''; ?> margin: 5px 2px 1px 0px; " cellpadding="0" cellspacing="0" border="0">
-			<tbody><tr>
-				<td><img src="/img/box_login_tl.gif" width="5" height="5"></td>
-				<td><img src="/img/pixel.gif" width="1" height="5"></td>
-				<td><img src="/img/box_login_tr.gif" width="5" height="5"></td>
-			</tr>
-			<tr>
-				<td><img src="/img/pixel.gif" width="5" height="1"></td>
-				<td style="padding-bottom: 5px; font-size: 13px; font-weight: bold; width:134px; text-align:center;"><a href="/index">Home</a></td>
-				<td><img src="/img/pixel.gif" width="5" height="1"></td>
-			</tr>
-		</tbody></table>
-		</td>
-		<td>
-		<table style=" background-color: #BECEEE; <?php echo ($current_page == "browse") ? 'background-color: #DDDDDD;' : ''; ?> margin: 5px 2px 1px 0px; " cellpadding="0" cellspacing="0" border="0">
-			<tbody><tr>
-				<td><img src="/img/box_login_tl.gif" width="5" height="5"></td>
-				<td><img src="/img/pixel.gif" width="1" height="5"></td>
-				<td><img src="/img/box_login_tr.gif" width="5" height="5"></td>
-			</tr>
-			<tr>
-				<td><img src="/img/pixel.gif" width="5" height="1"></td>
-				<td style="padding-bottom: 5px; font-size: 13px; font-weight: bold; width:134px; text-align:center;"><a href="/browse">Videos</a></td>
-				<td><img src="/img/pixel.gif" width="5" height="1"></td>
-			</tr>
-		</tbody></table>
-		</td>
-		<td>
-		<table style=" background-color: #BECEEE; <?php echo ($current_page == "channels") ? 'background-color: #DDDDDD;' : ''; ?> margin: 5px 2px 1px 0px; " cellpadding="0" cellspacing="0" border="0">
-			<tbody><tr>
-				<td><img src="/img/box_login_tl.gif" width="5" height="5"></td>
-				<td><img src="/img/pixel.gif" width="1" height="5"></td>
-				<td><img src="/img/box_login_tr.gif" width="5" height="5"></td>
-			</tr>
-			<tr>
-				<td><img src="/img/pixel.gif" width="5" height="1"></td>
-				<td style="padding-bottom: 5px; font-size: 13px; font-weight: bold; width:134px; text-align:center;"><a href="/channels">Channels</a></td>
-				<td><img src="/img/pixel.gif" width="5" height="1"></td>
-			</tr>
-		</tbody></table>
-		</td>
-		<td>
-		<table style=" background-color: #BECEEE; <?php echo ($current_page == "groups_main") ? 'background-color: #DDDDDD;' : ''; ?> margin: 5px 2px 1px 0px; " cellpadding="0" cellspacing="0" border="0">
-			<tbody><tr>
-				<td><img src="/img/box_login_tl.gif" width="5" height="5"></td>
-				<td><img src="/img/pixel.gif" width="1" height="5"></td>
-				<td><img src="/img/box_login_tr.gif" width="5" height="5"></td>
-			</tr>
-			<tr>
-				<td><img src="/img/pixel.gif" width="5" height="1"></td>
-				<td style="padding-bottom: 5px; font-size: 13px; font-weight: bold; width:134px; text-align:center;"><a href="/groups_main">Groups</a></td>
-				<td><img src="/img/pixel.gif" width="5" height="1"></td>
-			</tr>
-		</tbody></table>
-		</td>
-		<td>
-		<table style=" background-color: #BECEEE; <?php echo ($current_page == "members") ? 'background-color: #DDDDDD;' : ''; ?> margin: 5px 2px 1px 0px; " cellpadding="0" cellspacing="0" border="0">
-			<tbody><tr>
-				<td><img src="/img/box_login_tl.gif" width="5" height="5"></td>
-				<td><img src="/img/pixel.gif" width="1" height="5"></td>
-				<td><img src="/img/box_login_tr.gif" width="5" height="5"></td>
-			</tr>
-			<tr>
-				<td><img src="/img/pixel.gif" width="5" height="1"></td>
-				<td style="padding-bottom: 5px; font-size: 13px; font-weight: bold; width:134px; text-align:center;"><a href="/members">Members</a></td>
-				<td><img src="/img/pixel.gif" width="5" height="1"></td>
-			</tr>
-		</tbody></table>
-		</td>
-		<td>
-		<table style=" background-color: #BECEEE; <?php echo ($current_page == "my_videos_upload") ? 'background-color: #DDDDDD;' : ''; ?> margin: 5px 2px 1px 0px; " cellpadding="0" cellspacing="0" border="0">
-			<tbody><tr>
-				<td><img src="/img/box_login_tl.gif" width="5" height="5"></td>
-				<td><img src="/img/pixel.gif" width="1" height="5"></td>
-				<td><img src="/img/box_login_tr.gif" width="5" height="5"></td>
-			</tr>
-			<tr>
-				<td><img src="/img/pixel.gif" width="5" height="1"></td>
-				<td style="padding-bottom: 5px; font-size: 13px; font-weight: bold; width:135px; text-align:center;"><a href="/my_videos_upload">Upload</a></td>
-				<td><img src="/img/pixel.gif" width="5" height="1"></td>
-			</tr>
-		</tbody></table>
-		</td>
-	</tr>
-	</tbody></table>
-</div> <!-- end globalNavDiv -->
-<div id="globalSubNavDiv">
-<table valign="top" align="center" width="875" bgcolor="#DDDDDD" cellpadding="0" cellspacing="0" border="0" style="margin-bottom: 10px;">
-	<tbody><tr>
-		<td><img src="/img/pixel.gif" width="5" height="5"></td>
-		<td><img src="/img/pixel.gif" width="1" height="5"></td>
-		<td><img src="/img/pixel.gif" width="5" height="5"></td>
-	</tr>
-	<tr>
-		<td><img src="/img/pixel.gif" width="5" height="1"></td>
-		<td width="865" align="center" style="padding: 2px;">
-	
-		<table cellpadding="0" cellspacing="0" border="0">
-				<tbody><tr>
-					<td style="font-size: 10px;">&nbsp;</td>
-						<?php if($current_page === "index") { ?>				
-				<td style="  "><a href="my_videos.php">My Videos</a></td>
-				<td style="padding: 0px 10px 0px 10px;">|</td>
-				<td style="  "><a href="my_favorites.php">My Favorites</a></td>
-				<td style="padding: 0px 10px 0px 10px;">|</td>
-				<td style="  "><a href="my_friends.php">My Friends</a></td>
-				<!-- <td>&nbsp;|&nbsp;</td>
-				<td style="  "><a href="my_groups.php">My Groups</a></td> -->
-				<td style="padding: 0px 10px 0px 10px;">|</td>
-				<td style="  "><a href="my_messages.php" >My Messages</a></td>
-				<td style="padding: 0px 10px 0px 10px;">|</td>
-				<td style="  "><a href="my_profile.php">My Profile</a></td>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%"><tr>
+<td><div id="gNavDiv">
+
+<!-- thank you Spiffy Corners (http://www.spiffycorners.com/) for the rounded corner goodness.  RESPECT!  -->
+
+		
+		<div class="ltab">
+		<b class="rc<?php if ($current_page == "index") { ?>s<?php } ?>">
+		<b class="rc<?php if ($current_page == "index") { ?>s<?php } ?>1"><b></b></b>
+		<b class="rc<?php if ($current_page == "index") { ?>s<?php } ?>2"><b></b></b>
+		<b class="rc<?php if ($current_page == "index") { ?>s<?php } ?>3"></b>
+		<b class="rc<?php if ($current_page == "index") { ?>s<?php } ?>4"></b>
+		<b class="rc<?php if ($current_page == "index") { ?>s<?php } ?>5"></b>
+		</b> <div class="tabContent <?php if ($current_page == "index") { ?> selected <?php } ?>">
+		<a href="/index">Home</a>
+		</div>
+		</div>
+		
+		
+		<div class="tab">
+		<b class="rc<?php if ($current_page == "browse" OR $current_page == "watch") { ?>s<?php } ?>">
+		<b class="rc<?php if ($current_page == "browse" OR $current_page == "watch") { ?>s<?php } ?>1"><b></b></b>
+		<b class="rc<?php if ($current_page == "browse" OR $current_page == "watch") { ?>s<?php } ?>2"><b></b></b>
+		<b class="rc<?php if ($current_page == "browse" OR $current_page == "watch") { ?>s<?php } ?>3"></b>
+		<b class="rc<?php if ($current_page == "browse" OR $current_page == "watch") { ?>s<?php } ?>4"></b>
+		<b class="rc<?php if ($current_page == "browse" OR $current_page == "watch") { ?>s<?php } ?>5"></b>
+		</b> <div class="tabContent <?php if ($current_page == "browse" OR $current_page == "watch") { ?> selected <?php } ?>">
+		<a href="/browse?s=mp">Videos</a>
+		</div>
+		</div>
+		
+		
+		<div class="tab">
+		<b class="rc<?php if ($current_page == "categories") { ?>s<?php } ?>">
+		<b class="rc<?php if ($current_page == "categories") { ?>s<?php } ?>1"><b></b></b>
+		<b class="rc<?php if ($current_page == "categories") { ?>s<?php } ?>2"><b></b></b>
+		<b class="rc<?php if ($current_page == "categories") { ?>s<?php } ?>3"></b>
+		<b class="rc<?php if ($current_page == "categories") { ?>s<?php } ?>4"></b>
+		<b class="rc<?php if ($current_page == "categories") { ?>s<?php } ?>5"></b>
+		</b> <div class="tabContent<?php if ($current_page == "categories") { ?> selected <?php } ?>">
+		<a href="/categories">Categories</a>
+		</div>
+		</div>
+		
+		
+		<div class="tab">
+		<b class="rc<?php if ($current_page == "groups") { ?>s<?php } ?>">
+		<b class="rc<?php if ($current_page == "groups") { ?>s<?php } ?>1"><b></b></b>
+		<b class="rc<?php if ($current_page == "groups") { ?>s<?php } ?>2"><b></b></b>
+		<b class="rc<?php if ($current_page == "groups") { ?>s<?php } ?>3"></b>
+		<b class="rc<?php if ($current_page == "groups") { ?>s<?php } ?>4"></b>
+		<b class="rc<?php if ($current_page == "groups") { ?>s<?php } ?>5"></b>
+		</b> <div class="tabContent<?php if ($current_page == "groups") { ?> selected <?php } ?>">
+		<a href="/groups_main">Groups</a>
+		</div>
+		</div>
+		
+		
+		<div class="tab">
+		<b class="rc<?php if ($current_page == "members") { ?>s<?php } ?>">
+		<b class="rc<?php if ($current_page == "members") { ?>s<?php } ?>1"><b></b></b>
+		<b class="rc<?php if ($current_page == "members") { ?>s<?php } ?>2"><b></b></b>
+		<b class="rc<?php if ($current_page == "members") { ?>s<?php } ?>3"></b>
+		<b class="rc<?php if ($current_page == "members") { ?>s<?php } ?>4"></b>
+		<b class="rc<?php if ($current_page == "members") { ?>s<?php } ?>5"></b>
+		</b> <div class="tabContent">
+		<a href="/members?ms30">Members</a>
+		</div>
+		</div>
+		
+		
+		<div class="rtab">
+		<b class="rc<?php if ($current_page == "my_videos_upload" OR $current_page == "my_videos_upload_2") { ?>s<?php } ?>">
+		<b class="rc<?php if ($current_page == "my_videos_upload" OR $current_page == "my_videos_upload_2") { ?>s<?php } ?>1"><b></b></b>
+		<b class="rc<?php if ($current_page == "my_videos_upload" OR $current_page == "my_videos_upload_2") { ?>s<?php } ?>2"><b></b></b>
+		<b class="rc<?php if ($current_page == "my_videos_upload" OR $current_page == "my_videos_upload_2") { ?>s<?php } ?>3"></b>
+		<b class="rc<?php if ($current_page == "my_videos_upload" OR $current_page == "my_videos_upload_2") { ?>s<?php } ?>4"></b>
+		<b class="rc<?php if ($current_page == "my_videos_upload" OR $current_page == "my_videos_upload_2") { ?>s<?php } ?>5"></b>
+		</b> <div class="tabContent <?php if ($current_page == "my_videos_upload" OR $current_page == "my_videos_upload_2") { ?> selected <?php } ?>">
+		<a href="/my_videos_upload">Upload</a>
+		</div>
+		</div>
+		
+</div></td> <!-- end gNavDiv -->
+</tr><tr>
+<td><div id="gSubNavDiv">
+	&nbsp;
+		<?php if($current_page === "index") { ?>				
+				<span style="  "><a href="my_videos.php">My Videos</a></span>
+				<span style="padding: 0px 10px 0px 10px;">|</span>
+				<span style="  "><a href="my_favorites.php">My Favorites</a></span>
+				<span style="padding: 0px 10px 0px 10px;">|</span>
+				<span style="  "><a href="my_friends.php">My Friends</a></span>
+				<!-- <span>&nbsp;|&nbsp;</span>
+				<span style="  "><a href="my_groups.php">My Groups</a></span> -->
+				<span style="padding: 0px 10px 0px 10px;">|</span>
+				<span style="  "><a href="my_messages.php" >My Messages</a></span>
+				<span style="padding: 0px 10px 0px 10px;">|</span>
+				<span style="  "><a href="my_profile.php">My Profile</a></span>
                 <?php if($session['administrator'] == 1) {?>
-                <td style="padding: 0px 10px 0px 10px;">|</td>
-				<td style="  "><strong><a href="admin.php">Admin Panel</a></strong></td>
+                <span style="padding: 0px 10px 0px 10px;">|</span>
+				<span style="  "><strong><a href="admin.php">Admin Panel</a></strong></span>
 				<?php } ?>
                 <?php } ?>
                 <?php if($current_page === "browse") { ?>				
-				<td style="font-size: 10px;">&nbsp;</td>
-				<td><a href="/browse.php?s=mr">Most Recent</a></td>
-					<td style="padding: 0px 10px 0px 10px;">|</td>
-				<td><a href="/browse.php?s=mp">Most Viewed</a></td>
-					<td style="padding: 0px 10px 0px 10px;">|</td>
-				<td><a href="/browse.php?s=md">Most Discussed</a></td>
-					<td style="padding: 0px 10px 0px 10px;">|</td>
-				<td><a href="/browse.php?s=mf" >Top Favorites</a></td>
-					<td style="padding: 0px 10px 0px 10px;">|</td>
-				<td><a href="/browse.php?s=tr">Top Rated</a></td>
-					<td style="padding: 0px 10px 0px 10px;">|</td>
-				<td><a href="/browse.php?s=rf">Recently Featured</a></td>
-					<td style="padding: 0px 10px 0px 10px;">|</td>
-				<td><a href="/browse.php?s=r">Random</a></td>
-				<td style="font-size: 10px;">&nbsp;</td>
+				<span style="font-size: 10px;">&nbsp;</span>
+				<span><a href="/browse.php?s=mr">Most Recent</a></span>
+					<span style="padding: 0px 10px 0px 10px;">|</span>
+				<span><a href="/browse.php?s=mp">Most Viewed</a></span>
+					<span style="padding: 0px 10px 0px 10px;">|</span>
+				<span><a href="/browse.php?s=md">Most Discussed</a></span>
+					<span style="padding: 0px 10px 0px 10px;">|</span>
+				<span><a href="/browse.php?s=mf" >Top Favorites</a></span>
+					<span style="padding: 0px 10px 0px 10px;">|</span>
+				<span><a href="/browse.php?s=tr">Top Rated</a></span>
+					<span style="padding: 0px 10px 0px 10px;">|</span>
+				<span><a href="/browse.php?s=rf">Recently Featured</a></span>
+					<span style="padding: 0px 10px 0px 10px;">|</span>
+				<span><a href="/browse.php?s=r">Random</a></span>
+				<span style="font-size: 10px;">&nbsp;</span>
                 <?php } ?>
                 <?php if($current_page === "watch") { ?>				
 				
                    
 			
-				<td style="font-size: 10px;">&nbsp;</td>
-				<td><a href="/browse.php?s=mr">Most Recent</a></td>
-					<td style="padding: 0px 10px 0px 10px;">|</td>
-				<td><a href="/browse.php?s=mp">Most Viewed</a></td>
-					<td style="padding: 0px 10px 0px 10px;">|</td>
-				<td><a href="/browse.php?s=md">Most Discussed</a></td>
-					<td style="padding: 0px 10px 0px 10px;">|</td>
-				<td><a href="/browse.php?s=mf">Top Favorites</a></td>
-					<td style="padding: 0px 10px 0px 10px;">|</td>
-				<td><a href="/browse.php?s=tr">Top Rated</a></td>
-					<td style="padding: 0px 10px 0px 10px;">|</td>
-				<td><a href="/browse.php?s=rf">Recently Featured</a></td>
-					<td style="padding: 0px 10px 0px 10px;">|</td>
-				<td><a href="/browse.php?s=r">Random</a></td>
-				<td style="font-size: 10px;">&nbsp;</td>
+				<span style="font-size: 10px;">&nbsp;</span>
+				<span><a href="/browse.php?s=mr">Most Recent</a></span>
+					<span style="padding: 0px 10px 0px 10px;">|</span>
+				<span><a href="/browse.php?s=mp">Most Viewed</a></span>
+					<span style="padding: 0px 10px 0px 10px;">|</span>
+				<span><a href="/browse.php?s=md">Most Discussed</a></span>
+					<span style="padding: 0px 10px 0px 10px;">|</span>
+				<span><a href="/browse.php?s=mf">Top Favorites</a></span>
+					<span style="padding: 0px 10px 0px 10px;">|</span>
+				<span><a href="/browse.php?s=tr">Top Rated</a></span>
+					<span style="padding: 0px 10px 0px 10px;">|</span>
+				<span><a href="/browse.php?s=rf">Recently Featured</a></span>
+					<span style="padding: 0px 10px 0px 10px;">|</span>
+				<span><a href="/browse.php?s=r">Random</a></span>
+				<span style="font-size: 10px;">&nbsp;</span>
                 <?php } ?>
-					<td style="font-size: 10px;">&nbsp;</td>
-				</tr>
-		</tbody></table>
-				
-		</td>
-		<td><img src="/img/pixel.gif" width="5" height="1"></td>
-	</tr>
-	<tr>
-		<td style="border-bottom: 1px solid #FFFFFF"><img src="/img/box_login_bl.gif" width="5" height="5"></td>
-		<td style="border-bottom: 1px solid #BBBBBB"><img src="/img/pixel.gif" width="1" height="5"></td>
-		<td style="border-bottom: 1px solid #FFFFFF"><img src="/img/box_login_br.gif" width="5" height="5"></td>
-	</tr>
-</tbody></table>
-</div> <!-- end globalSubNavDiv -->
+	&nbsp;
+</div></td> <!-- end gSubNavDiv -->
+</tr></table>
