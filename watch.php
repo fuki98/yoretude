@@ -398,7 +398,7 @@ function CommentHandler()
 					</div>
 			<script type="text/javascript">
 			if(swfobject.hasFlashPlayerVersion("6")) {	
-				swfobject.embedSWF("/players/player2.swf?video_id=<?php echo $video_info['video_id']; ?>&l=<?php echo ceil($video_info['duration']); ?>", "flashcontent", "425", "350", "6");
+				swfobject.embedSWF("/players/player2.swf?video_id=<?php echo $video_info['video_id']; ?>&l=<?php echo ceil($video_info['duration']); ?>", "flashcontent", "450", "370", "6");
 			} else if(typeof(document.createElement('video').canPlayType) != 'undefined' && document.createElement('video').canPlayType('video/webm;codecs="vp8,opus"') == "probably") {
 				document.getElementById('flashcontent').innerHTML = '<figure id="videoContainer" oncontextmenu="return false;"><video id="video" controls preload="metadata" src="/get_video.php?video_id=<?php echo $video_info['video_id'] ?>&format=webm"></video><img class="watermark" src="img/watermark.png"><br><div id="video-controls" class="controls" data-state="hidden"><button id="playpause" type="button" data-state="play">Play/Pause</button><div class="progress"><progress id="progress" value="0" min="0"><span id="progress-bar"></span></progress></div><button id="mute" type="button" data-state="mute">Mute/Unmute</button></div></figure></div>';
 			}
