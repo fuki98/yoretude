@@ -392,13 +392,10 @@ function CommentHandler()
 <div id="interactDiv">
 
 	<div id="playerDiv">
-	<div id="flashcontent">
+		<div id="flashcontent">
 					<div style="padding: 20px; font-size:14px; font-weight: bold;">
 						Hello, you either have JavaScript turned off or an old version of Macromedia's Flash Player, <a href="https://archive.org/details/fp6_archive">click here</a> to get the latest flash player.
 					</div>
-				</div>
-			</div>
-			
 			<script type="text/javascript">
 			if(swfobject.hasFlashPlayerVersion("6")) {	
 				swfobject.embedSWF("/players/player2.swf?video_id=<?php echo $video_info['video_id']; ?>&l=<?php echo ceil($video_info['duration']); ?>", "flashcontent", "425", "350", "6");
@@ -407,8 +404,9 @@ function CommentHandler()
 			}
 			</script>
 			<script src="player.js"></script>
+		</div>
 	</div>
-	
+
 	<div id="actionsAndStatsDiv" class="contentBox">
 		<div id="ratingDivWrapper">
 			<div id="ratingDiv">
@@ -689,6 +687,8 @@ function CommentHandler()
 		
 		<div id="div_main_comment"></div>
 	</div> <!-- end commentsDiv -->
+	
+	
 	
 </div> <!-- end interactDiv -->
 </td>
