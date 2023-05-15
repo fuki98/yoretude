@@ -385,7 +385,7 @@ function CommentHandler()
 <!-- begin presentation code -->
 <body onload="performOnLoadFunctions();">
 <h1><?php echo htmlspecialchars($video_info['title']); ?></h1>
-<link rel="stylesheet" href="player.css">
+<link rel="stylesheet" href="player.css?2">
 
 <table id="watchTable"><tr>
 <td>
@@ -396,15 +396,102 @@ function CommentHandler()
 					<div style="padding: 20px; font-size:14px; font-weight: bold;">
 						Hello, you either have JavaScript turned off or an old version of Macromedia's Flash Player, <a href="https://archive.org/details/fp6_archive">click here</a> to get the latest flash player.
 					</div>
+			
 			<script type="text/javascript">
 			if(swfobject.hasFlashPlayerVersion("6")) {	
-				swfobject.embedSWF("/players/player2.swf?video_id=<?php echo $video_info['video_id']; ?>&l=<?php echo ceil($video_info['duration']); ?>", "flashcontent", "450", "370", "6");
+				swfobject.embedSWF("/players/player2.swf?video_id=<?php echo $video_info['video_id']; ?>&l=<?php echo ceil($video_info['duration']); ?>", "flashcontent", "425", "350", "6");
 			} else if(typeof(document.createElement('video').canPlayType) != 'undefined' && document.createElement('video').canPlayType('video/webm;codecs="vp8,opus"') == "probably") {
-				document.getElementById('flashcontent').innerHTML = '<figure id="videoContainer" oncontextmenu="return false;"><video id="video" controls preload="metadata" src="/get_video.php?video_id=<?php echo $video_info['video_id'] ?>&format=webm"></video><img class="watermark" src="img/watermark.png"><br><div id="video-controls" class="controls" data-state="hidden"><button id="playpause" type="button" data-state="play">Play/Pause</button><div class="progress"><progress id="progress" value="0" min="0"><span id="progress-bar"></span></progress></div><button id="mute" type="button" data-state="mute">Mute/Unmute</button></div></figure></div>';
+				document.getElementById('flashcontent').innerHTML = `
+				<!-- YoreTude HTML5 Player-->
+				<div class="yorePlayerContainer" id="playerBox">
+					<div class="playerScreen">
+						<div class="playerVideoArea">
+						<video class="playerVideoAreaSub" id="video">
+							<source src="/get_video.php?video_id=<?php echo $video_info['video_id'] ?>&format=webm"></source> 
+							</video>
+						</div>
+						<div id="playerEndScreen">
+							<div class="endShareDiv">
+								<img src="/resource/end_share.png">
+								<p>Share this Video</p>
+							</div>
+							<div class="endReplayDiv">
+								<img id="endReplayBtn" src="/resource/end_replay.png">
+								<p>Replay this Video</p>
+							</div>
+						</div>
+						<div id="aboutBox">
+							<div class="aboutBoxContent">
+							<div class="aboutHeader">YorePlay</div>
+							<div class="aboutBody">
+								<p>Version 0.11<br>Public Beta</p>
+								<button id="aboutCloseBtn">Close</button>
+							</div>
+							</div>
+						</div>
+					</div>  
+					<div class="yorePlayerControls">
+						<div class="ctrlsHighlightDiv">
+							<div class="Button" id="playBtn">
+								<img id="playIcon" src="/resource/play.png" draggable="false">
+								<img id="pauseIcon" src="/resource/pause.png" draggable="false">
+							</div>
+						</div>
+						<div class="ctrlsDiv">
+							<div class="ctrlsUpperDiv">
+								<div class="seekProgressContainer">
+									<progress id="seekProgress" value="0" min="0"></progress>
+								</div>
+								<div class="seekHandleContainer">
+									<input class="seekHandle" id="seekHandle" value="0" min="0" type="range">
+								</div>
+							</div>
+							<div class="ctrlsLowerDiv">
+								<div class="ctrlsLowerLeftDiv">
+									<div class="Button" id="stopBtn">
+										<img src="/resource/stop.png" draggable="false">
+									</div>
+									<div class="timeContainer">
+									<time class="timeElapsed" id="elapsed">00:00</time>
+									<span class="timeContainerSeparator">/</span>
+									<time class="timeDuration" id="duration">00:00</time>
+									</div>
+									<div class="Button" id="muteBtn">
+										<img src="/resource/volume.png" draggable="false">
+										<img class="muteSignHidden" id="muteSign" src="/resource/mute.png" draggable="false">
+									</div>
+								</div>
+								<div class="ctrlsLowerRightDiv">
+									<div class="sizeCtrlContainer">
+										<span>Size:</span>
+										<div id="btnShrink"></div>
+										<div id="btnUnshrink"></div>
+										<div id="btnFullscreen"></div>
+									</div> 
+								</div>
+							</div>
+						</div>
+					</div>
+					<div id="yorePlayContextMenu">
+						<div class="contextItem" id="contextMute">
+							<span>Mute</span>
+							<div id="muteTick" class="tick tickInactive">    
+							</div>
+						</div>
+						<div class="contextItem" id="contextLoop">
+							<span>Loop</span>
+							<div id="loopTick" class="tick tickInactive">
+							</div>
+						</div>
+						<div class="contextItem" id="contextAbout">About</div>
+					</div>
+				</div>
+				<!-- Here Lies Purple -->
+				`;
 			}
 			</script>
-			<script src="player.js"></script>
 		</div>
+		<script src="player.js"></script>
 	</div>
 
 	<div id="actionsAndStatsDiv" class="contentBox">
