@@ -385,7 +385,7 @@ function CommentHandler()
 <!-- begin presentation code -->
 <body onload="performOnLoadFunctions();">
 <h1><?php echo htmlspecialchars($video_info['title']); ?></h1>
-<link rel="stylesheet" href="player.css?2">
+<link rel="stylesheet" href="player.css">
 
 <table id="watchTable"><tr>
 <td>
@@ -399,90 +399,123 @@ function CommentHandler()
 			
 			<script type="text/javascript">
 			if(swfobject.hasFlashPlayerVersion("6")) {	
-				swfobject.embedSWF("/players/player2.swf?video_id=<?php echo $video_info['video_id']; ?>&l=<?php echo ceil($video_info['duration']); ?>", "flashcontent", "425", "350", "6");
+				swfobject.embedSWF("/players/player2.swf?video_id=<?php echo $video_info['video_id']; ?>&l=<?php echo ceil($video_info['duration']); ?>", "flashcontent", "450", "370", "6");
 			} else if(typeof(document.createElement('video').canPlayType) != 'undefined' && document.createElement('video').canPlayType('video/webm;codecs="vp8,opus"') == "probably") {
 				document.getElementById('flashcontent').innerHTML = `
-				<!-- YoreTude HTML5 Player-->
-				<div class="yorePlayerContainer" id="playerBox">
-					<div class="playerScreen">
-						<div class="playerVideoArea">
-						<video class="playerVideoAreaSub" id="video">
-							<source src="/get_video.php?video_id=<?php echo $video_info['video_id'] ?>&format=webm"></source> 
-							</video>
-						</div>
-						<div id="playerEndScreen">
-							<div class="endShareDiv">
-								<img src="/resource/end_share.png">
-								<p>Share this Video</p>
+				<!-- Play'06 HTML5 Player-->
+				<div class="playerContainer" id="playerBox">
+					<div class="mainPlayerContainer">
+						<div class="playerScreen">
+							<div class="playerVideoArea">
+							<video class="playerVideoAreaSub" id="video">
+								<source src="/get_video.php?video_id=<?php echo $video_info['video_id'] ?>&format=webm"> 
+								</video>
 							</div>
-							<div class="endReplayDiv">
-								<img id="endReplayBtn" src="/resource/end_replay.png">
-								<p>Replay this Video</p>
-							</div>
-						</div>
-						<div id="aboutBox">
-							<div class="aboutBoxContent">
-							<div class="aboutHeader">YorePlay</div>
-							<div class="aboutBody">
-								<p>Version 0.11<br>Public Beta</p>
-								<button id="aboutCloseBtn">Close</button>
-							</div>
-							</div>
-						</div>
-					</div>  
-					<div class="yorePlayerControls">
-						<div class="ctrlsHighlightDiv">
-							<div class="Button" id="playBtn">
-								<img id="playIcon" src="/resource/play.png" draggable="false">
-								<img id="pauseIcon" src="/resource/pause.png" draggable="false">
-							</div>
-						</div>
-						<div class="ctrlsDiv">
-							<div class="ctrlsUpperDiv">
-								<div class="seekProgressContainer">
-									<progress id="seekProgress" value="0" min="0"></progress>
+							<div class="playerEndScreen hidden" id="endScreen">
+								<div class="endShareDiv">
+									<img src="/resource/end_share.png">
+									<p>Share this Video</p>
 								</div>
-								<div class="seekHandleContainer">
-									<input class="seekHandle" id="seekHandle" value="0" min="0" type="range">
+								<div class="endReplayDiv">
+									<img id="endReplayBtn" src="/resource/end_replay.png">
+									<p>Replay this Video</p>
 								</div>
 							</div>
-							<div class="ctrlsLowerDiv">
-								<div class="ctrlsLowerLeftDiv">
-									<div class="Button" id="stopBtn">
-										<img src="/resource/stop.png" draggable="false">
+						</div>  
+						<div class="playerControls">
+							<div class="ctrlsHighlightDiv">
+								<div class="Button" id="playBtn">
+									<img id="playIcon" src="/resource/play.png" draggable="false">
+									<img id="pauseIcon" src="/resource/pause.png" draggable="false">
+								</div>
+							</div>
+							<div class="ctrlsDiv">
+								<div class="ctrlsUpperDiv">
+									<div class="bufferProgressContainer">
+										<progress id="bufferProgress" value="0" min="0" max="1"></progress>
 									</div>
-									<div class="timeContainer">
-									<time class="timeElapsed" id="elapsed">00:00</time>
-									<span class="timeContainerSeparator">/</span>
-									<time class="timeDuration" id="duration">00:00</time>
+									<div class="seekProgressContainer">
+										<progress id="seekProgress" value="0" min="0"></progress>
 									</div>
-									<div class="Button" id="muteBtn">
-										<img src="/resource/volume.png" draggable="false">
-										<img class="muteSignHidden" id="muteSign" src="/resource/mute.png" draggable="false">
+									<div class="seekHandleContainer">
+										<input class="seekHandle" id="seekHandle" value="0" min="0" step="0.01" type="range">
 									</div>
 								</div>
-								<div class="ctrlsLowerRightDiv">
-									<div class="sizeCtrlContainer">
-										<span>Size:</span>
-										<div id="btnShrink"></div>
-										<div id="btnUnshrink"></div>
-										<div id="btnFullscreen"></div>
-									</div> 
+								<div class="ctrlsLowerDiv">
+									<div class="ctrlsLowerLeftDiv">
+										<div class="Button" id="stopBtn">
+											<img src="/resource/stop.png" draggable="false">
+										</div>
+										<div class="timeContainer">
+										<time class="timeElapsed" id="elapsed">00:00</time>
+										<span class="timeContainerSeparator">/</span>
+										<time class="timeDuration" id="duration">00:00</time>
+										</div>
+										<div class="volBtnContainer">
+											<div class="Button" id="muteBtn">
+												<img src="/resource/volume.png" draggable="false">
+												<img class="hidden" id="muteSign" src="/resource/mute.png" draggable="false">
+											</div>
+											<div class="volumeBtnDeco" id="vlBtnDeco">
+												<img id="vlBtnDeco1" src="/resource/volume_btn_deco1.png" draggable="false">
+												<img id="vlBtnDeco2" src="/resource/volume_btn_deco2.png" draggable="false">
+												<img id="vlBtnDeco3" src="/resource/volume_btn_deco3.png" draggable="false"> 
+											</div>
+										</div>
+										<div class="volumeSliderContainer">
+											<div class="volDecoContainer">
+												<div class="volDeco volDeco1"></div>
+												<div class="volDeco volDeco2" id="volDecoFg"></div>
+											</div>
+											<input type="range" value="1" type="range" max="1" min="0" step="0.01" class="volSlider" id="vlSlide">
+										</div>
+									</div>
+									<div class="ctrlsLowerRightDiv">
+										<div class="sizeCtrlContainer">
+											<span>Size:</span>
+											<div class="btnShrink" id="btnShrink"></div>
+											<div id="btnFullscreen"></div>
+										</div> 
+									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-					<div id="yorePlayContextMenu">
+					<div id="aboutBox">
+						<div class="aboutBoxContent">
+						<div class="aboutHeader">Play'06</div>
+						<div class="aboutBody">
+							<div>Version 0.14<br>Public Beta<br>
+							<br>
+							Bugfixes:<br>
+							-Seek bar no longer jumps to 0 on play<br>
+							-Non 4:3 videos are now stretched by height<br>
+							<br>
+							New features:<br>
+							-Volume controls implemented<br>
+							-[EXPERIMENTAL] Buffering profress indicator<br>
+							<br>
+							Tweaks:<br>
+							-Minor UI tweaks<br>
+							-Simplified some JS functions<br>
+							-About window now resembles Flash settings window<br>
+						</div>
+						</div>
+						<button id="aboutCloseBtn">Close</button>
+						</div>
+					</div>
+					<div id="playerContextMenu">
 						<div class="contextItem" id="contextMute">
 							<span>Mute</span>
-							<div id="muteTick" class="tick tickInactive">    
+							<div id="muteTick" class="tick hidden">    
 							</div>
 						</div>
 						<div class="contextItem" id="contextLoop">
 							<span>Loop</span>
-							<div id="loopTick" class="tick tickInactive">
+							<div id="loopTick" class="tick hidden">
 							</div>
 						</div>
+						<div class="contextSeparator"></div>
 						<div class="contextItem" id="contextAbout">About</div>
 					</div>
 				</div>
